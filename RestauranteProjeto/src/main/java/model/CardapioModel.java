@@ -11,7 +11,7 @@ import model.dao.CardapioDaoImpl;
 import model.util.Validacoes;
 
 public class CardapioModel {
-//alterado no eclipse
+	
 	private CardapioDaoImpl dao = new CardapioDaoImpl();
 
 	public void registraCategoria(Cardapio c) throws JaExisteException, NullException, StringException {
