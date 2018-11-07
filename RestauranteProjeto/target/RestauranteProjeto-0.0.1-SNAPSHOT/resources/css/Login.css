@@ -1,0 +1,10 @@
+@charset "ISO-8859-1";
+
+#login{
+	width: 2000px;
+	height:150px;
+	background-image: url('Imagens/banner2.jpg');
+}
+.nome{
+	color: blue;
+}

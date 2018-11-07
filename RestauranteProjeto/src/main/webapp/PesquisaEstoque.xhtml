@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<link href="CSS/Style.css" rel="stylesheet" />
+</h:head>
+<ui:composition template="Template.xhtml">
+	<ui:define name="content">
+		<h:form>
+			<p:dataTable emptyMessage="Nenhum registro encontrado."
+				id="estoque"
+				value="#{estoqueController.listaEstoque}"
+				filteredValue="#{estoqueController.listaEstoqueFiltrado}"
+				rows="15"
+				paginator="true"
+				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink}"
+				paginatorPosition="bottom"
+				var="e">
+				<f:facet name="header">
+		            <p:commandButton value="Novo" type="button" onclick="PF('cadastro').show();" ></p:commandButton>
+		        </f:facet>	
+				<p:column headerText="Código" width="80">
+					<h:outputText value="#{e.codEstoque}" />
+				</p:column>
+				<p:column headerText="Nome" filterBy="#{e.nome}" sortBy="#{e.nome}">
+					<h:outputText value="#{e.nome}" />
+				</p:column>
+				<p:column headerText="Quantidade">
+					<h:outputText value="#{e.quantidade}" />
+				</p:column>
+				<p:column headerText="Unidade de Medida">
+					<h:outputText value="#{e.uniMedida}" />
+				</p:column>
+				<p:column headerText="Opcões">
+					<p:commandButton action="Editar" value="Editar" update=":dialogalterar" oncomplete="PF('editar').show();">
+						<f:setPropertyActionListener target="#{estoqueController.estoque}" value="#{e}" />
+					</p:commandButton>
+					<p:commandButton action="Excluir" actionListener="#{estoqueController.excluir(e)}" value="Excluir" update=":msgGlobal"></p:commandButton>
+				</p:column>
+			</p:dataTable> 
+			</h:form>
+			
+			
+			<p:dialog header="Novo Estoque" widgetVar="cadastro" modal="true" showEffect="clip">
+				<h:form>
+				    <p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:outputLabel for="nome" value="Nome"/>
+		       			<p:inputText id="nome" value="#{estoqueController.estoque.nome}"/>
+		       			<p:outputLabel for="quantidade" value="Quantidade"/>
+		       			<p:inputText id="quantidade" value="#{estoqueController.estoque.quantidade}"/>
+		       			<p:outputLabel for="umedida" value="Unidade de medida"/>
+		       			<p:selectOneMenu  id="umedida" value="#{estoqueController.estoque.uniMedida}">
+		       				<f:selectItem itemLabel="l" itemValue="l"/>
+		       				<f:selectItem itemLabel="Kg" itemValue="Kg"/>
+		       				<f:selectItem itemLabel="Un" itemValue="Un"/>
+		       			</p:selectOneMenu>
+					</p:panelGrid>
+					<div style="display:flex; justify-content:center; align-items:center;">
+						<p:commandButton value="Salvar" icon="ui-icon-check" actionListener="#{estoqueController.salvar}" update=":msgGlobal" oncomplete="PF('cadastro').hide();"/>
+					</div>
+				</h:form>
+			</p:dialog> 
+			
+			<p:dialog header="Editar Estoque" widgetVar="editar" modal="true" showEffect="clip" id="dialogalterar">
+				<h:form>
+				    <p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:outputLabel for="nome" value="Nome"/>
+		       			<p:inputText id="nome" value="#{estoqueController.estoque.nome}"/>
+		       			<p:outputLabel for="quantidade" value="Quantidade"/>
+		       			<p:inputText id="quantidade" value="#{estoqueController.estoque.quantidade}"/>
+		       			<p:outputLabel for="umedida" value="Unidade de medida"/>
+		       			<p:selectOneMenu  id="umedida" value="#{estoqueController.estoque.uniMedida}">
+		       				<f:selectItem itemLabel="l" itemValue="l"/>
+		       				<f:selectItem itemLabel="Kg" itemValue="Kg"/>
+		       				<f:selectItem itemLabel="Un" itemValue="Un"/>
+		       			</p:selectOneMenu>
+					</p:panelGrid>
+					<div style="display:flex; justify-content:center; align-items:center;">
+						<p:commandButton value="Editar" icon="ui-icon-check" actionListener="#{estoqueController.editar}" update=":msgGlobal" oncomplete="PF('editar').hide();"/>
+					</div>
+				</h:form>
+			</p:dialog>
+		
+	</ui:define>
+</ui:composition>
+</html>

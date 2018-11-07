@@ -1,0 +1,38 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+	<persistence-unit name="ProjetoRestaurante">
+
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+		<class>model.Entidades.Cardapio</class>
+		<class>model.Entidades.Cliente</class>
+		<class>model.Entidades.Conta</class>
+		<class>model.Entidades.Entrega</class>
+		<class>model.Entidades.Estoque</class>
+		<class>model.Entidades.Funcionario</class>
+		<class>model.Entidades.ItemCardapio</class>
+		<class>model.Entidades.ItemPedido</class>
+		<class>model.Entidades.Pagamento</class>
+		<class>model.Entidades.PagamentoCartao</class>
+		<class>model.Entidades.PagamentoDinheiro</class>
+		<class>model.Entidades.Pedido</class>
+		<class>model.Entidades.Pessoa</class>
+		<class>model.Entidades.Produto</class>
+		
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/ProjetoRestaurante" /> 
+			<property name="javax.persistence.jdbc.user" value="postgres" /> 
+			<property name="javax.persistence.jdbc.password" value="root" />
+
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" /> 
+			<property name="hibernate.hbm2ddl.auto" value="update" /> 
+
+			<property name="hibernate.show_sql" value="true" /> 
+			<property name="hibernate.format_sql" value="true" /> 
+		</properties>
+
+	</persistence-unit>
+</persistence>

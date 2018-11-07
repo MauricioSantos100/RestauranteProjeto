@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<link type="text/css" rel="stylesheet"
+		href="resources/css/Template.css" />
+	<h:outputStylesheet library="css" name="Template.css"></h:outputStylesheet>
+</h:head>
+<ui:composition template="Template.xhtml">
+	<ui:define name="content">
+		<div class="container">
+			<h:graphicImage value="/Imagens/banner1.jpg" styleClass="imagem" />
+
+			<h:outputText value="Bem vindo ao WebRestaurante" styleClass="texto" />
+
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

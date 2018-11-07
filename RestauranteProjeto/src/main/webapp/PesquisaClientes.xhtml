@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="Template.xhtml">
+	<ui:define name="content">
+		<h:form>
+			<p:dataTable emptyMessage="Nenhum registro encontrado."
+				id="clientes"
+				value="#{clienteController.listaCliente}"
+				filteredValue="#{clienteController.listaClienteFiltrado}"
+				rows="5"
+				paginator="true"
+				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink}"
+				paginatorPosition="bottom"
+				var="c">
+				<f:facet name="header">
+		            <p:commandButton value="Novo" type="button" onclick="PF('cadastro').show();" ></p:commandButton>
+		        </f:facet>
+				<p:column headerText="Código">
+					<h:outputText value="#{c.codPessoa}" />
+				</p:column>
+				<p:column headerText="Nome">
+					<h:outputText value="#{c.nome}" />
+				</p:column>
+				<p:column headerText="CPF">
+					<h:outputText value="#{c.cpf}" />
+				</p:column>
+				<p:column headerText="Email">
+					<h:outputText value="#{c.email}" />
+				</p:column>
+				<p:column headerText="Telefone">
+					<h:outputText value="#{c.telefone}" />
+				</p:column>
+			</p:dataTable>
+			
+			<p:dialog header="Novo Cliente" widgetVar="cadastro" modal="true" showEffect="clip" >
+			    <p:panelGrid columns="2" styleClass="ui-noborder">
+					<p:outputLabel for="nome" value="Nome"/>
+	       			<p:inputText id="nome" value="#{clienteController.cliente.nome}"/>
+	       			<p:outputLabel for="email" value="E-mail"/>
+	       			<p:inputText id="email" value="#{clienteController.cliente.email}"/>
+	       			<p:outputLabel for="cpf" value="CPF"/>
+	       			<p:inputMask id="cpf" value="#{clienteController.cliente.cpf}" mask="999.999.999-99"/>
+					<p:outputLabel for="telefone" value="Telefone"/>
+	       			<p:inputMask id="telefone" value="#{clienteController.cliente.telefone}" mask="(99) 99999-9999"/>
+					<p:outputLabel for="usuario" value="Usuario"/>
+	       			<p:inputText id="usuario" value="#{clienteController.cliente.usuario}"/>
+					
+	       			<p:outputLabel for="senha" value="Senha"/>
+	       			<p:password id="senha" match="senha1" label="Senha" required="true"></p:password>
+	       			<p:outputLabel for="senha2" value="Confirme a senha"/>
+	       			<p:password id="senha2" value="#{clienteController.cliente.senha}" label="Senha2" required="true" requiredMessage="Digite a senha"></p:password>
+				</p:panelGrid>
+				<div style="display:flex; justify-content:center; align-items:center;">
+					<p:commandButton value="Salvar" icon="ui-icon-check" actionListener="#{clienteController.salvar(clienteController.cliente)}" update=":msgGlobal" oncomplete="PF('cadastro').hide();"/>
+				</div>
+			</p:dialog>
+		</h:form>
+		
+	</ui:define>
+</ui:composition>
+</html>
