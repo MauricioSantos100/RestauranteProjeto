@@ -16,11 +16,11 @@
 			<div class="bloco">
 				<h:panelGrid>
 					<h:panelGrid columns="1">
-						<p:inputText id="usuario" styleClass="input" placeholder="Usuário" size="21" value="#{loginController.nome}"/>					
-						<p:password id="senha" placeholder="Senha" size="21" value="#{loginController.senha}"/>
+						<p:inputText id="usuario" styleClass="input" placeholder="Usuário" size="21" value="#{loginControl.usuario}"/>					
+						<p:password id="senha" placeholder="Senha" size="21" value="#{loginControl.senha}"/>
 					</h:panelGrid>
 					<h:panelGrid columns="2" styleClass="botoes">
-						<p:commandButton value="Entrar" styleClass="botao" actionListener="#{loginController.logar}"/>
+						<p:commandButton value="Entrar" styleClass="botao" actionListener="#{loginControl.logar}"/>
 						<p:commandButton value="Cadastrar" styleClass="botao" action="CadastroCliente.xhtml"/>
 					</h:panelGrid>
 				</h:panelGrid>

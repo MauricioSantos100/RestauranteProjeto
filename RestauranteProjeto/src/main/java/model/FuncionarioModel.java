@@ -100,4 +100,10 @@ public class FuncionarioModel {
 	public List<Funcionario> filtrarFuncionarios() {
 		return dao.listando();
 	}
+	public Funcionario autenticarfunc(String login, String senha) {
+        if (login == null || senha == null) {
+            return null;
+        }
+        return FuncionarioDaoImpl.autenticarfunc(login, senha);
+    }
 }

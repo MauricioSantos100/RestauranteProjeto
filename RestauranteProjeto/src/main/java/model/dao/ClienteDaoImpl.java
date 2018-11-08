@@ -47,4 +47,8 @@ public class ClienteDaoImpl extends DAOImpl implements ClienteDao{
 		return cliente;
 	}
 
+
+    public static Cliente autenticar(String usuario, String senha) {
+        return (Cliente) JPAManager.getInstance().autenticar(usuario, senha);
+    }
 }

@@ -11,7 +11,7 @@ import model.dao.CardapioDaoImpl;
 import model.util.Validacoes;
 
 public class CardapioModel {
-	
+
 	private CardapioDaoImpl dao = new CardapioDaoImpl();
 
 	public void registraCategoria(Cardapio c) throws JaExisteException, NullException, StringException {
@@ -20,10 +20,10 @@ public class CardapioModel {
 				if (Validacoes.verificaString(c.getCategoria())) {
 					dao.insert(c);
 				} else {
-					throw new StringException("Categoria invï¿½lida");
+					throw new StringException("Categoria inválida");
 				}
 			} else {
-				throw new JaExisteException("Este Cardapio jï¿½ existe");
+				throw new JaExisteException("Este Cardapio já existe");
 			}
 		} else {
 			throw new NullException("Nenhum item pode estar vazio");
@@ -36,10 +36,10 @@ public class CardapioModel {
 				if (Validacoes.verificaString(c.getCategoria())) {
 					dao.update(c);
 				} else {
-					throw new StringException("Categoria invï¿½lida");
+					throw new StringException("Categoria inválida");
 				}
 			} else {
-				throw new JaExisteException("Este Cardapio jï¿½ existe");
+				throw new JaExisteException("Este Cardapio já existe");
 			}
 		} else {
 			throw new NullException("Nenhum item pode estar vazio");

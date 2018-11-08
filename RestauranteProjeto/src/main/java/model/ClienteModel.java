@@ -92,4 +92,12 @@ public class ClienteModel {
 	public List<Cliente> listarNomeCliente() {
 		return dao.listarNome();
 	}
+	
+	
+    public Cliente autenticar(String login, String senha) {
+        if (login == null || senha == null) {
+            return null;
+        }
+        return ClienteDaoImpl.autenticar(login, senha);
+    }
 }
