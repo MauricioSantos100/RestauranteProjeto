@@ -50,7 +50,7 @@ public class LoginControl {
 				try {
 					con.getExternalContext().redirect("Inicio.xhtml");
 				} catch (IOException e) {
-					e.printStackTrace();
+					e.printStackTrace(); 
 				}
 			} else  {
 				FuncionarioModel fm = new FuncionarioModel();
