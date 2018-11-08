@@ -6,17 +6,39 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<link type="text/css" rel="stylesheet"
-		href="resources/css/Template.css" />
-	<h:outputStylesheet library="css" name="Template.css"></h:outputStylesheet>
 </h:head>
 <ui:composition template="Template.xhtml">
 	<ui:define name="content">
+		<link type="text/css" rel="stylesheet" href="resources/css/Inicio.css" />
+		<h:outputStylesheet library="css" name="Inicio.css"></h:outputStylesheet>
+		<!-- 
 		<div class="container">
 			<h:graphicImage value="/Imagens/banner1.jpg" styleClass="imagem" />
 
 			<h:outputText value="Bem vindo ao WebRestaurante" styleClass="texto" />
-
+		</div>
+		 -->
+		<div id="delivery">
+			<div class="center">
+				<div class="col1">
+					<div class="bloco1">
+						<h:graphicImage value="/Imagens/banner3.jpg"
+							style="margin: auto; display: block;" />
+					</div>
+				</div>
+				<div class="col2">
+					<div class="bloco2">
+						<h3>Peça pelo nosso</h3>
+						<h1>site</h1>
+						<p>
+							Coma o melhor do Web Restaurante em qualquer lugar! <br /> Peça
+							nossos pratos no conforto da sua casa.
+						</p>						<a href="Pedido.xhtml">
+							<button Class="botao">Fazer pedido</button>
+						</a>
+					</div>
+				</div>
+			</div>
 		</div>
 	</ui:define>
 </ui:composition>

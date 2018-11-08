@@ -41,17 +41,18 @@ public class LoginControl {
 		
 		public void logar() {
 			FacesContext con = FacesContext.getCurrentInstance();
-			ClienteModel cm = new ClienteModel();
-			clienteLogin = cm.autenticar(usuario, senha);
+			
 			 
 			if (this.usuario.equals(usuario) && this.senha.equals(senha)) {
+				ClienteModel cm = new ClienteModel();
+				clienteLogin = cm.autenticar(usuario, senha);
 				con.getExternalContext().getSessionMap().put("user", usuario);
 				try {
 					con.getExternalContext().redirect("Inicio.xhtml");
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			} else {
+			} else  {
 				FuncionarioModel fm = new FuncionarioModel();
 				funcionarioLogin = fm.autenticarfunc(usuario, senha);
 				if (this.usuario.equals(usuario) && this.senha.equals(senha)) {

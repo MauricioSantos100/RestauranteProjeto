@@ -40,7 +40,7 @@ public class JPAManager {
         } catch(RuntimeException ex) {
             throw ex;
         } finally {
-                session.close();
+            session.close();
         }
         
         return obj;
@@ -57,7 +57,7 @@ public class JPAManager {
         } catch(RuntimeException ex) {
             throw ex;
         } finally {
-                session.close();
+            session.close();
         }
         
         return obj;
