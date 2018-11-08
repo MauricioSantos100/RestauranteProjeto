@@ -20,7 +20,7 @@
 				paginatorPosition="bottom"
 				var="c">
 				<f:facet name="header">
-		            <p:commandButton value="Novo" type="button" onclick="PF('cadastro').show();" ></p:commandButton>
+		            <p:commandButton value="Novo" icon="fa fa-plus" type="button" onclick="PF('cadastro').show();" ></p:commandButton>
 		        </f:facet>
 				<p:column headerText="Código">
 					<h:outputText value="#{c.codPessoa}" />
@@ -58,7 +58,7 @@
 	       			<p:password id="senha2" value="#{clienteController.cliente.senha}" label="Senha2" required="true" requiredMessage="Digite a senha"></p:password>
 				</p:panelGrid>
 				<div style="display:flex; justify-content:center; align-items:center;">
-					<p:commandButton value="Salvar" icon="ui-icon-check" actionListener="#{clienteController.salvar(clienteController.cliente)}" update=":msgGlobal" oncomplete="PF('cadastro').hide();"/>
+					<p:commandButton value="Salvar" icon="fa fa-check" actionListener="#{clienteController.salvar(clienteController.cliente)}" update=":msgGlobal" oncomplete="PF('cadastro').hide();"/>
 				</div>
 			</p:dialog>
 		</h:form>

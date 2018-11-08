@@ -22,7 +22,7 @@
 				paginatorPosition="bottom"
 				var="c">				
 				<f:facet name="header">
-		            <p:commandButton value="Novo" type="button" onclick="PF('cadastro').show();" ></p:commandButton>
+		            <p:commandButton value="Novo" icon="fa fa-plus" type="button" onclick="PF('cadastro').show();" ></p:commandButton>
 		        </f:facet>
 				<p:column headerText="Código" width="80">
 					<h:outputText value="#{c.codCardapio}" />
@@ -31,10 +31,10 @@
 					<h:outputText value="#{c.categoria}" />
 				</p:column>
 				<p:column headerText="Opcões">
-					<p:commandButton action="Editar" value="Editar" update=":dialogalterar" oncomplete="PF('editar').show();">
+					<p:commandButton action="Editar" icon="fa fa-fw fa-edit" value="Editar" update=":dialogalterar" oncomplete="PF('editar').show();">
 						<f:setPropertyActionListener target="#{cardapioController.cardapio}" value="#{c}" />
 					</p:commandButton>
-					<p:commandButton action="Excluir" actionListener="#{cardapioController.excluir(c)}" value="Excluir" update=":msgGlobal"></p:commandButton>
+					<p:commandButton action="Excluir" icon="fa fa-fw fa-remove" actionListener="#{cardapioController.excluir(c)}" value="Excluir" update=":msgGlobal"></p:commandButton>
 				</p:column>
 			</p:dataTable> 
 			</h:form>
@@ -47,7 +47,7 @@
 		       			<p:inputText id="inserircardapio" value="#{cardapioController.cardapio.categoria}"/>
 					</p:panelGrid>
 					<div style="display:flex; justify-content:center; align-items:center;">
-						<p:commandButton value="Salvar" icon="ui-icon-check" actionListener="#{cardapioController.salvar}" update=":msgGlobal" oncomplete="PF('cadastro').hide();"/>
+						<p:commandButton value="Salvar" icon="fa fa-check" actionListener="#{cardapioController.salvar}" update=":msgGlobal" oncomplete="PF('cadastro').hide();"/>
 					</div>
 				</h:form>
 			</p:dialog> 
@@ -60,7 +60,7 @@
 		       			<h:inputHidden value="#{cardapioController.cardapio.codCardapio}" />
 					</p:panelGrid>
 					<div style="display:flex; justify-content:center; align-items:center;">
-						<p:commandButton value="Editar" icon="ui-icon-check" actionListener="#{cardapioController.editar}" update=":msgGlobal" oncomplete="PF('editar').hide();"/>
+						<p:commandButton value="Editar" icon="fa fa-check" actionListener="#{cardapioController.editar}" update=":msgGlobal" oncomplete="PF('editar').hide();"/>
 					
 					</div>
 					</h:form>

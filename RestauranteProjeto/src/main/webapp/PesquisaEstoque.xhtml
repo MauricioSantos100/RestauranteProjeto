@@ -22,7 +22,7 @@
 				paginatorPosition="bottom"
 				var="e">
 				<f:facet name="header">
-		            <p:commandButton value="Novo" type="button" onclick="PF('cadastro').show();" ></p:commandButton>
+		            <p:commandButton value="Novo" icon="fa fa-plus" type="button" onclick="PF('cadastro').show();" ></p:commandButton>
 		        </f:facet>	
 				<p:column headerText="Código" width="80">
 					<h:outputText value="#{e.codEstoque}" />
@@ -37,10 +37,10 @@
 					<h:outputText value="#{e.uniMedida}" />
 				</p:column>
 				<p:column headerText="Opcões">
-					<p:commandButton action="Editar" value="Editar" update=":dialogalterar" oncomplete="PF('editar').show();">
+					<p:commandButton action="Editar" icon="fa fa-fw fa-edit" value="Editar" update=":dialogalterar" oncomplete="PF('editar').show();">
 						<f:setPropertyActionListener target="#{estoqueController.estoque}" value="#{e}" />
 					</p:commandButton>
-					<p:commandButton action="Excluir" actionListener="#{estoqueController.excluir(e)}" value="Excluir" update=":msgGlobal"></p:commandButton>
+					<p:commandButton action="Excluir" icon="fa fa-fw fa-remove" actionListener="#{estoqueController.excluir(e)}" value="Excluir" update=":msgGlobal"></p:commandButton>
 				</p:column>
 			</p:dataTable> 
 			</h:form>
@@ -61,7 +61,7 @@
 		       			</p:selectOneMenu>
 					</p:panelGrid>
 					<div style="display:flex; justify-content:center; align-items:center;">
-						<p:commandButton value="Salvar" icon="ui-icon-check" actionListener="#{estoqueController.salvar}" update=":msgGlobal" oncomplete="PF('cadastro').hide();"/>
+						<p:commandButton value="Salvar" icon="fa fa-check" actionListener="#{estoqueController.salvar}" update=":msgGlobal" oncomplete="PF('cadastro').hide();"/>
 					</div>
 				</h:form>
 			</p:dialog> 
@@ -81,7 +81,7 @@
 		       			</p:selectOneMenu>
 					</p:panelGrid>
 					<div style="display:flex; justify-content:center; align-items:center;">
-						<p:commandButton value="Editar" icon="ui-icon-check" actionListener="#{estoqueController.editar}" update=":msgGlobal" oncomplete="PF('editar').hide();"/>
+						<p:commandButton value="Editar" icon="fa fa-check" actionListener="#{estoqueController.editar}" update=":msgGlobal" oncomplete="PF('editar').hide();"/>
 					</div>
 				</h:form>
 			</p:dialog>

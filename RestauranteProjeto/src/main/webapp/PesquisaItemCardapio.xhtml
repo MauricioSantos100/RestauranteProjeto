@@ -23,7 +23,7 @@
 				var="ic"
 				>				
 				<f:facet name="header">
-		            <p:commandButton value="Novo" type="button" onclick="PF('cadastro').show();" ></p:commandButton>
+		            <p:commandButton value="Novo" icon="fa fa-plus" type="button" onclick="PF('cadastro').show();" ></p:commandButton>
 		        </f:facet>
 				<p:column headerText="Código" width="80">
 					<h:outputText value="#{ic.codItem}" />
@@ -38,10 +38,10 @@
 					<h:outputText value="#{cardapioController.cardapio.categoria}" />
 				</p:column>
 				<p:column headerText="Opcões">
-					<p:commandButton action="Editar" value="Editar" update=":dialogalterar" oncomplete="PF('editar').show();">
+					<p:commandButton action="Editar" icon="fa fa-fw fa-edit" value="Editar" update=":dialogalterar" oncomplete="PF('editar').show();">
 						<f:setPropertyActionListener target="#{itemCardapioController.cardapio}" value="#{ic}"/>
 					</p:commandButton>
-					<p:commandButton action="Excluir" actionListener="#{itemCardapioController.excluir(ic)}" value="Excluir" update=":msgGlobal"/>
+					<p:commandButton action="Excluir" icon="fa fa-fw fa-remove" actionListener="#{itemCardapioController.excluir(ic)}" value="Excluir" update=":msgGlobal"/>
 				</p:column>
 			</p:dataTable> 
 			</h:form>
@@ -62,7 +62,7 @@
 		       			</p:selectOneMenu>
 					</p:panelGrid>
 					<div style="display:flex; justify-content:center; align-items:center;">
-						<p:commandButton value="Salvar" icon="ui-icon-check" actionListener="#{itemCardapioController.salvar}" update=":msgGlobal" oncomplete="PF('cadastro').hide();"/>
+						<p:commandButton value="Salvar" icon="fa fa-check" actionListener="#{itemCardapioController.salvar}" update=":msgGlobal" oncomplete="PF('cadastro').hide();"/>
 					</div>
 				</h:form>
 			</p:dialog> 
@@ -82,7 +82,7 @@
 		       			</p:selectOneMenu>
 					</p:panelGrid>
 					<div style="display:flex; justify-content:center; align-items:center;">
-						<p:commandButton value="Editar" icon="ui-icon-check" actionListener="#{itemCardapioController.editar}" update=":msgGlobal" oncomplete="PF('editar').hide();"/>
+						<p:commandButton value="Editar" icon="fa fa-check" actionListener="#{itemCardapioController.editar}" update=":msgGlobal" oncomplete="PF('editar').hide();"/>
 					</div>
 				</h:form>
 			</p:dialog>

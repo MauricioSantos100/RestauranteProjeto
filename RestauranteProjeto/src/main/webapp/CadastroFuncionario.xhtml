@@ -38,8 +38,8 @@
 		       			<p:password id="senha2" styleClass="input" value="#{funcionarioController.funcionario.senha}" label="senha2" required="true" requiredMessage="Digite a senha"></p:password>
 					</h:panelGrid>
 					<h:panelGrid columns="2" styleClass="botoes">
-						<p:commandButton value="Voltar" styleClass="botao" icon="ui-icon-arrow-1-w" action="Login.xhtml"/>
-						<p:commandButton value="Salvar" styleClass="botao" icon="ui-icon-check" actionListener="#{funcionarioController.salvar}" update=":msgGlobal" oncomplete="PF('cadastro').hide();"/>
+						<p:commandButton value="Voltar" styleClass="botao" icon="fa fa-arrow-left" action="Login.xhtml"/>
+						<p:commandButton value="Salvar" styleClass="botao" icon="fa fa-check" actionListener="#{funcionarioController.salvar}" update=":msgGlobal" oncomplete="PF('cadastro').hide();"/>
 					</h:panelGrid>					
 				</h:panelGrid>
 				</h:form>

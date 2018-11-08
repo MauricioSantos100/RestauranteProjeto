@@ -22,7 +22,7 @@
 				paginatorPosition="bottom"
 				var="p">				
 				<f:facet name="header">
-		            <p:commandButton value="Novo" type="button" onclick="PF('cadastro').show();" ></p:commandButton>
+		            <p:commandButton value="Novo" icon="fa fa-plus" type="button" onclick="PF('cadastro').show();" ></p:commandButton>
 		        </f:facet>
 				<p:column headerText="Código" width="80">
 					<h:outputText value="#{p.codProduto}" />
@@ -43,10 +43,10 @@
 					<h:outputText value="#{produtoController.produto.estoque.nome}" />
 				</p:column>
 				<p:column headerText="Opcões">
-					<p:commandButton action="Editar" actionListener="#{produtoController.editar(p)}" value="Editar" update=":test:dialogalterar" onclick="PF('editar').show();">
+					<p:commandButton action="Editar" icon="fa fa-fw fa-edit" actionListener="#{produtoController.editar(p)}" value="Editar" update=":test:dialogalterar" onclick="PF('editar').show();">
 						<f:setPropertyActionListener target="#{produtoController.produto}" value="#{p}"/>
 					</p:commandButton>
-					<p:commandButton action="Excluir" actionListener="#{produtoController.excluir(p)}" value="Excluir" update=":msgGlobal"></p:commandButton>
+					<p:commandButton action="Excluir" icon="fa fa-fw fa-remove" actionListener="#{produtoController.excluir(p)}" value="Excluir" update=":msgGlobal"></p:commandButton>
 				</p:column>
 			</p:dataTable> 
 			</h:form>
@@ -70,7 +70,7 @@
 		       			
 					</p:panelGrid>
 					<div style="display:flex; justify-content:center; align-items:center;">
-						<p:commandButton value="Salvar" icon="ui-icon-check" actionListener="#{produtoController.salvar}" update=":msgGlobal" oncomplete="PF('cadastro').hide();"/>
+						<p:commandButton value="Salvar" icon="fa fa-check" actionListener="#{produtoController.salvar}" update=":msgGlobal" oncomplete="PF('cadastro').hide();"/>
 					</div>
 				</h:form>
 			</p:dialog> 
@@ -82,7 +82,7 @@
 		       			<p:inputText id="editarcardapio" value="#{cardapioController.cardapio.categoria}"/>
 					</p:panelGrid>
 					<div style="display:flex; justify-content:center; align-items:center;">
-						<p:commandButton value="Editar" icon="ui-icon-check" actionListener="#{cardapioController.editar}" update=":msgGlobal" oncomplete="PF('editar').hide();"/>
+						<p:commandButton value="Editar" icon="fa fa-check" actionListener="#{cardapioController.editar}" update=":msgGlobal" oncomplete="PF('editar').hide();"/>
 					</div>
 				</h:form>
 			</p:dialog>
