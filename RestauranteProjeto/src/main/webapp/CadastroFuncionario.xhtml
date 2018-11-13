@@ -30,12 +30,12 @@
 		       			<p:outputLabel for="funcao" value="Função"/> 
 		       			<p:inputMask id="funcao" styleClass="input" value="#{funcionarioController.funcionario.funcao}"/>
 						<p:outputLabel for="usuario" value="Usuario"/>
-		       			<p:inputText id="usuario" styleClass="input" value="#{funcionarioController.funcionario.usuario}"/>
+		       			<p:inputText id="usuario" styleClass="input" value="#{funcionarioController.usuario.login}"/>
 						
 		       			<p:outputLabel for="senha" value="Senha"/>
 		       			<p:password id="senha" styleClass="input" match="senha2" required="true"></p:password>
 		       			<p:outputLabel for="senha2" value="Confirme a senha"/>
-		       			<p:password id="senha2" styleClass="input" value="#{funcionarioController.funcionario.senha}" label="senha2" required="true" requiredMessage="Digite a senha"></p:password>
+		       			<p:password id="senha2" styleClass="input" value="#{funcionarioController.usuario.senha}" label="senha2" required="true" requiredMessage="Digite a senha"></p:password>
 					</h:panelGrid>
 					<h:panelGrid columns="2" styleClass="botoes">
 						<p:commandButton value="Voltar" styleClass="botao" icon="fa fa-arrow-left" action="Login.xhtml"/>

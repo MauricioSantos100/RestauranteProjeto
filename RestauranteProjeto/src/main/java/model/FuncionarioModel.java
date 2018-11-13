@@ -21,7 +21,7 @@ public class FuncionarioModel {
 			StringException, NullException, JaExisteException, ValorException {
 		if (f != null) {
 			if (!this.existe(f)) {
-				if (Validacoes.verificaString(f.getNome()) && Validacoes.verificaString(f.getUsuario())
+				if (Validacoes.verificaString(f.getNome())
 						&& Validacoes.verificaString(f.getFuncao())) {
 					if (Validacoes.verificaCpf(f.getCpf())) {
 						if (Validacoes.verificaTelefone(f.getTelefone())) {
@@ -58,7 +58,7 @@ public class FuncionarioModel {
 	public void atualizaFuncionario(Funcionario f)
 			throws StringException, ValorException, EmailException, TelefoneException, CpfException, NullException {
 		if (((FuncionarioDao) dao).buscaCpfFuncionario(f.getCpf()) != null) {
-			if (Validacoes.verificaString(f.getNome()) && Validacoes.verificaString(f.getUsuario())
+			if (Validacoes.verificaString(f.getNome())
 					&& Validacoes.verificaString(f.getFuncao())) {
 				if (Validacoes.verificaCpf(f.getCpf())) {
 					if (Validacoes.verificaTelefone(f.getTelefone())) {
@@ -100,10 +100,5 @@ public class FuncionarioModel {
 	public List<Funcionario> filtrarFuncionarios() {
 		return dao.listando();
 	}
-	public Funcionario autenticarfunc(String login, String senha) {
-        if (login == null || senha == null) {
-            return null;
-        }
-        return FuncionarioDaoImpl.autenticarfunc(login, senha);
-    }
+	
 }

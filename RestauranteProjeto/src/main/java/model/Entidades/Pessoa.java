@@ -1,16 +1,28 @@
 package model.Entidades;
 
-import java.io.Serializable;
 
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 
+import org.hibernate.annotations.Formula;
 
-@MappedSuperclass
-public abstract class Pessoa  implements Serializable{
+@Entity
+@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="tipo", discriminatorType= DiscriminatorType.STRING, length = 1)
+public abstract class Pessoa implements Serializable{
 	
 	private static final long serialVersionUID = 5795870903752855103L;
 	
@@ -24,14 +36,42 @@ public abstract class Pessoa  implements Serializable{
 	private String cpf;
 	@Column(name = "telefone", length = 20, nullable = false)
 	private String telefone;
-	@Column(name = "usuario", length = 20, nullable = false)
-	private String usuario;
-	@Column(name = "senha", length = 20, nullable = false)
-	private String senha;
 	@Column(name = "email", length = 100, nullable = false)
 	private String email;
 	
+	@AttributeOverride(name="tipo", column=@Column(name="tipo", nullable = false, insertable = false, updatable= false ))
+	private Pessoa pessoat;
+	
+	@Formula("tipo")
+	public Pessoa getTheApType() {
+	    return pessoat;
+	}
+	
+	
+
+	public Pessoa getPessoat() {
+		return pessoat;
+	}
+
+
+
+	public void setPessoat(Pessoa pessoat) {
+		this.pessoat = pessoat;
+	}
+
+
+
+	@Transient
+	public String getDecriminatorValue() {
+	    return this.getClass().getAnnotation(DiscriminatorColumn.class).name();
+	}
+
+	
+	@ManyToMany
+	private List<Usuario> usuario;
+	
 	protected Pessoa() {}
+	
 	
 	public Integer getCodPessoa() {
 		return codPessoa;
@@ -60,24 +100,14 @@ public abstract class Pessoa  implements Serializable{
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	public String getUsuario() {
-		return usuario;
-	}
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
-	}
-	public String getSenha() {
-		return senha;
-	}
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+
 
 	@Override
 	public int hashCode() {
@@ -87,11 +117,13 @@ public abstract class Pessoa  implements Serializable{
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
+		result = prime * result + ((pessoat == null) ? 0 : pessoat.hashCode());
 		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
 		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -122,10 +154,10 @@ public abstract class Pessoa  implements Serializable{
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
-		if (senha == null) {
-			if (other.senha != null)
+		if (pessoat == null) {
+			if (other.pessoat != null)
 				return false;
-		} else if (!senha.equals(other.senha))
+		} else if (!pessoat.equals(other.pessoat))
 			return false;
 		if (telefone == null) {
 			if (other.telefone != null)
@@ -139,5 +171,6 @@ public abstract class Pessoa  implements Serializable{
 			return false;
 		return true;
 	}
-	
+
+
 }

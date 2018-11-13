@@ -6,75 +6,75 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title><ui:insert name="title">templateteste</ui:insert></title>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <h:outputStylesheet library="css" name="Template.css"></h:outputStylesheet>
-    <link type="text/css" rel="stylesheet" href="resources/css/Template.css"/>
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<h:outputStylesheet library="css" name="Template.css"></h:outputStylesheet>
+	<link type="text/css" rel="stylesheet"
+		href="resources/css/Template.css" />
 </h:head>
 
 <h:body>
-	
-	<ui:debug hotkey="x" rendered="#{initParam['javax.faces.FACELETS_DEVELOPMENT']}" />
-	<p:growl id="msgGlobal"/>
-	
+
+	<ui:debug hotkey="x"
+		rendered="#{initParam['javax.faces.FACELETS_DEVELOPMENT']}" />
+	<p:growl id="msgGlobal" />
+
 	<div id="header">
 		<ui:insert name="header">
 			<h:graphicImage value="Imagens/logo1.png" alt="logo" class="logo" />
 			<h:form>
 				<ul id="menu">
-				
-				<ui:fragment rendered="true">
-					<li><a href="Inicio.xhtml">Inicio</a></li>
-				</ui:fragment>
+
+					<ui:fragment rendered="true">
+						<li><a href="Inicio.xhtml">Inicio</a></li>
+					</ui:fragment>
 					<li><a href="Mesa.xhtml">Mesa</a></li>
 					<li><a href="#">Delivery</a></li>
 					<li><a href="PesquisaCardapio.xhtml">Cardápio</a></li>
 					<li><a href="PesquisaClientes.xhtml">Cadastro</a>
 						<ul>
-					      <li><a href="PesquisaClientes.xhtml">Clientes</a></li>
-					      <li><a href="PesquisaClientes.xhtml">Funcionários</a></li>
-					    </ul>
-					</li>
+							<li><a href="PesquisaClientes.xhtml">Clientes</a></li>
+							<li><a href="CadastroFuncionario.xhtml">Funcionários</a></li>
+						</ul></li>
 					<li><a href="PesquisaProduto.xhtml">Produto</a></li>
 					<li><a href="PesquisaEstoque.xhtml">Estoque</a></li>
 				</ul>
 				<ul id="menudireito">
-				<ui:fragment value="#{loginController.sessao == true}" rendered="false">
-					<li><a href="Login.xhtml">Login</a></li>
-				</ui:fragment>
-				<ui:fragment value="#{loginController.sessao == true}" rendered="true">
-					<li><a href="Login.xhtml">Sair</a></li>
-				</ui:fragment>
+					<ui:fragment rendered="true">
+						<li><a href="Login.xhtml">Login</a></li>
+					</ui:fragment>
+					<ui:fragment value="#{loginControl.deslogar}"	rendered="true">
+						<li><a href="Login.xhtml">Sair</a></li>
+					</ui:fragment>
 				</ul>
 			</h:form>
 		</ui:insert>
 	</div>
-	
+
 	<div id="content">
 		<ui:insert name="content">
-			<div>
-				
-			</div>
+			<div></div>
 		</ui:insert>
 	</div>
-	
+
 	<div id="rodape">
 		<ui:insert name="rodape">
 			<h:form>
-			<footer class="footer">
-			
-			<h:graphicImage value="Imagens/logo1.png" alt="logo" class="logo2" />
-			<ul class="menuRodape">
-				<li><a href="Inicio.xhtml">INICIO</a></li>
-				<li><a href="Cardapio.xhtml">CARDAPIO</a></li>
-				<li><a href="Cardapio.xhtml">CONTATO</a></li>
-				<li><a href="Cardapio.xhtml">SOBRE</a></li>
-				<li><a href="Cardapio.xhtml">LOCALIZAÇÃO</a></li>
-			</ul>
-				<p>© COPYRIGHT 2018 WEB RESTAURANTE - TODOS OS DIREITOS RESERVADOS.</p>
+				<footer class="footer">
+
+					<h:graphicImage value="Imagens/logo1.png" alt="logo" class="logo2" />
+					<ul class="menuRodape">
+						<li><a href="Inicio.xhtml">INICIO</a></li>
+						<li><a href="Cardapio.xhtml">CARDAPIO</a></li>
+						<li><a href="Cardapio.xhtml">CONTATO</a></li>
+						<li><a href="Cardapio.xhtml">SOBRE</a></li>
+						<li><a href="Cardapio.xhtml">LOCALIZAÇÃO</a></li>
+					</ul>
+					<p>© COPYRIGHT 2018 WEB RESTAURANTE - TODOS OS DIREITOS
+						RESERVADOS.</p>
 				</footer>
 			</h:form>
 		</ui:insert>
 	</div>
-	
+
 </h:body>
 </html>

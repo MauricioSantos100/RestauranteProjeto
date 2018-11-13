@@ -38,7 +38,7 @@ public class Pedido implements Serializable {
 	private String status;
 	
 	@OneToOne
-	@JoinColumn(name = "cod_cliente", referencedColumnName = "cod_cliente")
+	@JoinColumn(name = "cod_pessoa", referencedColumnName = "cod_pessoa")
 	private Cliente cliente;
 
 	@ManyToOne//onetomany
@@ -63,8 +63,8 @@ public class Pedido implements Serializable {
 					name = "cod_pedido",
 					referencedColumnName = "cod_pedido")},
 			inverseJoinColumns = {@JoinColumn(
-					name = "cod_funcionario",
-					referencedColumnName = "cod_funcionario")})
+					name = "cod_pessoa",
+					referencedColumnName = "cod_pessoa")})
 	@ManyToMany
 	private List<Funcionario> funcionario;
 	

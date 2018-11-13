@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import controler.util.FacesUtil;
 import model.ClienteModel;
 import model.Entidades.Cliente;
+import model.Entidades.Usuario;
 import model.Exception.CpfException;
 import model.Exception.EmailException;
 import model.Exception.JaExisteException;
@@ -21,9 +22,19 @@ import model.Exception.TelefoneException;
 public class ClienteController {
 
 	private Cliente cliente;
+	private Usuario usuario;
 	private List<Cliente> listaCliente;
 	private List<Cliente> listaClienteFiltrado;
 	private ClienteModel cm = new ClienteModel();
+
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 	public Cliente getCliente() {
 		return this.cliente;
@@ -34,6 +45,7 @@ public class ClienteController {
 	}
 
 	public ClienteController() {
+		this.usuario = new Usuario();
 		this.cliente = new Cliente();
 	}
 
@@ -61,8 +73,9 @@ public class ClienteController {
 	}
 
 	public void salvar() {
-
+		UsuarioController uc = new UsuarioController(); 
 		try {
+			uc.salvar(this.usuario);
 			cm.registraCliente(this.cliente);
 			FacesUtil.adicionarMsgInfo("Cliente Salvo com Sucesso.");
 		} catch (JaExisteException ee) {

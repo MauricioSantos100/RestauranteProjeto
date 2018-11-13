@@ -7,6 +7,8 @@ import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import model.Entidades.Pessoa;
+
 
 public class JPAManager {
 
@@ -33,7 +35,7 @@ public class JPAManager {
         Object obj = null;
         
         try {
-            Query consulta = session.createQuery (" SELECT a FROM Cliente a WHERE a.usuario = :usuario AND a.senha = :senha");
+            Query consulta = session.createQuery (" SELECT a FROM Usuario a WHERE a.login = :usuario AND a.senha = :senha");
             consulta.setParameter("usuario", usuario);
             consulta.setParameter("senha", senha);
             obj = consulta.getSingleResult();
@@ -45,14 +47,13 @@ public class JPAManager {
         
         return obj;
     }
-	public Object autenticarfunc(String usuario, String senha) {
+	
+	public Object tipo(String tipo, Pessoa pessoa) {
         Session session = this.sessionFactory.openSession();
         Object obj = null;
-        
         try {
-            Query consulta = session.createQuery (" SELECT f FROM Funcionario f WHERE f.usuario = :usuario AND f.senha = :senha");
-            consulta.setParameter("usuario", usuario);
-            consulta.setParameter("senha", senha);
+            Query consulta = session.createQuery (" SELECT a FROM Pessoa a WHERE a.funcao = :funcao");
+            consulta.setParameter("tipo", tipo);
             obj = consulta.getSingleResult();
         } catch(RuntimeException ex) {
             throw ex;
@@ -61,6 +62,5 @@ public class JPAManager {
         }
         
         return obj;
-        
     }
 }

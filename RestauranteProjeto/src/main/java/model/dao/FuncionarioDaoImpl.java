@@ -31,8 +31,4 @@ public class FuncionarioDaoImpl extends DAOImpl implements FuncionarioDao{
 		}
 		return funcionario;
 	}
-
-	public static Funcionario autenticarfunc(String usuario, String senha) {
-        return (Funcionario) JPAManager.getInstance().autenticarfunc(usuario, senha);
-    }
 }

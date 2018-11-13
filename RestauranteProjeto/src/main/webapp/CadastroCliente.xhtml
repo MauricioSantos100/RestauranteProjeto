@@ -24,12 +24,12 @@
 						<p:outputLabel for="telefone" value="Telefone"/> 
 		       			<p:inputMask id="telefone" styleClass="input" value="#{clienteController.cliente.telefone}" mask="(99) 99999-9999"/>
 						<p:outputLabel for="usuario" value="Usuario"/>
-		       			<p:inputText id="usuario" styleClass="input" value="#{clienteController.cliente.usuario}"/>
+		       			<p:inputText id="usuario" styleClass="input" value="#{clienteController.usuario.login}"/>
 						
 		       			<p:outputLabel for="senha" value="Senha"/>
 		       			<p:password id="senha" styleClass="input" match="senha2" required="true"></p:password>
 		       			<p:outputLabel for="senha2" value="Confirme a senha"/>
-		       			<p:password id="senha2" styleClass="input" value="#{clienteController.cliente.senha}" label="senha2" required="true" requiredMessage="Digite a senha"></p:password>
+		       			<p:password id="senha2" styleClass="input" value="#{clienteController.usuario.senha}" label="senha2" required="true" requiredMessage="Digite a senha"></p:password>
 					</h:panelGrid>
 					<h:panelGrid columns="2" styleClass="botoes">
 						<p:commandButton value="Voltar" styleClass="botao" icon="fa fa-arrow-left" action="Login.xhtml"/>

@@ -3,15 +3,14 @@ package model.Entidades;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="cliente")
-@AttributeOverride(name = "codPessoa", column = @Column(name = "cod_cliente"))
+@DiscriminatorValue("C")
 public class Cliente extends Pessoa implements Serializable{
 
 	private static final long serialVersionUID = 7126712513942445970L;

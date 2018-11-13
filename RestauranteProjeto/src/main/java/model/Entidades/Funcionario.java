@@ -3,24 +3,24 @@ package model.Entidades;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="funcionario")
-@AttributeOverride(name = "codPessoa", column = @Column(name = "cod_funcionario"))
+@DiscriminatorValue("F")
 public class Funcionario extends Pessoa  implements Serializable {
 	
 	private static final long serialVersionUID = -2112511687324669107L;
 	
 	@Column(name = "num_carteira", length = 20)
 	private Integer numCarteira;
-	@Column(name = "funcao", length = 30, nullable = false)
+	@Column(name = "funcao", length = 30)
 	private String funcao;
-	@Column(name = "salario", precision = 6, scale = 2, nullable = false)
+	@Column(name = "salario", precision = 6, scale = 2)
 	private double salario;
 	
 	@ManyToMany

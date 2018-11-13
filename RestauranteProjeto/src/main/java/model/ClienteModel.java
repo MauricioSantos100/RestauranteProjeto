@@ -21,7 +21,7 @@ public class ClienteModel {
 			throws JaExisteException, NullException, StringException, CpfException, TelefoneException, EmailException {
 		if (c != null) {
 			if (!this.existe(c)) {
-				if (Validacoes.verificaString(c.getNome()) && Validacoes.verificaString(c.getUsuario())) {
+				if (Validacoes.verificaString(c.getNome())) {
 					if (Validacoes.verificaCpf(c.getCpf())) {
 						if (Validacoes.verificaTelefone(c.getTelefone())) {
 							if (Validacoes.verificaEmail(c.getEmail())) {
@@ -48,7 +48,7 @@ public class ClienteModel {
 
 	public void atualizaCliente(Cliente c) throws EmailException, TelefoneException, CpfException, StringException, NullException {
 		if (((ClienteDao) dao).buscaCpfCliente(c.getCpf()) != null) {
-			if (Validacoes.verificaString(c.getNome()) && Validacoes.verificaString(c.getUsuario())) {
+			if (Validacoes.verificaString(c.getNome())) {
 				if (Validacoes.verificaCpf(c.getCpf())) {
 					if (Validacoes.verificaTelefone(c.getTelefone())) {
 						if (Validacoes.verificaEmail(c.getEmail())) {
@@ -93,11 +93,4 @@ public class ClienteModel {
 		return dao.listarNome();
 	}
 	
-	
-    public Cliente autenticar(String login, String senha) {
-        if (login == null || senha == null) {
-            return null;
-        }
-        return ClienteDaoImpl.autenticar(login, senha);
-    }
 }

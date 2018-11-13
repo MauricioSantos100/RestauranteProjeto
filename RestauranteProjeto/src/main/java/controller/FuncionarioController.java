@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import controler.util.FacesUtil;
 import model.FuncionarioModel;
 import model.Entidades.Funcionario;
+import model.Entidades.Usuario;
 import model.Exception.CpfException;
 import model.Exception.EmailException;
 import model.Exception.JaExisteException;
@@ -21,10 +22,18 @@ import model.Exception.ValorException;
 public class FuncionarioController {
 	
 	private Funcionario funcionario;
+	private Usuario usuario;
 	private List<Funcionario> listaFuncionario;
 	private List<Funcionario> listaFuncionarioFiltrado;
 	FuncionarioModel fm = new FuncionarioModel();
 	
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	public Funcionario getFuncionario() {
 		return funcionario;
 	}
@@ -32,6 +41,7 @@ public class FuncionarioController {
 		this.funcionario = funcionario;
 	}
 	public FuncionarioController() {
+		this.usuario = new Usuario();
 		this.funcionario = new Funcionario();
 	}
 	public List<Funcionario> getListaFuncionario() {
@@ -50,7 +60,9 @@ public class FuncionarioController {
 	}
 	
 	public void salvar() {
+		UsuarioController uc = new UsuarioController(); 
 		try {
+			uc.salvar(this.usuario);
 			fm.registraFuncionario(this.funcionario);
 			FacesUtil.adicionarMsgInfo("Funcionário Salvo com Sucesso.");
 		} catch (JaExisteException ee) {
