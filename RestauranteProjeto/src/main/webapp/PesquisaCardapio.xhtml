@@ -11,7 +11,8 @@
 </h:head>
 <ui:composition template="Template.xhtml">
 	<ui:define name="content">
-		<h:form id="tabela">
+	
+		<h:form id="tabela">	
 			<p:dataTable emptyMessage="Nenhum registro encontrado."
 				id="cardapios"
 				value="#{cardapioController.listaCardapio}"
@@ -47,7 +48,7 @@
 		       			<p:inputText id="inserircardapio" value="#{cardapioController.cardapio.categoria}"/>
 					</p:panelGrid>
 					<div style="display:flex; justify-content:center; align-items:center;">
-						<p:commandButton value="Salvar" icon="fa fa-check" actionListener="#{cardapioController.salvar}" update=":msgGlobal" oncomplete="PF('cadastro').hide();"/>
+						<p:commandButton value="Salvar" icon="fa fa-check" actionListener="#{cardapioController.salvar}" update=":msgGlobal" onclick="this.form.target= " action="PesquisaCardapio.xhtml" oncomplete="PF('cadastro').hide();"/>
 					</div>
 				</h:form>
 			</p:dialog> 

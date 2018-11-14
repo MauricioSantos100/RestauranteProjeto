@@ -38,35 +38,12 @@ public abstract class Pessoa implements Serializable{
 	private String telefone;
 	@Column(name = "email", length = 100, nullable = false)
 	private String email;
-	
-	@AttributeOverride(name="tipo", column=@Column(name="tipo", nullable = false, insertable = false, updatable= false ))
-	private Pessoa pessoat;
-	
-	@Formula("tipo")
-	public Pessoa getTheApType() {
-	    return pessoat;
-	}
-	
-	
-
-	public Pessoa getPessoat() {
-		return pessoat;
-	}
-
-
-
-	public void setPessoat(Pessoa pessoat) {
-		this.pessoat = pessoat;
-	}
-
-
 
 	@Transient
 	public String getDecriminatorValue() {
 	    return this.getClass().getAnnotation(DiscriminatorColumn.class).name();
 	}
 
-	
 	@ManyToMany
 	private List<Usuario> usuario;
 	
@@ -108,7 +85,6 @@ public abstract class Pessoa implements Serializable{
 	}
 
 
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -117,12 +93,10 @@ public abstract class Pessoa implements Serializable{
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((pessoat == null) ? 0 : pessoat.hashCode());
 		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
 		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
 	}
-
 
 
 	@Override
@@ -154,11 +128,6 @@ public abstract class Pessoa implements Serializable{
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
-		if (pessoat == null) {
-			if (other.pessoat != null)
-				return false;
-		} else if (!pessoat.equals(other.pessoat))
-			return false;
 		if (telefone == null) {
 			if (other.telefone != null)
 				return false;
@@ -171,6 +140,8 @@ public abstract class Pessoa implements Serializable{
 			return false;
 		return true;
 	}
+
+
 
 
 }
