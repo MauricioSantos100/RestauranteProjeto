@@ -62,6 +62,7 @@ public class FuncionarioController {
 	public void salvar() {
 		UsuarioController uc = new UsuarioController(); 
 		try {
+			funcionario.setTipo("F");
 			uc.salvar(this.usuario);
 			fm.registraFuncionario(this.funcionario);
 			FacesUtil.adicionarMsgInfo("Funcionário Salvo com Sucesso.");
@@ -89,6 +90,7 @@ public class FuncionarioController {
 
 	public String editar(Funcionario f) {
 		try {
+			funcionario.setTipo("F");
 			fm.atualizaFuncionario(f);;
 			FacesUtil.adicionarMsgInfo("Funcionário alterado.");
 		} catch (NullException ne) {

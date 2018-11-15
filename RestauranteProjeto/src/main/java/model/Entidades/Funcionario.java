@@ -7,10 +7,12 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="funcionario")
+@PrimaryKeyJoinColumn(name = "cod_funcionario")
 @DiscriminatorValue("F")
 public class Funcionario extends Pessoa  implements Serializable {
 	

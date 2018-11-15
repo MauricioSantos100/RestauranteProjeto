@@ -75,6 +75,7 @@ public class ClienteController {
 	public void salvar() {
 		UsuarioController uc = new UsuarioController(); 
 		try {
+			cliente.setTipo("C");
 			uc.salvar(this.usuario);
 			cm.registraCliente(this.cliente);
 			FacesUtil.adicionarMsgInfo("Cliente Salvo com Sucesso.");
@@ -100,6 +101,7 @@ public class ClienteController {
 
 	public String editar() throws SQLException {
 		try {
+			cliente.setTipo("C");
 			cm.atualizaCliente(this.cliente);
 			FacesUtil.adicionarMsgInfo("Cliente alterado.");
 		} catch (StringException se) {

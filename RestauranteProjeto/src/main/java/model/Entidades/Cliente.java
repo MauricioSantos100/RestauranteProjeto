@@ -6,10 +6,12 @@ import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="cliente")
+@PrimaryKeyJoinColumn(name = "cod_cliente")
 @DiscriminatorValue("C")
 public class Cliente extends Pessoa implements Serializable{
 

@@ -52,7 +52,7 @@ public class JPAManager {
         Session session = this.sessionFactory.openSession();
         Object obj = null;
         try {
-            Query consulta = session.createQuery (" SELECT a FROM Pessoa a WHERE a.funcao = :funcao");
+            Query consulta = session.createQuery (" SELECT a FROM Pessoa a WHERE a.tipo = :tipo");
             consulta.setParameter("tipo", tipo);
             obj = consulta.getSingleResult();
         } catch(RuntimeException ex) {
