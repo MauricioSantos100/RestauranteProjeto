@@ -29,7 +29,7 @@
 					</ui:fragment>
 					<li><a href="Mesa.xhtml">Mesa</a></li>
 					<li><a href="#">Delivery</a></li>
-					<li><a href="PesquisaCardapio.xhtml">Cardápio</a></li>
+					<li><a href="Cardapio.xhtml">Cardápio</a></li>
 					<li><a href="PesquisaClientes.xhtml">Cadastro</a>
 						<ul>
 							<li><a href="PesquisaClientes.xhtml">Clientes</a></li>
@@ -42,9 +42,10 @@
 					<ui:fragment rendered="true">
 						<li><a href="Login.xhtml">Login</a></li>
 					</ui:fragment>
-					<ui:fragment value="#{loginControl.deslogar}" rendered="true">
-						<li><a href="Login.xhtml">Sair</a></li>
+					<ui:fragment  rendered="true">
+						<li><h:commandLink value = "Sair"  action="#{loginControl.deslogar}"/></li>
 					</ui:fragment>
+					<li><h:outputText value="#{loginControl.usuario}" /> </li>
 				</ul>
 			</h:form>
 		</ui:insert>

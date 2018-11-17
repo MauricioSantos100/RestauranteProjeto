@@ -2,11 +2,14 @@ package controller;
 
 import java.io.IOException;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.persistence.NoResultException;
 import javax.servlet.http.HttpSessionEvent;
 
+import controler.util.FacesUtil;
 import model.UsuarioModel;
 import model.Entidades.Pessoa;
 import model.Entidades.Usuario;
@@ -39,9 +42,9 @@ public class LoginControl {
 
 	public LoginControl() {
 		usuariologin = new Usuario();
-	}	
+	}
 
-	public void logar() {
+	public void logar(){
 		FacesContext con = FacesContext.getCurrentInstance();
 		
 		if (this.usuario.equals(usuario) && this.senha.equals(senha)
@@ -55,9 +58,8 @@ public class LoginControl {
 				e.printStackTrace();
 			}
 		} else {
-			
+			//con.addMessage(null, new FacesMessage("falha ao entrar."));
 		}
-		
 	}
 	private String tipo;
 	
@@ -78,12 +80,6 @@ public class LoginControl {
 		return false;
 	}
 	
-	public boolean sessao(HttpSessionEvent se) {
-		if (se.getSession().getId() != null) {
-			return true;
-		}
-		return false;
-	}
 
 	public void deslogar() {
 		FacesContext con = FacesContext.getCurrentInstance();
@@ -94,4 +90,5 @@ public class LoginControl {
 			e.printStackTrace();
 		}
 	}
+ 
 }

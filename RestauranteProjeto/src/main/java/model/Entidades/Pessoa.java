@@ -1,6 +1,5 @@
 package model.Entidades;
 
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -16,14 +15,14 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 
 @Entity
-@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="tipop", discriminatorType= DiscriminatorType.STRING, length = 1)
-public abstract class Pessoa implements Serializable{
-	
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipop", discriminatorType = DiscriminatorType.STRING, length = 1)
+public abstract class Pessoa implements Serializable {
+
 	private static final long serialVersionUID = 5795870903752855103L;
-	
-	@Id 
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cod_pessoa")
 	protected Integer codPessoa;
 	@Column(name = "nome", length = 100, nullable = false)
@@ -39,23 +38,26 @@ public abstract class Pessoa implements Serializable{
 
 	@ManyToMany
 	private List<Usuario> usuario;
-	
-	protected Pessoa() {}
-	
-	
+
+	protected Pessoa() {
+	}
+
 	public Integer getCodPessoa() {
 		return codPessoa;
 	}
+
 	public void setCodPessoa(Integer codPessoa) {
 		this.codPessoa = codPessoa;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	public String getCpf() {
 		return cpf;
 	}
@@ -67,22 +69,26 @@ public abstract class Pessoa implements Serializable{
 	public String getTelefone() {
 		return telefone;
 	}
+
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getTipo() {
 		return tipo;
 	}
+
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -97,7 +103,6 @@ public abstract class Pessoa implements Serializable{
 		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {

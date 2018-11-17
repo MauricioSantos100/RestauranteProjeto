@@ -9,7 +9,31 @@
 </h:head>
 <ui:composition template="Template.xhtml">
 	<ui:define name="content">
-		
+		<link type="text/css" rel="stylesheet" href="resources/css/Cardapio.css" />
+		<h:outputStylesheet library="css" name="Cardapio.css"></h:outputStylesheet>
+		<div id="cardapio">
+			<div class="center">
+				<div class="header">
+					<div class="bg"></div>
+					<div class="interno">
+						<h2>Cardápio</h2>
+					</div>
+				</div>
+				<div class="body">
+					<ul class="categoria">
+						<ui:repeat value="#{cardapioController.cardapio}" var="cardapio">
+							<li><h:outputText value="#{cardapioController.cardapio.categoria}"/></li>
+						</ui:repeat>
+						<h:dataTable>
+							<h:column>#{cardapioController.cardapio.categoria}
+							</h:column>
+						</h:dataTable>
+						<li></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
 	</ui:define>
 </ui:composition>
 </html>

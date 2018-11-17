@@ -61,7 +61,7 @@ public class FuncionarioController {
 	
 	public void salvar() {
 		UsuarioController uc = new UsuarioController(); 
-		try {
+		try { 
 			funcionario.setTipo("F");
 			uc.salvar(this.usuario);
 			fm.registraFuncionario(this.funcionario);

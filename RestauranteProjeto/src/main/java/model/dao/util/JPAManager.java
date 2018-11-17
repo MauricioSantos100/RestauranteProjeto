@@ -48,11 +48,12 @@ public class JPAManager {
         return obj;
     }
 	
+	
 	public Object tipo(String tipo, Pessoa pessoa) {
         Session session = this.sessionFactory.openSession();
         Object obj = null;
         try {
-            Query consulta = session.createQuery (" SELECT a FROM Pessoa a WHERE a.tipo = :tipo");
+            Query consulta = session.createQuery (" SELECT p FROM Pessoa p WHERE p.tipo = :tipo");
             consulta.setParameter("tipo", tipo);
             obj = consulta.getSingleResult();
         } catch(RuntimeException ex) {

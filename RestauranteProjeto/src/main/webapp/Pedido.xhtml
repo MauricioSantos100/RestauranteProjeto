@@ -28,6 +28,10 @@
 						</p:selectOneMenu>
 					</p:column>
 				</p:dataTable>
+				<p:selectOneMenu value="#{clienteController.cliente}">
+							<f:selectItem itemLabel="Selecione um cliente:" />
+							<f:selectItems value="#{clienteController.clientes}"></f:selectItems>
+						</p:selectOneMenu>
 				<p:commandButton value="Proximo" styleClass="botao"
 					action="Produtos.xhtml" />
 			</h:form>
