@@ -21,15 +21,25 @@
 				</div>
 				<div class="body">
 					<ul class="categoria">
-						<ui:repeat value="#{cardapioController.cardapio}" var="cardapio">
-							<li><h:outputText value="#{cardapioController.cardapio.categoria}"/></li>
-						</ui:repeat>
-						<h:dataTable>
-							<h:column>#{cardapioController.cardapio.categoria}
-							</h:column>
-						</h:dataTable>
-						<li></li>
+						<li>
+						<h3><a>Nome do cardapio</a></h3>
+							<ul class="produto">
+								<ui:repeat value="#{itemCardapioController.listaItemCardapio}" var="car">
+									<li>
+										<div class="prod">
+											<div class="nome">
+												<h:outputText  value="#{car.nome}"/>
+											</div>
+											<div class="preco">
+												<h:outputText value="R$#{car.preco}" converter="javax.faces.Number" />
+											</div>
+										</div>
+									</li>
+								</ui:repeat>
+							</ul>
+						</li>
 					</ul>
+					* O cardápio está sujeito a alterações sem aviso prévio. O Web Restaurante não garante o valor ou a disponibilidade dos itens.
 				</div>
 			</div>
 		</div>

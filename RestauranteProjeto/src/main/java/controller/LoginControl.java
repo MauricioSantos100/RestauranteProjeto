@@ -2,14 +2,11 @@ package controller;
 
 import java.io.IOException;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.persistence.NoResultException;
-import javax.servlet.http.HttpSessionEvent;
+import javax.persistence.PostLoad;
 
-import controler.util.FacesUtil;
 import model.UsuarioModel;
 import model.Entidades.Pessoa;
 import model.Entidades.Usuario;
@@ -79,7 +76,6 @@ public class LoginControl {
 			}
 		return false;
 	}
-	
 
 	public void deslogar() {
 		FacesContext con = FacesContext.getCurrentInstance();

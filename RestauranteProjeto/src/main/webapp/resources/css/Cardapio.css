@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
+@import url('https://fonts.googleapis.com/css?family=Raleway:500');
 
 #cardapio{
 	display: table;
     width: 100%;
-    height: 780px;
+    height: 1670px;
     padding: 65px 0;
-    background-color: gray;
+    background-color: #a6a6a6;
 }
 
 #cardapio .center{
@@ -52,7 +53,7 @@
 	position: absolute;
     bottom: 50%;
     top: 0;
-    left: 0;
+    left: 150px;
     right: 0;
 } 
 #cardapio h2{
@@ -66,4 +67,52 @@
 #cardapio .body ul{
 	padding-left: 0;
     list-style-type: none;
+    padding-top: 10px;
+}
+#cardapio .categoria h3{
+	font-weight: 400;
+    text-transform: uppercase;
+    border-bottom: 2px solid;
+    padding-bottom: 7px;
+    border-bottom-color: #FFBC47;
+    padding-top: 7px;
+}
+
+#cardapio .categoria h3 a{
+	color: black;
+	font-family: 'Raleway', sans-serif;
+	font-size: 30px;
+}
+#cardapio .produto li{
+	display: inline-block;
+    vertical-align: top;
+    width: 49.8%;
+    box-sizing: border-box;
+    margin-bottom: 8px;
+    background-color: #ffffff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 8px;
+}
+#cardapio .produto li .prod{
+	font-size: 30px;
+	font-family: 'Josefin Sans', sans-serif;
+}
+#cardapio .produto li .nome{
+	font-weight: 300;
+    color: #36454f;
+    vertical-align: top;
+    padding-right: 4px;
+    overflow: hidden;
+}
+#cardapio .produto li .preco{
+	letter-spacing: 1px;
+    vertical-align: bottom;
+    text-align: right;
+    padding-left: 10px;
+    float: right;
+    color: #36454f;
+}
+#cardapio .produto li .preco, #cardapio .produto li .nome {
+	position: relative;
 }

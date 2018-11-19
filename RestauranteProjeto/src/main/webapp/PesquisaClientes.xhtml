@@ -53,12 +53,12 @@
 	       			<p:inputText id="usuario" value="#{clienteController.usuario.login}"/>
 					
 	       			<p:outputLabel for="senha" value="Senha"/>
-	       			<p:password id="senha" match="senha1" label="Senha" required="true"></p:password>
+	       			<p:password id="senha" match="senha2" label="Senha" required="true"></p:password>
 	       			<p:outputLabel for="senha2" value="Confirme a senha"/>
 	       			<p:password id="senha2" value="#{clienteController.usuario.senha}" label="Senha2" required="true" requiredMessage="Digite a senha"></p:password>
 				</p:panelGrid>
 				<div style="display:flex; justify-content:center; align-items:center;">
-					<p:commandButton value="Salvar" icon="fa fa-check" actionListener="#{clienteController.salvar(clienteController.cliente)}" update=":msgGlobal" oncomplete="PF('cadastro').hide();"/>
+					<p:commandButton value="Salvar" icon="fa fa-check" actionListener="#{clienteController.salvar}" update=":msgGlobal" oncomplete="PF('cadastro').hide();"/>
 				</div>
 			</p:dialog>
 		</h:form>

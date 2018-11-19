@@ -5,7 +5,8 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title><ui:insert name="title">templateteste</ui:insert></title>
+	<link rel="shortcut icon" href="favicon.ico"/>
+	<title><ui:insert name="title">Web Restaurante</ui:insert></title>
 	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 	<h:outputStylesheet library="css" name="Template.css"></h:outputStylesheet>
 	<link type="text/css" rel="stylesheet"
@@ -20,16 +21,18 @@
 
 	<div id="header">
 		<ui:insert name="header">
-			<h:graphicImage value="Imagens/logo1.png" alt="logo" class="logo" />
+			<a href="Inicio.xhtml">
+				<h:graphicImage value="Imagens/logo1.png" alt="logo" class="logo" />
+			</a>
 			<h:form>
 				<ul id="menu">
-
 					<ui:fragment rendered="true">
 						<li><a href="Inicio.xhtml">Inicio</a></li>
 					</ui:fragment>
 					<li><a href="Mesa.xhtml">Mesa</a></li>
 					<li><a href="#">Delivery</a></li>
 					<li><a href="Cardapio.xhtml">Cardápio</a></li>
+					<li><a href="PesquisaCardapio.xhtml">Cardápio</a></li>
 					<li><a href="PesquisaClientes.xhtml">Cadastro</a>
 						<ul>
 							<li><a href="PesquisaClientes.xhtml">Clientes</a></li>
