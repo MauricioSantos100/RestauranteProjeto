@@ -21,7 +21,7 @@ public class Cardapio implements Serializable{
 	
 	private static final long serialVersionUID = -4664430664985731932L;
 
-	@Id
+	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cod_cardapio")
 	private Integer codCardapio;
