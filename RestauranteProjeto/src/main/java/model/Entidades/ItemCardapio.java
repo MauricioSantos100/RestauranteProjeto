@@ -11,8 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -30,8 +30,8 @@ public class ItemCardapio implements Serializable{
 	@Column(name = "preco", precision = 6, scale = 2, nullable = false)
 	private double preco;
 	/**/
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name = "cod_cardapio", referencedColumnName = "cod_cardapio")
+	@ManyToOne
+	@JoinColumn(name = "cod_cardapio")
 	private Cardapio cardapio;
 	
 	@ManyToMany

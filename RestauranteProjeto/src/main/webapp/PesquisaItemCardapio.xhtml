@@ -36,7 +36,7 @@
 					<h:outputText value="#{ic.preco}" />
 				</p:column>
 				<p:column headerText="Nome do Cardapio">
-					<h:outputText value="#{cardapioController.cardapio.categoria}" />
+					<h:outputText value="#{ic.cardapio.categoria}" />
 				</p:column>
 				<p:column headerText="Opcões">
 					<p:commandButton action="Editar" icon="fa fa-fw fa-edit" value="Editar" update=":dialogalterar" oncomplete="PF('editar').show();">

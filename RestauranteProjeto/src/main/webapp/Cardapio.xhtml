@@ -30,6 +30,7 @@
 								<ui:repeat value="#{itemCardapioController.listaItemCardapio}" var="icar">
 									<li>
 										<div class="prod">
+										<h:outputText  value="#{icar.cardapio.categoria}"/>
 											<div class="nome">
 												<h:outputText  value="#{icar.nome}"/>
 											</div>
