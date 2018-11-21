@@ -19,4 +19,5 @@ public class UsuarioDaoImpl extends DAOImpl implements UsuarioDao {
 		return null;
 	}
 	
+	
 }

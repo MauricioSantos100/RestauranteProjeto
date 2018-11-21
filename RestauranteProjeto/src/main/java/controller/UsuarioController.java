@@ -3,7 +3,7 @@ package controller;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import controler.util.FacesUtil;
+import controller.util.FacesUtil;
 import model.UsuarioModel;
 import model.Entidades.Usuario;
 

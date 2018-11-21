@@ -23,15 +23,18 @@
 					<ul class="categoria">
 						<li>
 						<h3><a>Nome do cardapio</a></h3>
+						<ui:repeat value="#{cardapioController.listaCardapio}" var="car">
+							<h:outputText  value="#{car.categoria}"/>
+						</ui:repeat>
 							<ul class="produto">
-								<ui:repeat value="#{itemCardapioController.listaItemCardapio}" var="car">
+								<ui:repeat value="#{itemCardapioController.listaItemCardapio}" var="icar">
 									<li>
 										<div class="prod">
 											<div class="nome">
-												<h:outputText  value="#{car.nome}"/>
+												<h:outputText  value="#{icar.nome}"/>
 											</div>
 											<div class="preco">
-												<h:outputText value="R$#{car.preco}" converter="javax.faces.Number" />
+												<h:outputText value="R$#{icar.preco}" converter="javax.faces.Number" />
 											</div>
 										</div>
 									</li>

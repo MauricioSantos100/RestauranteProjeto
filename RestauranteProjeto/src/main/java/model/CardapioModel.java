@@ -65,8 +65,4 @@ public class CardapioModel {
 	public List<Cardapio> filtrarCardapios() {
 		return dao.listando();
 	}
-
-	public List<Cardapio> listarNomeCardapio() {
-		return dao.listarNome();
-	}
 }

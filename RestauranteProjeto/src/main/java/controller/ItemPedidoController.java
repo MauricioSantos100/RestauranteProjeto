@@ -2,7 +2,7 @@ package controller;
 
 import java.util.List;
 
-import controler.util.FacesUtil;
+import controller.util.FacesUtil;
 import model.ItemPedidoModel;
 import model.Entidades.ItemPedido;
 import model.Exception.JaExisteException;

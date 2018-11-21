@@ -30,22 +30,5 @@ public class CardapioDaoImpl extends DAOImpl implements CardapioDao {
 			mng.close();
 		}
 		return cardapio;
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Cardapio> listarNome(){
-		List<Cardapio> cardapio = null;
-		EntityManager mng = JPAManager.getInstance().getEntityManager();
-		try {
-			mng.getTransaction().begin();
-			Query query = mng.createQuery("SELECT categoria FROM Cardapio");
-			cardapio = query.getResultList();
-		}catch (Exception e) {
-			mng.getTransaction().rollback();
-		} finally {
-			mng.close();
-		}
-		return cardapio;
-	}
-	
+	}	
 }

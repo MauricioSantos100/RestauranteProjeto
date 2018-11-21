@@ -5,7 +5,7 @@ import java.util.List;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
-import controler.util.FacesUtil;
+import controller.util.FacesUtil;
 import model.FuncionarioModel;
 import model.Entidades.Funcionario;
 import model.Entidades.Usuario;

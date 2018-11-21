@@ -33,7 +33,6 @@ public class JPAManager {
 	public Object autenticar(String usuario, String senha) {
         Session session = this.sessionFactory.openSession();
         Object obj = null;
-        
         try {
             Query consulta = session.createQuery (" SELECT a FROM Usuario a WHERE a.login = :usuario AND a.senha = :senha");
             consulta.setParameter("usuario", usuario);
@@ -64,4 +63,20 @@ public class JPAManager {
         
         return obj;
     }
+	/*
+	public Object cardapio(String tipo, Pessoa pessoa) {
+        Session session = this.sessionFactory.openSession();
+        Object obj = null;
+        try {
+            Query consulta = session.createQuery (" SELECT ic FROM ItemCardapio WHERE ic.codCardapio = :");
+            consulta.setParameter("tipo", tipo);
+            obj = consulta.getSingleResult();
+        } catch(RuntimeException ex) {
+            throw ex;
+        } finally {
+            session.close();
+        }
+        
+        return obj;
+    }*/
 }

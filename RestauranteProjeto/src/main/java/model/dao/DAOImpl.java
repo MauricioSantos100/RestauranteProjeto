@@ -1,5 +1,6 @@
 package model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -9,9 +10,9 @@ import model.dao.util.JPAManager;
 
 public class DAOImpl implements DAO<Object>{
 
+	EntityManager manager = JPAManager.getInstance().getEntityManager();
+	
 	public void insert(Object obj) {
-		EntityManager manager = JPAManager.getInstance().getEntityManager();
-		
 		try  {
 			manager.getTransaction().begin();		
 			manager.persist(obj);
@@ -23,9 +24,7 @@ public class DAOImpl implements DAO<Object>{
 		}
 	}
 
-	public void update(Object obj) {
-		EntityManager manager = JPAManager.getInstance().getEntityManager();
-		
+	public void update(Object obj) {		
 		try  {
 			manager.getTransaction().begin();		
 			manager.merge(obj);
@@ -39,8 +38,6 @@ public class DAOImpl implements DAO<Object>{
 	}
 
 	public void remove(Object obj) {
-		EntityManager manager = JPAManager.getInstance().getEntityManager();
-		
 		try  {
 			manager.getTransaction().begin();		
 			manager.remove(manager.merge(obj));
@@ -61,7 +58,6 @@ public class DAOImpl implements DAO<Object>{
 	@SuppressWarnings("unchecked")
 	public List<Object> findporid(Integer id) {
 		List<Object> obj = null;
-		EntityManager manager = JPAManager.getInstance().getEntityManager();
 		try {
 			manager.getTransaction().begin();
 			Query query = (Query) manager.find(getClass(), id);
@@ -77,7 +73,6 @@ public class DAOImpl implements DAO<Object>{
 	@SuppressWarnings("unchecked")
 	public List<Object> findALL() {
 		List<Object> obj = null;
-		EntityManager manager = JPAManager.getInstance().getEntityManager();
 		try {
 			manager.getTransaction().begin();
 			Query query = manager.createQuery("FROM " + getClass());
@@ -89,5 +84,17 @@ public class DAOImpl implements DAO<Object>{
 		}
 		return obj;
 	}
-
+	
+	public List<Object> findALsL() {
+		List<Object> lista = new ArrayList<Object>();
+		try {
+			manager.getTransaction().begin();
+			lista = manager.createQuery("SELECT FROM Object", Object.class).getResultList();
+		} catch (Exception e) {
+			manager.getTransaction().rollback();
+		} finally {
+			manager.close();
+		}
+		return lista;
+	}
 }

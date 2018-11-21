@@ -2,7 +2,7 @@ package controller;
 
 import java.util.List;
 
-import controler.util.FacesUtil;
+import controller.util.FacesUtil;
 import model.PagamentoModel;
 import model.Entidades.Pagamento;
 import model.Exception.DateException;

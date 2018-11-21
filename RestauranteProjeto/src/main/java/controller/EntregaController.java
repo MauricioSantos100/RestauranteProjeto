@@ -2,7 +2,7 @@ package controller;
 
 import java.util.List;
 
-import controler.util.FacesUtil;
+import controller.util.FacesUtil;
 import model.EntregaModel;
 import model.Entidades.Entrega;
 import model.Exception.EnderecoException;

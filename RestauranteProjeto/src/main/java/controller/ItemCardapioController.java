@@ -5,7 +5,7 @@ import java.util.List;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
-import controler.util.FacesUtil;
+import controller.util.FacesUtil;
 import model.CardapioModel;
 import model.ItemCardapioModel;
 import model.Entidades.Cardapio;
@@ -46,24 +46,6 @@ public class ItemCardapioController {
 	public void setListaItemCardapioFiltrado(List<ItemCardapio> listaItemCardapioFiltrado) {
 		this.listaItemCardapioFiltrado = listaItemCardapioFiltrado;
 	}
-	//Importar lista de Cardapios
-		private String cardapio;
-		private List<Cardapio> cardapios;
-		private CardapioModel cm = new CardapioModel();
-		
-		
-		public String getCardapio() {
-			return cardapio;
-		}
-		public void setCardapio(String cardapio) {
-			this.cardapio = cardapio;
-		}
-		public List<Cardapio> getCardapios() {
-			cardapios = cm.listarNomeCardapio();
-			return cardapios;
-		}
-		
-		//fim lista de Cardapios
 
 	public void salvar() {
 		try {

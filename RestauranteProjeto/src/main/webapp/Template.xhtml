@@ -37,18 +37,22 @@
 						<ul>
 							<li><a href="PesquisaClientes.xhtml">Clientes</a></li>
 							<li><a href="CadastroFuncionario.xhtml">Funcionários</a></li>
-						</ul></li>
+						</ul>
+					</li>
 					<li><a href="PesquisaProduto.xhtml">Produto</a></li>
 					<li><a href="PesquisaEstoque.xhtml">Estoque</a></li>
 				</ul>
 				<ul id="menudireito">
-					<ui:fragment rendered="true">
+					<ui:fragment rendered="#{loginControl.usuario != false}">
 						<li><a href="Login.xhtml">Login</a></li>
 					</ui:fragment>
-					<ui:fragment  rendered="true">
-						<li><h:commandLink value = "Sair"  action="#{loginControl.deslogar}"/></li>
+					<ui:fragment rendered="#{loginControl.usuario == false}">
+						<li><a><h:outputText value="#{loginControl.usuario}" /></a> 
+							<ul>
+								<li><h:commandLink value = "Sair"  action="#{loginControl.deslogar}"/></li>
+							</ul>
+						</li>
 					</ui:fragment>
-					<li><h:outputText value="#{loginControl.usuario}" /> </li>
 				</ul>
 			</h:form>
 		</ui:insert>

@@ -1,6 +1,6 @@
 package controller;
 
-import controler.util.FacesUtil;
+import controller.util.FacesUtil;
 import model.PagamentoDinheiroModel;
 import model.Entidades.PagamentoDinheiro;
 import model.Exception.JaExisteException;

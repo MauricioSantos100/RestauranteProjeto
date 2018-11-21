@@ -68,7 +68,7 @@ p {
 	width: 350px;
 }
  
-#menu>ul {
+#menu>ul, #menudireito>ul  {
 	list-style-type: none;
 	overflow: hidden;
 }
@@ -78,11 +78,6 @@ p {
 	list-style: none;
 	width: 100px;
 	height: 80px;
-}
-
-#menudireito>ul {
-	list-style-type: none;
-	overflow: hidden;
 }
 
 #menudireito>li {
@@ -104,27 +99,28 @@ p {
 	display: block;
 }
  
-#menu>li>ul {
+#menu>li>ul, #menudireito>li>ul {
 	display: none;
 }
 
-#menu li:hover ul{
+#menu li:hover ul, #menudireito li:hover ul{
 	display: block;
+	position: absolute;
 }
 
 
-#menu>ul>li>ul {
+#menu>ul>li>ul, #menudireito>ul>li>ul {
 	list-style-type: none;
 	overflow: hidden;
 }
 
-#menu>li>ul>li {
+#menu>li>ul>li, #menudireito>li>ul>li {
 	list-style: none;
 	width: 100px;
 	height: 80px;
 }
 
-#menu>li>ul>li a {
+#menu>li>ul>li a, #menudireito>li>ul>li a  {
 	font-size: 20px;
 	color: white;
 	display: block;
@@ -132,14 +128,13 @@ p {
 	text-align: center;
 	line-height: 80px;
 	background-color: #808080;
-	position: absolute;
 }
 
 #menu>li>ul>li a:hover {
 	background-color: #444;
 	text-decoration: none;
 	display: block;
-	position: absolute;
+
 }
 .menuRodape{ 
 	border-bottom: #fff solid 1px;
@@ -150,3 +145,11 @@ p {
 	display: inline-block;
     margin-right: 20px;
 }
+/*
+#menudireito>li>ul>li {
+	display: none;
+}
+#menudireito>li>ul>li .sair:hover{
+	display: block;
+}
+*/

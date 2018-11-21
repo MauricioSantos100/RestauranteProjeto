@@ -5,7 +5,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import controler.util.FacesUtil;
+import controller.util.FacesUtil;
 import model.CardapioModel;
 import model.Entidades.Cardapio;
 import model.Exception.JaExisteException;
@@ -33,7 +33,7 @@ public class CardapioController {
 		this.cardapio = new Cardapio();
 	}
 	
-	public List<Cardapio> getListaCardapio() {
+	public List<Cardapio> getListaCardapio() {		
 		listaCardapio = cm.listarCardapios();
 		return listaCardapio;
 	}
