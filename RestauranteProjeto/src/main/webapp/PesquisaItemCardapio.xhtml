@@ -16,7 +16,6 @@
 			<p:dataTable emptyMessage="Nenhum registro encontrado."
 				id="itemCardapio"
 				value="#{itemCardapioController.listaItemCardapio}"
-				filteredValue="#{itemCardapioController.listaItemCardapioFiltrado}"
 				rows="15"
 				paginator="true"
 				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink}"
@@ -42,7 +41,7 @@
 					<p:commandButton action="Editar" icon="fa fa-fw fa-edit" value="Editar" update=":dialogalterar" oncomplete="PF('editar').show();">
 						<f:setPropertyActionListener target="#{cardapioController.cardapio}" value="#{ic}"/>
 					</p:commandButton>
-					<p:commandButton action="Excluir" icon="fa fa-fw fa-remove" actionListener="#{itemCardapioController.excluir(ic)}" value="Excluir" update=":msgGlobal"/>
+					<p:commandButton icon="fa fa-fw fa-remove" action="#{itemCardapioController.excluir(ic)}" value="Excluir" update=":msgGlobal" />
 				</p:column>
 			</p:dataTable> 
 			</h:form>
@@ -57,33 +56,33 @@
 		       			<p:inputNumber id="preco" value="#{itemCardapioController.itemCardapio.preco}" symbol="R$"></p:inputNumber>
 		       			
 		       			<p:outputLabel for="car" value="Nome do cardapio"/>
-		       			<p:selectOneMenu  id="car" value="#{cardapioController.cardapio}">
-		       				<f:selectItem itemLabel="Selecione um cardapio" itemValue=""/>
-		       				<f:selectItems value="#{cardapioController.listaCardapio}" var="car" itemLabel="#{car.categoria}" itemValue="#{car}" ></f:selectItems>
+		       			<p:selectOneMenu  id="car" value="#{itemCardapioController.itemCardapio.cardapio.codCardapio}">
+		       				<f:selectItem itemLabel="Selecione um cardapio" itemValue="itemCardapioController.itemCardapio.cardapio.codCardapio"/>
+		       				<f:selectItems value="#{cardapioController.listaCardapio}" var="car" itemLabel="#{car.categoria}" itemValue="#{car.codCardapio}"  ></f:selectItems>
 		       			</p:selectOneMenu>
 					</p:panelGrid>
 					<div style="display:flex; justify-content:center; align-items:center;">
-						<p:commandButton value="Salvar" icon="fa fa-check" actionListener="#{itemCardapioController.salvar}" update=":msgGlobal" oncomplete="PF('cadastro').hide();"/>
+						<p:commandButton value="Salvar" icon="fa fa-check" action="#{itemCardapioController.salvar}" update=":msgGlobal" oncomplete="PF('cadastro').hide();"/>
 					</div>
 				</h:form>
 			</p:dialog> 
 			
 			<p:dialog header="Editar item" widgetVar="editar" modal="true" showEffect="clip" id="dialogalterar">
 				<h:form>
-				    <p:panelGrid columns="2" styleClass="ui-noborder" >
+				    <p:panelGrid columns="2" styleClass="ui-noborder">
 						<p:outputLabel for="nome" value="Nome"/>
 		       			<p:inputText id="nome" value="#{itemCardapioController.itemCardapio.nome}"/>
 		       			<p:outputLabel for="preco" value="Preço"/>
 		       			<p:inputNumber id="preco" value="#{itemCardapioController.itemCardapio.preco}" symbol="R$"></p:inputNumber>
 		       			
-		       			<p:outputLabel for="nomecardapio" value="Nome do cardapio"/>
-		       			<p:selectOneMenu  id="nomecardapio" value="#{cardapioController.cardapio}" >
-		       				<f:selectItem itemLabel="Selecione um cardapio" itemValue=""/>
-		       				<f:selectItems value="#{cardapioController.listaCardapio}"></f:selectItems>
+		       			<p:outputLabel for="car" value="Nome do cardapio"/>
+		       			<p:selectOneMenu  id="car" value="#{itemCardapioController.itemCardapio.cardapio.codCardapio}">
+		       				<f:selectItem itemLabel="Selecione um cardapio" itemValue="itemCardapioController.itemCardapio.cardapio.codCardapio"/>
+		       				<f:selectItems value="#{cardapioController.listaCardapio}" var="car" itemLabel="#{car.categoria}" itemValue="#{car.codCardapio}"></f:selectItems>
 		       			</p:selectOneMenu>
 					</p:panelGrid>
 					<div style="display:flex; justify-content:center; align-items:center;">
-						<p:commandButton value="Editar" icon="fa fa-check" actionListener="#{itemCardapioController.editar}" update=":msgGlobal" oncomplete="PF('editar').hide();"/>
+						<p:commandButton value="Editar" icon="fa fa-check" action="#{itemCardapioController.editar}" update=":msgGlobal" oncomplete="PF('editar').hide();"/>
 					</div>
 				</h:form>
 			</p:dialog>

@@ -1,7 +1,10 @@
 package model.dao;
 
+import java.util.List;
+
 import model.Entidades.Pagamento;
 
 public interface PagamentoDao {
-	public Pagamento buscaCodPagamento(int codPagamento);
+	public List<Pagamento> listarTodos();
+	public Pagamento buscarPorCodPagamento(int codPagamento);
 }

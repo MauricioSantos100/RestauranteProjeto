@@ -36,7 +36,7 @@ public class ProdutoModel {
 	}
 
 	public void atualizaProduto(Produto p) throws ValorException, StringException, NullException {
-		if (((ProdutoDao) dao).buscaNome(p.getNome()) != null) {
+		if (((ProdutoDao) dao).buscarPorNome(p.getNome()) != null) {
 			if (Validacoes.verificaString(p.getNome()) && Validacoes.verificaString(p.getCategoria())) {
 				if (Validacoes.verificaValor(p.getPrecoCusto())) {
 					dao.update(p);
@@ -57,18 +57,18 @@ public class ProdutoModel {
 
 	private boolean existe(Produto p) {
 		boolean valida = false;
-		if (((ProdutoDao) dao).buscaNome(p.getNome()) != null) {
+		if (((ProdutoDao) dao).buscarPorNome(p.getNome()) != null) {
 			valida = true;
 		}
 		return valida;
 	}
 	
-	public List<Produto> listarProdutos() {
-		return dao.listando();
+	public List<Produto> listarTodos() {
+		return dao.listarTodos();
 	}
 
-	public List<Produto> filtrarProdutos() {
-		return dao.listando();
+	public Produto buscarPorNome(String nome) {
+		return dao.buscarPorNome(nome);
 	}
 
 }

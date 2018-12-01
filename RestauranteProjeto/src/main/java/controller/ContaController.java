@@ -13,16 +13,13 @@ import model.Exception.JaExisteException;
 import model.Exception.NullException;
 import model.Exception.StringException;
 import model.Exception.ValorException;
-import model.dao.ContaDaoImpl;
 
 @ApplicationScoped
 @ManagedBean(name = "contaController")
 public class ContaController {
 	private Conta conta;
 	private List<Conta> listaConta;
-	private List<Conta> listaContaFiltrado;
-	private ContaDaoImpl contaDaoImpl = new ContaDaoImpl();
-	ContaModel cm = new ContaModel();
+	private ContaModel cm = new ContaModel();
 
 	public Conta getConta() {
 		return conta;
@@ -33,30 +30,12 @@ public class ContaController {
 	}
 
 	public List<Conta> getListaConta() {
-		listaConta = contaDaoImpl.listando();
+		listaConta = cm.listarTodos();
 		return listaConta;
 	}
 
 	public void setListaConta(List<Conta> listaConta) {
 		this.listaConta = listaConta;
-	}
-
-	public List<Conta> getListaContaFiltrado() {
-		listaContaFiltrado = contaDaoImpl.listando();
-		return listaContaFiltrado;
-	}
-
-	public void setListaContaFiltrado(List<Conta> listaContaFiltrado) {
-		this.listaContaFiltrado = listaContaFiltrado;
-	}
-
-	public void carregarPesquisa(Conta c) {
-		try {
-			ContaDaoImpl contadaoimpl = new ContaDaoImpl();
-			listaConta = contadaoimpl.listando();
-		} catch (RuntimeException ex) {
-			FacesUtil.adicionarMsgErro("Erro ao listar contas" + ex.getMessage());
-		}
 	}
 
 	public void salvar(Conta c) {

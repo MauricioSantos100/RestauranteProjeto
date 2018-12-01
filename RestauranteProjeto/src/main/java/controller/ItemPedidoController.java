@@ -7,43 +7,27 @@ import model.ItemPedidoModel;
 import model.Entidades.ItemPedido;
 import model.Exception.JaExisteException;
 import model.Exception.NullException;
-import model.dao.ItemPedidoDaoImpl;
 
 public class ItemPedidoController {
 	private ItemPedido itemPedido;
 	private List<ItemPedido> listaItemPedido;
-	private List<ItemPedido> listaItemPedidoFiltrado;
-	private ItemPedidoDaoImpl itemPedidoDaoImpl = new ItemPedidoDaoImpl();
 	ItemPedidoModel ipm = new ItemPedidoModel();
-	
+
 	public ItemPedido getItemPedido() {
 		return itemPedido;
 	}
+
 	public void setItemPedido(ItemPedido itemPedido) {
 		this.itemPedido = itemPedido;
 	}
+
 	public List<ItemPedido> getListaItemPedido() {
-		listaItemPedido = itemPedidoDaoImpl.listando();
+		listaItemPedido = ipm.listarTodos();
 		return listaItemPedido;
 	}
+
 	public void setListaItemPedido(List<ItemPedido> listaItemPedido) {
 		this.listaItemPedido = listaItemPedido;
-	}
-	public List<ItemPedido> getListaItemPedidoFiltrado() {
-		listaItemPedidoFiltrado = itemPedidoDaoImpl.listando();
-		return listaItemPedidoFiltrado;
-	}
-	public void setListaItemPedidoFiltrado(List<ItemPedido> listaItemPedidoFiltrado) {
-		this.listaItemPedidoFiltrado = listaItemPedidoFiltrado;
-	}
-	
-
-	public void carregarPesquisa(ItemPedido ip) {
-		try {
-			listaItemPedido = itemPedidoDaoImpl.listando();
-		} catch (RuntimeException ex) {
-			FacesUtil.adicionarMsgErro("Erro ao listar Item pedidos" + ex.getMessage());
-		}
 	}
 
 	public void salvar(ItemPedido ip) {
@@ -70,5 +54,5 @@ public class ItemPedidoController {
 			FacesUtil.adicionarMsgErro(ne.getMessage());
 		}
 		return "";
-	}		
+	}
 }

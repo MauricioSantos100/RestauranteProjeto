@@ -1,7 +1,10 @@
 package model.dao;
 
+import java.util.List;
+
 import model.Entidades.Conta;
 
 public interface ContaDao {
-	public Conta buscaCodConta(int codConta);
+	public List<Conta> listarTodos();
+	public Conta buscarPorCodConta(int codConta);
 }

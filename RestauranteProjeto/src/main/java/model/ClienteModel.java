@@ -47,7 +47,7 @@ public class ClienteModel {
 	}
 
 	public void atualizaCliente(Cliente c) throws EmailException, TelefoneException, CpfException, StringException, NullException {
-		if (((ClienteDao) dao).buscaCpfCliente(c.getCpf()) != null) {
+		if (!this.existe(c)) {
 			if (Validacoes.verificaString(c.getNome())) {
 				if (Validacoes.verificaCpf(c.getCpf())) {
 					if (Validacoes.verificaTelefone(c.getTelefone())) {
@@ -76,21 +76,22 @@ public class ClienteModel {
 	
 	private boolean existe(Cliente c) {
 		boolean existe = false;
-		if (((ClienteDao) dao).buscaCpfCliente(c.getCpf()) != null) {
+		if (((ClienteDao) dao).buscarPorCpf(c.getCpf()) != null) {
 			existe = true;
 		}
 		return existe;
 	}
 	
-	public List<Cliente> listarClientes() {
-		return dao.listando();
+	public List<Cliente> ListarTodos() {
+		return dao.ListarTodos();
 	}
-
-	public List<Cliente> filtrarClientes() {
-		return dao.listando();
+	
+	public Cliente buscarPorNome(String nome) {
+		return dao.buscarPorNome(nome);
 	}
-	public List<Cliente> listarNomeCliente() {
-		return dao.listarNome();
+	
+	public Cliente buscarPorCpf(String cpf) {
+		return dao.buscarPorCpf(cpf);
 	}
 	
 }

@@ -20,48 +20,44 @@ import model.Exception.ValorException;
 @ManagedBean(name = "funcionarioController")
 @ApplicationScoped
 public class FuncionarioController {
-	
 	private Funcionario funcionario;
 	private Usuario usuario;
 	private List<Funcionario> listaFuncionario;
-	private List<Funcionario> listaFuncionarioFiltrado;
 	FuncionarioModel fm = new FuncionarioModel();
-	
-	
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
+
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+
 	public Funcionario getFuncionario() {
 		return funcionario;
 	}
+
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
 	}
+
 	public FuncionarioController() {
 		this.usuario = new Usuario();
 		this.funcionario = new Funcionario();
 	}
+
 	public List<Funcionario> getListaFuncionario() {
-		listaFuncionario = fm.listarFuncionarios();
+		listaFuncionario = fm.listarTodos();
 		return listaFuncionario;
 	}
+
 	public void setListaFuncionario(List<Funcionario> listaFuncionario) {
 		this.listaFuncionario = listaFuncionario;
 	}
-	public List<Funcionario> getListaFuncionarioFiltrado() {
-		listaFuncionarioFiltrado = fm.filtrarFuncionarios();
-		return listaFuncionarioFiltrado;
-	}
-	public void setListaFuncionarioFiltrado(List<Funcionario> listaFuncionarioFiltrado) {
-		this.listaFuncionarioFiltrado = listaFuncionarioFiltrado;
-	}
-	
+
 	public void salvar() {
-		UsuarioController uc = new UsuarioController(); 
-		try { 
+		UsuarioController uc = new UsuarioController();
+		try {
 			funcionario.setTipo("F");
 			uc.salvar(this.usuario);
 			fm.registraFuncionario(this.funcionario);
@@ -84,14 +80,16 @@ public class FuncionarioController {
 	}
 
 	public void excluir(Funcionario f) {
-		fm.removeFuncionario(f);;
+		fm.removeFuncionario(f);
+		;
 		FacesUtil.adicionarMsgInfo("Funcionário excluido.");
 	}
 
 	public String editar(Funcionario f) {
 		try {
 			funcionario.setTipo("F");
-			fm.atualizaFuncionario(f);;
+			fm.atualizaFuncionario(f);
+			;
 			FacesUtil.adicionarMsgInfo("Funcionário alterado.");
 		} catch (NullException ne) {
 			FacesUtil.adicionarMsgErro(ne.getMessage());
@@ -108,5 +106,5 @@ public class FuncionarioController {
 		}
 
 		return "";
-	}	
+	}
 }

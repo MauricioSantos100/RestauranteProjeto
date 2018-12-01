@@ -10,19 +10,13 @@ import model.dao.util.JPAManager;
 
 public class EstoqueDaoImpl extends DAOImpl implements EstoqueDao{
 
-	public Estoque buscaNome(String nome) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Estoque> listarNome(){
-		List<Estoque> estoque = null;
+	public Estoque buscarPorNome(String nome) {
+		Estoque estoque = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {
 			mng.getTransaction().begin();
-			Query query = mng.createQuery("SELECT nome FROM Estoque");
-			estoque = query.getResultList();
+			Query query = mng.createQuery("FROM Estoque where nome = :nome");
+			estoque = (Estoque) query.getSingleResult();
 		}catch (Exception e) {
 			mng.getTransaction().rollback();
 		} finally {
@@ -30,8 +24,9 @@ public class EstoqueDaoImpl extends DAOImpl implements EstoqueDao{
 		}
 		return estoque;
 	}
+	
 	@SuppressWarnings("unchecked")
-	public List<Estoque> listando(){
+	public List<Estoque> listarTodos(){
 		List<Estoque> estoque = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {

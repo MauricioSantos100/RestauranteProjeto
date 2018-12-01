@@ -47,7 +47,6 @@ public class JPAManager {
         return obj;
     }
 	
-	
 	public Object tipo(String tipo, Pessoa pessoa) {
         Session session = this.sessionFactory.openSession();
         Object obj = null;
@@ -63,20 +62,4 @@ public class JPAManager {
         
         return obj;
     }
-	/*
-	public Object cardapio(String tipo, Pessoa pessoa) {
-        Session session = this.sessionFactory.openSession();
-        Object obj = null;
-        try {
-            Query consulta = session.createQuery (" SELECT ic FROM ItemCardapio WHERE ic.codCardapio = :");
-            consulta.setParameter("tipo", tipo);
-            obj = consulta.getSingleResult();
-        } catch(RuntimeException ex) {
-            throw ex;
-        } finally {
-            session.close();
-        }
-        
-        return obj;
-    }*/
 }

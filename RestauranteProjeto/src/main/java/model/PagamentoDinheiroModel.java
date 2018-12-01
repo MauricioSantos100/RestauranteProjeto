@@ -29,7 +29,7 @@ public class PagamentoDinheiroModel {
 	}
 
 	public void atualizaPagamentoDinheiro(PagamentoDinheiro pd) throws ValorException, NullException {
-		if (((PagamentoDinheiroDao) dao).buscaCodPagamento(pd.getCodPagamento()) != null) {
+		if (((PagamentoDinheiroDao) dao).buscarPorCodPagamento(pd.getCodPagamento()) != null) {
 			if (Validacoes.verificaValor(pd.getValor())) {
 				dao.update(pd);
 			} else {
@@ -46,9 +46,10 @@ public class PagamentoDinheiroModel {
 
 	private boolean existe(PagamentoDinheiro pd) {
 		boolean valida = false;
-		if (((PagamentoDinheiroDao) dao).buscaCodPagamento(pd.getCodPagamento()) != null) {
+		if (((PagamentoDinheiroDao) dao).buscarPorCodPagamento(pd.getCodPagamento()) != null) {
 			valida = true;
 		}
 		return valida;
 	}
+	
 }

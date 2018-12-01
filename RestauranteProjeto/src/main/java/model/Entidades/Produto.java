@@ -29,7 +29,7 @@ public class Produto implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name = "cod_estoque", referencedColumnName = "cod_estoque")//222
-	private Estoque estoque;
+	private Estoque estoque = new Estoque();
 	
 	public Produto() {}
 	

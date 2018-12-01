@@ -10,13 +10,23 @@ import model.dao.util.JPAManager;
 
 public class PedidoDaoImpl extends DAOImpl implements PedidoDao{
 
-	public Pedido buscaCodPedido(int codPedido) {
-		// TODO Auto-generated method stub
-		return null;
+	public Pedido buscarPorCodPedido(int codPedido) {
+		Pedido pedido = null;
+		EntityManager mng = JPAManager.getInstance().getEntityManager();
+		try {
+			mng.getTransaction().begin();
+			Query query = mng.createQuery("FROM Pedido where cod_pedido = :codPedido");
+			pedido = (Pedido) query.getResultList();
+		}catch (Exception e) {
+			mng.getTransaction().rollback();
+		} finally {
+			mng.close();
+		}
+		return pedido;
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Pedido> listando(){
+	public List<Pedido> listarTodos(){
 		List<Pedido> pedido = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {

@@ -1,7 +1,10 @@
 package model.dao;
 
+import java.util.List;
+
 import model.Entidades.Estoque;
 
 public interface EstoqueDao {
-	public Estoque buscaNome(String nome);
+	public List<Estoque> listarTodos();
+	public Estoque buscarPorNome(String nome);
 }

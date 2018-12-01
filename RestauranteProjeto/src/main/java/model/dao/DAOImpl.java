@@ -72,24 +72,11 @@ public class DAOImpl implements DAO<Object>{
 	
 	@SuppressWarnings("unchecked")
 	public List<Object> findALL() {
-		List<Object> obj = null;
+		List<Object> lista = null;
 		try {
 			manager.getTransaction().begin();
-			Query query = manager.createQuery("FROM " + getClass());
-			obj = query.getResultList();
-		} catch (Exception e) {
-			manager.getTransaction().rollback();
-		} finally {
-			manager.close();
-		}
-		return obj;
-	}
-	
-	public List<Object> findALsL() {
-		List<Object> lista = new ArrayList<Object>();
-		try {
-			manager.getTransaction().begin();
-			lista = manager.createQuery("SELECT FROM Object", Object.class).getResultList();
+			lista = manager.createQuery("FROM " + Object.class.getName()).getResultList();
+			
 		} catch (Exception e) {
 			manager.getTransaction().rollback();
 		} finally {
@@ -97,4 +84,5 @@ public class DAOImpl implements DAO<Object>{
 		}
 		return lista;
 	}
+	
 }

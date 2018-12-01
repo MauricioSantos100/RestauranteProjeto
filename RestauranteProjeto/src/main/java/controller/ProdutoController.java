@@ -2,13 +2,11 @@ package controller;
 
 import java.util.List;
 
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
 import controller.util.FacesUtil;
-import model.EstoqueModel;
 import model.ProdutoModel;
-import model.Entidades.Estoque;
 import model.Entidades.Produto;
 import model.Exception.JaExisteException;
 import model.Exception.NullException;
@@ -16,11 +14,10 @@ import model.Exception.StringException;
 import model.Exception.ValorException;
 
 @ManagedBean(name = "produtoController")
-@ApplicationScoped
+@RequestScoped
 public class ProdutoController {
 	private Produto produto;
 	private List<Produto> listaProduto;
-	private List<Produto> listaProdutoFiltrado;
 	private ProdutoModel pm = new ProdutoModel();
 	
 	public Produto getProduto() {
@@ -33,41 +30,14 @@ public class ProdutoController {
 		this.produto = new Produto();
 	}
 	public List<Produto> getListaProduto() {
-		listaProduto = pm.listarProdutos();
+		listaProduto = pm.listarTodos();
 		return listaProduto;
 	}
 	public void setListaProduto(List<Produto> listaProduto) {
 		this.listaProduto = listaProduto;
 	}
-	public List<Produto> getListaProdutoFiltrado() {
-		listaProdutoFiltrado = pm.filtrarProdutos();
-		return listaProdutoFiltrado;
-	}
-	public void setListaProdutoFiltrado(List<Produto> listaProdutoFiltrado) {
-		this.listaProdutoFiltrado = listaProdutoFiltrado;
-	}
-	
-	//Importar lista de Estoques
-	private String estoque;
-	private List<Estoque> estoques;
-	private EstoqueModel em = new EstoqueModel();
 	
 	
-	public String getEstoque() {
-		return estoque;
-	}
-	public void setEstoque(String estoque) {
-		this.estoque = estoque;
-	}
-	public List<Estoque> getEstoques() {
-		estoques = em.listarNomeEstoque();
-		return estoques;
-	}
-	public void setEstoques(List<Estoque> estoques) {
-		this.estoques = estoques;
-	}
-	
-	//fim lista de Estoques
 	public void salvar() {
 		try {
 			pm.registrarProduto(this.produto);
@@ -81,6 +51,7 @@ public class ProdutoController {
 		} catch (ValorException ve) {
 			FacesUtil.adicionarMsgErro(ve.getMessage());
 		}
+		
 	}
 
 	public void excluir(Produto p) {
@@ -88,9 +59,9 @@ public class ProdutoController {
 		FacesUtil.adicionarMsgInfo("Produto excluido.");
 	}
 
-	public String editar(Produto p) {
+	public void editar() {
 		try {
-			pm.atualizaProduto(p);
+			pm.atualizaProduto(this.produto);
 			FacesUtil.adicionarMsgInfo("Produto alterado.");
 		} catch (NullException ne) {
 			FacesUtil.adicionarMsgErro(ne.getMessage());
@@ -98,8 +69,7 @@ public class ProdutoController {
 			FacesUtil.adicionarMsgErro(se.getMessage());
 		} catch (ValorException ve) {
 			FacesUtil.adicionarMsgErro(ve.getMessage());
-		}
-		return "";
+		}		
 	}		
 	
 	

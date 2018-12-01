@@ -5,7 +5,6 @@ import java.io.IOException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.persistence.PostLoad;
 
 import model.UsuarioModel;
 import model.Entidades.Pessoa;
@@ -14,11 +13,10 @@ import model.Entidades.Usuario;
 @ManagedBean(name = "loginControl")
 @SessionScoped
 public class LoginControl {
-
 	private String usuario;
 	private String senha;
-	
 	private Pessoa pessoa;
+	@SuppressWarnings("unused")
 	private Usuario usuariologin = null;
 
 	public String getUsuario() {
@@ -81,7 +79,7 @@ public class LoginControl {
 		FacesContext con = FacesContext.getCurrentInstance();
 		con.getExternalContext().invalidateSession();
 		try {
-			con.getExternalContext().redirect("Login.xhtml");
+			con.getExternalContext().redirect("Inicio.xhtml");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

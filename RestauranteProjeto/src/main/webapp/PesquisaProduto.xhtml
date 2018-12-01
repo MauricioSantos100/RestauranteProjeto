@@ -11,11 +11,10 @@
 </h:head>
 <ui:composition template="Template.xhtml">
 	<ui:define name="content">
-		<h:form>
+		<h:form> 
 			<p:dataTable emptyMessage="Nenhum registro encontrado."
 				id="produto"
 				value="#{produtoController.listaProduto}"
-				filteredValue="#{produtoController.listaProdutoFiltrado}"
 				rows="15"
 				paginator="true"
 				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink}"
@@ -36,17 +35,14 @@
 				<p:column headerText="Categoria">
 					<h:outputText value="#{p.categoria}" />
 				</p:column>
-				<p:column headerText="Cod do estoque">
-					<h:outputText value="#{produtoController.produto.estoque.codEstoque}" />
-				</p:column>
 				<p:column headerText="nome do estoque">
-					<h:outputText value="#{produtoController.produto.estoque.nome}" />
+					<h:outputText value="#{p.estoque.nome}" />
 				</p:column>
 				<p:column headerText="Opcões">
-					<p:commandButton action="Editar" icon="fa fa-fw fa-edit" actionListener="#{produtoController.editar(p)}" value="Editar" update=":test:dialogalterar" onclick="PF('editar').show();">
+					<p:commandButton action="Editar" icon="fa fa-fw fa-edit" value="Editar" update=":dialogalterar" oncomplete="PF('editar').show();">
 						<f:setPropertyActionListener target="#{produtoController.produto}" value="#{p}"/>
 					</p:commandButton>
-					<p:commandButton action="Excluir" icon="fa fa-fw fa-remove" actionListener="#{produtoController.excluir(p)}" value="Excluir" update=":msgGlobal"></p:commandButton>
+					<p:commandButton icon="fa fa-fw fa-remove" action="#{produtoController.excluir(p)}" value="Excluir" update=":msgGlobal"></p:commandButton>
 				</p:column>
 			</p:dataTable> 
 			</h:form>
@@ -63,26 +59,36 @@
 		       			<p:inputText id="categoria" value="#{produtoController.produto.categoria}"/>
 		       			
 		       			<p:outputLabel for="nomeestoque" value="Nome do estoque"/>
-		       			<p:selectOneMenu  id="nomeestoque" value="#{produtoController.estoque}">
-		       				<f:selectItem itemLabel="Selecione um estoque" itemValue=""/>
-		       				<f:selectItems value="#{produtoController.estoques}"></f:selectItems>
+		       			<p:selectOneMenu  id="nomeestoque" value="#{produtoController.produto.estoque.codEstoque}">
+		       				<f:selectItem itemLabel="Selecione um estoque" itemValue="produtoController.produto.estoque.codEstoque"/>
+		       				<f:selectItems value="#{estoqueController.listaEstoque}" var="est" itemLabel="#{est.nome}" itemValue="#{est.codEstoque}"></f:selectItems>
 		       			</p:selectOneMenu>
 		       			
 					</p:panelGrid>
 					<div style="display:flex; justify-content:center; align-items:center;">
-						<p:commandButton value="Salvar" icon="fa fa-check" actionListener="#{produtoController.salvar}" update=":msgGlobal" oncomplete="PF('cadastro').hide();"/>
+						<p:commandButton value="Salvar" icon="fa fa-check" action="#{produtoController.salvar}" update=":msgGlobal" oncomplete="PF('cadastro').hide();"/>
 					</div>
 				</h:form>
 			</p:dialog> 
 			
-			<p:dialog header="Editar Cardapio" widgetVar="editar" modal="true" showEffect="clip" >
-				<h:form id="test">
+			<p:dialog header="Editar Cardapio" widgetVar="editar" modal="true" showEffect="clip" id="dialogalterar">
+				<h:form>
 				    <p:panelGrid columns="2" styleClass="ui-noborder" id="dialogalterar">
-						<p:outputLabel for="editarcardapio" value="categoria"/>
-		       			<p:inputText id="editarcardapio" value="#{cardapioController.cardapio.categoria}"/>
+						<p:outputLabel for="nome" value="Nome"/>
+		       			<p:inputText id="nome" value="#{produtoController.produto.nome}"/>
+		       			<p:outputLabel for="precocusto" value="Preço de custo"/>
+		       			<p:inputNumber id="precocusto" value="#{produtoController.produto.precoCusto}"></p:inputNumber>
+		       			<p:outputLabel for="categoria" value="Categoria"/>
+		       			<p:inputText id="categoria" value="#{produtoController.produto.categoria}"/>
+		       			
+		       			<p:outputLabel for="nomeestoque" value="Nome do estoque"/>
+		       			<p:selectOneMenu  id="nomeestoque" value="#{produtoController.produto.estoque.codEstoque}">
+		       				<f:selectItem itemLabel="Selecione um estoque" itemValue="produtoController.produto.estoque.codEstoque"/>
+		       				<f:selectItems value="#{estoqueController.listaEstoque}" var="est" itemLabel="#{est.nome}" itemValue="#{est.codEstoque}"></f:selectItems>
+		       			</p:selectOneMenu>
 					</p:panelGrid>
 					<div style="display:flex; justify-content:center; align-items:center;">
-						<p:commandButton value="Editar" icon="fa fa-check" actionListener="#{cardapioController.editar}" update=":msgGlobal" oncomplete="PF('editar').hide();"/>
+						<p:commandButton value="Editar" icon="fa fa-check" action="#{produtoController.editar}" update=":msgGlobal" oncomplete="PF('editar').hide();"/>
 					</div>
 				</h:form>
 			</p:dialog>

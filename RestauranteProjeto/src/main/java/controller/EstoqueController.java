@@ -2,8 +2,8 @@ package controller;
 
 import java.util.List;
 
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
 import controller.util.FacesUtil;
 import model.EstoqueModel;
@@ -12,43 +12,35 @@ import model.Exception.JaExisteException;
 import model.Exception.NullException;
 import model.Exception.StringException;
 
-
 @ManagedBean(name = "estoqueController")
-@ApplicationScoped
+@RequestScoped
 public class EstoqueController {
-	
 	private Estoque estoque;
 	private List<Estoque> listaEstoque;
-	private List<Estoque> listaEstoqueFiltrado;
 	private EstoqueModel em = new EstoqueModel();
-	
+
 	public Estoque getEstoque() {
 		return this.estoque;
 	}
+
 	public void setEstoque(Estoque estoque) {
 		this.estoque = estoque;
 	}
-	
+
 	public EstoqueController() {
 		this.estoque = new Estoque();
 	}
-	
+
 	public List<Estoque> getListaEstoque() {
-		listaEstoque = em.listarEstoques();
+		listaEstoque = em.listarTodos();
 		return listaEstoque;
 	}
+
 	public void setListaEstoque(List<Estoque> listaEstoque) {
 		this.listaEstoque = listaEstoque;
 	}
-	public List<Estoque> getListaEstoqueFiltrado() {
-		listaEstoqueFiltrado = em.filtrarEstoques();
-		return listaEstoqueFiltrado;
-	}
-	public void setListaEstoqueFiltrado(List<Estoque> listaEstoqueFiltrado) {
-		this.listaEstoqueFiltrado = listaEstoqueFiltrado;
-	}
 
-	public void salvar() {
+	public String salvar() {
 		try {
 			em.registraEstoque(this.estoque);
 			FacesUtil.adicionarMsgInfo("Estoque Salvo com Sucesso.");
@@ -59,11 +51,13 @@ public class EstoqueController {
 		} catch (StringException se) {
 			FacesUtil.adicionarMsgErro(se.getMessage());
 		}
+		return "PesquisaEstoque.xhtml?faces-redirect=true";
 	}
 
-	public void excluir(Estoque e) {
+	public String excluir(Estoque e) {
 		em.removeEstoque(e);
 		FacesUtil.adicionarMsgInfo("Estoque excluido.");
+		return "PesquisaEstoque.xhtml?faces-redirect=true";
 	}
 
 	public String editar() {
@@ -75,8 +69,7 @@ public class EstoqueController {
 		} catch (StringException se) {
 			FacesUtil.adicionarMsgErro(se.getMessage());
 		}
-
-		return "";
+		return "PesquisaEstoque.xhtml?faces-redirect=true";
 	}
-	
+
 }

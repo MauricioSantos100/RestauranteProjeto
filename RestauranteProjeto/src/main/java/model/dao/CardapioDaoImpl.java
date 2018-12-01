@@ -11,13 +11,23 @@ import model.dao.util.JPAManager;
 
 public class CardapioDaoImpl extends DAOImpl implements CardapioDao {
 
-	public Cardapio buscaCategoria(String categoria) {
-		// TODO Auto-generated method stub
-		return null;
+	public Cardapio buscarPorCategoria(String categoria) {
+		Cardapio cardapio = null;
+		EntityManager mng = JPAManager.getInstance().getEntityManager();
+		try {
+			mng.getTransaction().begin();
+			Query query = mng.createQuery("FROM Cardapio where categoria = :categoria");
+			cardapio = (Cardapio) query.getSingleResult();
+		}catch (Exception e) {
+			mng.getTransaction().rollback();
+		} finally {
+			mng.close();
+		}
+		return cardapio;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Cardapio> listando(){
+	public List<Cardapio> listarTodos(){
 		List<Cardapio> cardapio = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {
@@ -30,5 +40,5 @@ public class CardapioDaoImpl extends DAOImpl implements CardapioDao {
 			mng.close();
 		}
 		return cardapio;
-	}	
+	}
 }

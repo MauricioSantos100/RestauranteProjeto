@@ -8,34 +8,40 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<link href="CSS/Style.css" rel="stylesheet" />
+	<meta http-equiv="refresh" content="5" />
 </h:head>
 <ui:composition template="Template.xhtml">
 	<ui:define name="content">
-	
 		<h:form id="tabela">	
 			<p:dataTable emptyMessage="Nenhum registro encontrado."
 				id="cardapios"
 				value="#{cardapioController.listaCardapio}"
-				filteredValue="#{cardapioController.listaCardapioFiltrado}"
 				rows="15"
 				paginator="true"
 				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink}"
 				paginatorPosition="bottom"
-				var="c">				
+				widgetVar="tabelaCardaapio"
+				multiViewState="true"
+				var="c">
 				<f:facet name="header">
 		            <p:commandButton value="Novo" icon="fa fa-plus" type="button" onclick="PF('cadastro').show();" ></p:commandButton>
 		        </f:facet>
+		         <f:facet name="header">
+	            <p:outputPanel  style="float:right">
+	                <p:inputText id="globalFilter" onkeyup="PF('tabelaCardaapio').filter()" style="width:150px" placeholder="Buscar por nome"/>
+	            </p:outputPanel>
+	        </f:facet>
 				<p:column headerText="Código" width="80">
 					<h:outputText value="#{c.codCardapio}" />
 				</p:column>
-				<p:column headerText="Categoria" filterBy="#{c.categoria}" sortBy="#{c.categoria}">
+				<p:column headerText="Categoria" filterBy="#{c.categoria}" filterMatchMode="contains">
 					<h:outputText value="#{c.categoria}" />
 				</p:column>
 				<p:column headerText="Opcões">
 					<p:commandButton action="Editar" icon="fa fa-fw fa-edit" value="Editar" update=":dialogalterar" oncomplete="PF('editar').show();">
 						<f:setPropertyActionListener target="#{cardapioController.cardapio}" value="#{c}" />
 					</p:commandButton>
-					<p:commandButton action="Excluir" icon="fa fa-fw fa-remove" actionListener="#{cardapioController.excluir(c)}" value="Excluir" update=":msgGlobal"></p:commandButton>
+					<p:commandButton icon="fa fa-fw fa-remove" action="#{cardapioController.excluir(c)}" value="Excluir" update=":msgGlobal"></p:commandButton>
 				</p:column>
 			</p:dataTable>
 			</h:form>
@@ -48,21 +54,21 @@
 		       			<p:inputText id="inserircardapio" value="#{cardapioController.cardapio.categoria}"/>
 					</p:panelGrid>
 					<div style="display:flex; justify-content:center; align-items:center;">
-						<p:commandButton value="Salvar" icon="fa fa-check" actionListener="#{cardapioController.salvar}" update=":msgGlobal" onclick="this.form.target= " action="PesquisaCardapio.xhtml" oncomplete="PF('cadastro').hide();"/>
+						<p:commandButton value="Salvar" icon="fa fa-check" action="#{cardapioController.salvar}" update=":msgGlobal" oncomplete="PF('cadastro').hide();"/>
 					</div>
 				</h:form>
 			</p:dialog> 
 			
 			<p:dialog header="Editar Cardapio" widgetVar="editar" modal="true" showEffect="clip" id="dialogalterar">
 				<h:form>
+				
 				    <p:panelGrid columns="2" styleClass="ui-noborder">
 						<p:outputLabel for="editarcardapio" value="categoria"/>
 		       			<p:inputText id="editarcardapio" value="#{cardapioController.cardapio.categoria}"/>
 		       			<h:inputHidden value="#{cardapioController.cardapio.codCardapio}" />
 					</p:panelGrid>
 					<div style="display:flex; justify-content:center; align-items:center;">
-						<p:commandButton value="Editar" icon="fa fa-check" actionListener="#{cardapioController.editar}" update=":msgGlobal" oncomplete="PF('editar').hide();"/>
-					
+						<p:commandButton value="Editar" icon="fa fa-check" action="#{cardapioController.editar}" update=":msgGlobal" oncomplete="PF('editar').hide();"/>
 					</div>
 					</h:form>
 			</p:dialog>

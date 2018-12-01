@@ -11,48 +11,33 @@ import model.Entidades.Pedido;
 import model.Exception.JaExisteException;
 import model.Exception.NullException;
 import model.Exception.StringException;
-import model.dao.PedidoDaoImpl;
 
 @ManagedBean(name = "pedidoController")
 @ApplicationScoped
 public class PedidoController {
 	private Pedido pedido;
 	private List<Pedido> listaPedido;
-	private List<Pedido> listaPedidoFiltrado;
-	private PedidoDaoImpl pedidoDaoImpl = new PedidoDaoImpl();
 	PedidoModel pm = new PedidoModel();
-	
+
 	public Pedido getPedido() {
 		return pedido;
 	}
+
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
 	}
+
 	public PedidoController() {
 		this.pedido = new Pedido();
 	}
+
 	public List<Pedido> getListaPedido() {
-		listaPedido = pedidoDaoImpl.listando();
+		listaPedido = pm.listarTodos();
 		return listaPedido;
 	}
+
 	public void setListaPedido(List<Pedido> listaPedido) {
 		this.listaPedido = listaPedido;
-	}
-	public List<Pedido> getListaPedidoFiltrado() {
-		listaPedidoFiltrado = pedidoDaoImpl.listando();
-		return listaPedidoFiltrado;
-	}
-	public void setListaPedidoFiltrado(List<Pedido> listaPedidoFiltrado) {
-		this.listaPedidoFiltrado = listaPedidoFiltrado;
-	}
-	
-
-	public void carregarPesquisa(Pedido p) {
-		try {
-			listaPedido = pedidoDaoImpl.listando();
-		} catch (RuntimeException ex) {
-			FacesUtil.adicionarMsgErro("Erro ao listar pedidos" + ex.getMessage());
-		}
 	}
 
 	public void salvar(Pedido p) {
@@ -66,7 +51,7 @@ public class PedidoController {
 		} catch (StringException se) {
 			FacesUtil.adicionarMsgErro(se.getMessage());
 		}
-		
+
 	}
 
 	public void excluir(Pedido p) {
@@ -85,9 +70,8 @@ public class PedidoController {
 		}
 		return "";
 	}
-	
-	public String Pedido()
-	  {
-	    return "Pedido";
-	  }
+
+	public String Produto() {
+		return "Produtos";
+	}
 }

@@ -23,11 +23,13 @@
 					<ul class="categoria">
 						<li> 
 						<h3><a>Nome do cardapio</a></h3>
+						
 						<ui:repeat value="#{cardapioController.listaCardapio}" var="car">
-							<h:outputText  value="#{car.categoria}"/>
+							<h:outputText value="#{car.categoria}"/>
 						</ui:repeat>
 							<ul class="produto">
 								<ui:repeat value="#{itemCardapioController.listaItemCardapio}" var="icar">
+									  
 									<li>
 										<div class="prod">
 										<h:outputText  value="#{icar.cardapio.categoria}"/>

@@ -52,17 +52,17 @@ public class CardapioModel {
 
 	private boolean existe(Cardapio c) {
 		boolean existe = false;
-		if (((CardapioDao) dao).buscaCategoria(c.getCategoria()) != null) {
+		if (((CardapioDao) dao).buscarPorCategoria(c.getCategoria()) != null) {
 			existe = true;
 		}
 		return existe;
 	}
 
-	public List<Cardapio> listarCardapios() {
-		return dao.listando();
+	public List<Cardapio> listarTodos() {
+		return dao.listarTodos();
 	}
-
-	public List<Cardapio> filtrarCardapios() {
-		return dao.listando();
+	
+	public Cardapio buscarPorCategoria(String categoria) {
+		return dao.buscarPorCategoria(categoria);
 	}
 }

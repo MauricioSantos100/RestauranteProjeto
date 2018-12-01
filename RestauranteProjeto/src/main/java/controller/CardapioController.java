@@ -3,7 +3,7 @@ package controller;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 
 import controller.util.FacesUtil;
 import model.CardapioModel;
@@ -13,12 +13,10 @@ import model.Exception.NullException;
 import model.Exception.StringException;
 
 @ManagedBean(name = "cardapioController")
-@SessionScoped
+@RequestScoped
 public class CardapioController {
-	
 	private Cardapio cardapio;
 	private List<Cardapio> listaCardapio;
-	private List<Cardapio> listaCardapioFiltrado;
 	private CardapioModel cm = new CardapioModel();
 
 	public Cardapio getCardapio() {
@@ -29,12 +27,8 @@ public class CardapioController {
 		this.cardapio = cardapio;
 	}
 
-	public CardapioController() {
-		this.cardapio = new Cardapio();
-	}
-	
-	public List<Cardapio> getListaCardapio() {		
-		listaCardapio = cm.listarCardapios();
+	public List<Cardapio> getListaCardapio() {
+		listaCardapio = cm.listarTodos();
 		return listaCardapio;
 	}
 
@@ -42,13 +36,8 @@ public class CardapioController {
 		this.listaCardapio = listaCardapio;
 	}
 
-	public List<Cardapio> getListaCardapioFiltrado() {
-		listaCardapioFiltrado = cm.filtrarCardapios();
-		return listaCardapioFiltrado;
-	}
-	
-	public void setListaCardapioFiltrado(List<Cardapio> listaCardapioFiltrado) {
-		this.listaCardapioFiltrado = listaCardapioFiltrado;
+	public CardapioController() {
+		this.cardapio = new Cardapio();
 	}
 
 	public void salvar() {
@@ -61,17 +50,16 @@ public class CardapioController {
 			FacesUtil.adicionarMsgErro(ne.getMessage());
 		} catch (StringException se) {
 			FacesUtil.adicionarMsgErro(se.getMessage());
-		} finally {
-			this.cardapio = new Cardapio();
 		}
 	}
-	
-	public void excluir(Cardapio c) {
+
+	public String excluir(Cardapio c) {
 		cm.removeCategoria(c);
 		FacesUtil.adicionarMsgInfo("Cardapio excluido.");
+		return "PesquisaCardapio.xhtml?faces-redirect=true";
 	}
 
-	public String editar() throws NullException, StringException, JaExisteException{
+	public String editar() {
 		try {
 			cm.atualizarCategoria(this.cardapio);
 			FacesUtil.adicionarMsgInfo("Cardapio atualizado com Sucesso.");
@@ -82,7 +70,6 @@ public class CardapioController {
 		} catch (JaExisteException je) {
 			FacesUtil.adicionarMsgErro(je.getMessage());
 		}
-		
-		return "";
+		return "PesquisaCardapio.xhtml?faces-redirect=true";
 	}
 }

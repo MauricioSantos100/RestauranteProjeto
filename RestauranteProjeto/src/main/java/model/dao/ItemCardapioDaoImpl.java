@@ -10,13 +10,23 @@ import model.dao.util.JPAManager;
 
 public class ItemCardapioDaoImpl extends DAOImpl implements ItemCardapioDao{
 
-	public ItemCardapio buscaNome(String nome) {
-		// TODO Auto-generated method stub
-		return null;
+	public ItemCardapio buscarPorNome(String nome) {
+		ItemCardapio itemCardapio = null;
+		EntityManager mng = JPAManager.getInstance().getEntityManager();
+		try {
+			mng.getTransaction().begin();
+			Query query = mng.createQuery("FROM ItemCardapio where nome = :nome");
+			itemCardapio = (ItemCardapio) query.getSingleResult();
+		}catch (Exception e) {
+			mng.getTransaction().rollback();
+		} finally {
+			mng.close();
+		}
+		return itemCardapio;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<ItemCardapio> listando(){
+	public List<ItemCardapio> listarTodos(){
 		List<ItemCardapio> itemCardapio = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {

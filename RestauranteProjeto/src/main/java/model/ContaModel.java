@@ -45,7 +45,7 @@ public class ContaModel {
 	}
 
 	public void atualizaConta(Conta c) throws ValorException, StringException, NullException {
-		if (((ContaDao) dao).buscaCodConta(c.getCodConta()) != null) {
+		if  (!this.existe(c)) {
 			if (Validacoes.verificaString(c.getStatus())) {
 				if (Validacoes.verificaValor(c.getValorTotal())) {
 					dao.update(c);
@@ -66,19 +66,14 @@ public class ContaModel {
 
 	private boolean existe(Conta c) {
 		boolean valida = false;
-		if (((ContaDao) dao).buscaCodConta(c.getCodConta()) != null) {
+		if (((ContaDao) dao).buscarPorCodConta(c.getCodConta()) != null) {
 			valida = true;
 		}
 		return valida;
 	}
 
-	public List<Conta> listarContas() {
-		return dao.listando();
+	public List<Conta> listarTodos() {
+		return dao.listarTodos();
 	}
-
-	public List<Conta> filtrarContas() {
-		return dao.listando();
-	}
-
 	
 }

@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -16,25 +15,22 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "cardapio")
-@NamedQueries({@NamedQuery(name = "Cardapio.listar", query = "SELECT cardapios FROM Cardapio cardapios")})
-public class Cardapio implements Serializable{
-	
+@NamedQueries({ @NamedQuery(name = "Cardapio.listar", query = "SELECT cardapios FROM Cardapio cardapios") })
+public class Cardapio implements Serializable {
+
 	private static final long serialVersionUID = -4664430664985731932L;
 
-	@Id 
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cod_cardapio")
 	private Integer codCardapio;
-	
+
 	@Column(name = "categoria", length = 20, nullable = false)
 	private String categoria;
-	
+
 	@OneToMany(mappedBy = "cardapio")
-	@JoinColumn(name = "cod_cardapio")/*Para que nao seja necessario uma nova tabela no banco */
 	private List<ItemCardapio> ItemCardapio;
 
-
-	
 	public Cardapio() {
 	}
 
@@ -105,5 +101,4 @@ public class Cardapio implements Serializable{
 				+ "]";
 	}
 
-	
 }

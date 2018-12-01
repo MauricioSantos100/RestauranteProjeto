@@ -1,7 +1,10 @@
 package model.dao;
 
+import java.util.List;
+
 import model.Entidades.Entrega;
 
 public interface EntregaDao {
-	public Entrega buscaCodEntrega(int codEntrega);
+	public List<Entrega> listarTodos();
+	public Entrega buscarPorCodEntrega(int codEntrega);
 }

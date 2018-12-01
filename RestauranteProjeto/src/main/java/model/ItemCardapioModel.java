@@ -37,7 +37,6 @@ public class ItemCardapioModel {
 	}
 
 	public void atualizaItemCardapio(ItemCardapio ic) throws ValorException, StringException, NullException {
-		
 			if (Validacoes.verificaString(ic.getNome())) {
 				if (Validacoes.verificaValor(ic.getPreco())) {
 					dao.update(ic);
@@ -56,17 +55,17 @@ public class ItemCardapioModel {
 
 	private boolean existe(ItemCardapio ic) {
 		boolean valida = false;
-		if (((ItemCardapioDao) dao).buscaNome(ic.getNome()) != null) {
+		if (((ItemCardapioDao) dao).buscarPorNome(ic.getNome()) != null) {
 			valida = true;
 		}
 		return valida;
 	}
 	
-	public List<ItemCardapio> listarItemCardapios() {
-		return dao.listando();
+	public List<ItemCardapio> listarTodos() {
+		return dao.listarTodos();
 	}
 
-	public List<ItemCardapio> filtrarItemCardapios() {
-		return dao.listando();
+	public ItemCardapio buscarPorNome(String nome) {
+		return dao.buscarPorNome(nome);
 	}
 }

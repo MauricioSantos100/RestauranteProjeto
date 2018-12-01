@@ -32,7 +32,7 @@ public class EntregaModel {
 	}
 
 	public void atualizaEntrega(Entrega e) throws EnderecoException, NullException {
-		if (((EntregaDao) dao).buscaCodEntrega(e.getCodEntrega()) != null) {
+		if (!this.existe(e)) {
 			if (verificaEndereco(e.getBairro()) && verificaEndereco(e.getRua()) && verificaEndereco(e.getComplemento())
 					&& verificaEndereco(e.getReferencia()) && verificaEndereco(e.getStatus())) {
 				dao.update(e);
@@ -51,10 +51,14 @@ public class EntregaModel {
 
 	private boolean existe(Entrega e) {
 		boolean existe = false;
-		if (((EntregaDao) dao).buscaCodEntrega(e.getCodEntrega()) != null) {
+		if (((EntregaDao) dao).buscarPorCodEntrega(e.getCodEntrega()) != null) {
 			existe = true;
 		}
 		return existe;
+	}
+
+	public List<Entrega> listarTodos() {
+		return dao.listarTodos();
 	}
 
 	private boolean verificaEndereco(String s) {
@@ -68,12 +72,5 @@ public class EntregaModel {
 		}
 		return verifica;
 	}
-	
-	public List<Entrega> listarEntregas() {
-		return dao.listando();
-	}
 
-	public List<Entrega> filtrarEntregas() {
-		return dao.listando();
-	}
 }

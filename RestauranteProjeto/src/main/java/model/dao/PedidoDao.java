@@ -1,7 +1,10 @@
 package model.dao;
 
+import java.util.List;
+
 import model.Entidades.Pedido;
 
 public interface PedidoDao {
-	public Pedido buscaCodPedido(int codPedido);
+	public List<Pedido> listarTodos();
+	public Pedido buscarPorCodPedido(int codPedido);
 }

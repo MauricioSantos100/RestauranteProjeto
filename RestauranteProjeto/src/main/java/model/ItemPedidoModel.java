@@ -25,7 +25,7 @@ public class ItemPedidoModel {
 	}
 
 	public void atualizaItemPedido(ItemPedido ip) throws NullException {
-		if (((ItemPedidoDao) dao).buscaCodItemPedido(ip.getCodItemPedido()) != null) {
+		if (((ItemPedidoDao) dao).buscarPorCodItemPedido(ip.getCodItemPedido()) != null) {
 			dao.update(ip);
 		} else {
 			throw new NullException("Nenhum item pode estar vazio");
@@ -38,17 +38,17 @@ public class ItemPedidoModel {
 
 	private boolean existe(ItemPedido ip) {
 		boolean valida = false;
-		if (((ItemPedidoDao) dao).buscaCodItemPedido(ip.getCodItemPedido()) != null) {
+		if (((ItemPedidoDao) dao).buscarPorCodItemPedido(ip.getCodItemPedido()) != null) {
 			valida = true;
 		}
 		return valida;
 	}
 	
-	public List<ItemPedido> listarItemPedidos() {
-		return dao.listando();
+	public List<ItemPedido> listarTodos() {
+		return dao.listarTodos();
 	}
 
-	public List<ItemPedido> filtrarItemPedidos() {
-		return dao.listando();
+	public ItemPedido buscarPorNome(String nome) {
+		return dao.buscarPorNome(nome);
 	}
 }

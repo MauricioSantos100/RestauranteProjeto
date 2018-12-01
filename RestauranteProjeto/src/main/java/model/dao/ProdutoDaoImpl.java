@@ -10,13 +10,23 @@ import model.dao.util.JPAManager;
 
 public class ProdutoDaoImpl extends DAOImpl implements ProdutoDao{
 
-	public Produto buscaNome(String nome) {
-		// TODO Auto-generated method stub
-		return null;
+	public Produto buscarPorNome(String nome) {
+		Produto produto = null;
+		EntityManager mng = JPAManager.getInstance().getEntityManager();
+		try {
+			mng.getTransaction().begin();
+			Query query = mng.createQuery("FROM Produto where nome = :nome");
+			produto = (Produto) query.getSingleResult();
+		}catch (Exception e) {
+			mng.getTransaction().rollback();
+		} finally {
+			mng.close();
+		}
+		return produto;
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Produto> listando(){
+	public List<Produto> listarTodos(){
 		List<Produto> produto = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {
@@ -30,7 +40,5 @@ public class ProdutoDaoImpl extends DAOImpl implements ProdutoDao{
 		}
 		return produto;
 	}
-
-
 
 }

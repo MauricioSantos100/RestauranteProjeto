@@ -2,13 +2,11 @@ package controller;
 
 import java.util.List;
 
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
 import controller.util.FacesUtil;
-import model.CardapioModel;
 import model.ItemCardapioModel;
-import model.Entidades.Cardapio;
 import model.Entidades.ItemCardapio;
 import model.Exception.JaExisteException;
 import model.Exception.NullException;
@@ -16,38 +14,34 @@ import model.Exception.StringException;
 import model.Exception.ValorException;
 
 @ManagedBean(name = "itemCardapioController")
-@ApplicationScoped
+@RequestScoped
 public class ItemCardapioController {
 	private ItemCardapio itemCardapio;
 	private List<ItemCardapio> listaItemCardapio;
-	private List<ItemCardapio> listaItemCardapioFiltrado;
 	ItemCardapioModel icm = new ItemCardapioModel();
-	
+
 	public ItemCardapio getItemCardapio() {
 		return this.itemCardapio;
 	}
+
 	public void setItemCardapio(ItemCardapio itemCardapio) {
 		this.itemCardapio = itemCardapio;
 	}
+
 	public ItemCardapioController() {
 		this.itemCardapio = new ItemCardapio();
 	}
+
 	public List<ItemCardapio> getListaItemCardapio() {
-		listaItemCardapio = icm.listarItemCardapios();
+		listaItemCardapio = icm.listarTodos();
 		return listaItemCardapio;
 	}
+
 	public void setListaItemCardapio(List<ItemCardapio> listaItemCardapio) {
 		this.listaItemCardapio = listaItemCardapio;
 	}
-	public List<ItemCardapio> getListaItemCardapioFiltrado() {
-		listaItemCardapioFiltrado = icm.filtrarItemCardapios();
-		return listaItemCardapioFiltrado;
-	}
-	public void setListaItemCardapioFiltrado(List<ItemCardapio> listaItemCardapioFiltrado) {
-		this.listaItemCardapioFiltrado = listaItemCardapioFiltrado;
-	}
 
-	public void salvar() {
+	public String salvar() {
 		try {
 			icm.registraItemCardapio(this.itemCardapio);
 			FacesUtil.adicionarMsgInfo("Item cardápio Salvo com Sucesso.");
@@ -60,11 +54,13 @@ public class ItemCardapioController {
 		} catch (ValorException ve) {
 			FacesUtil.adicionarMsgErro(ve.getMessage());
 		}
+		return "PesquisaItemCardapio.xhtml?faces-redirect=true";
 	}
 
-	public void excluir(ItemCardapio ic) {
+	public String excluir(ItemCardapio ic) {
 		icm.removeItemCardapio(ic);
 		FacesUtil.adicionarMsgInfo("Item cardápio excluido.");
+		return "PesquisaItemCardapio.xhtml?faces-redirect=true";
 	}
 
 	public String editar() {
@@ -79,6 +75,6 @@ public class ItemCardapioController {
 			FacesUtil.adicionarMsgErro(ve.getMessage());
 		}
 
-		return "";
-	}		
+		return "PesquisaItemCardapio.xhtml?faces-redirect=true";
+	}
 }

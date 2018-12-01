@@ -57,7 +57,7 @@ public class FuncionarioModel {
 
 	public void atualizaFuncionario(Funcionario f)
 			throws StringException, ValorException, EmailException, TelefoneException, CpfException, NullException {
-		if (((FuncionarioDao) dao).buscaCpfFuncionario(f.getCpf()) != null) {
+		if (!this.existe(f)) {
 			if (Validacoes.verificaString(f.getNome())
 					&& Validacoes.verificaString(f.getFuncao())) {
 				if (Validacoes.verificaCpf(f.getCpf())) {
@@ -87,18 +87,21 @@ public class FuncionarioModel {
 
 	private boolean existe(Funcionario f) {
 		boolean existe = false;
-		if (((FuncionarioDao) dao).buscaCpfFuncionario(f.getCpf()) != null) {
+		if (((FuncionarioDao) dao).buscarPorCpf(f.getCpf()) != null) {
 			existe = true;
 		}
 		return existe;
 	}
 	
-	public List<Funcionario> listarFuncionarios() {
-		return dao.listando();
+	public List<Funcionario> listarTodos() {
+		return dao.listarTodos();
 	}
 
-	public List<Funcionario> filtrarFuncionarios() {
-		return dao.listando();
+	public Funcionario buscarPorNome(String nome) {
+		return dao.buscarPorNome(nome);
 	}
 	
+	public Funcionario buscarPorCpf(String cpf) {
+		return dao.buscarPorCpf(cpf);
+	}
 }

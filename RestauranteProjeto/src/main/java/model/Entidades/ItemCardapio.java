@@ -29,10 +29,10 @@ public class ItemCardapio implements Serializable{
 	private String nome;
 	@Column(name = "preco", precision = 6, scale = 2, nullable = false)
 	private double preco;
-	/**/ 
+	/**/
 	@ManyToOne
 	@JoinColumn(name = "cod_cardapio")
-	private Cardapio cardapio;
+	private Cardapio cardapio = new Cardapio();
 	
 	@ManyToMany
 	private List<Pedido> pedido;

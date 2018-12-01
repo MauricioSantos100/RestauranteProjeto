@@ -31,7 +31,7 @@ public class PedidoModel {
 	}
 
 	public void atualizaPedido(Pedido p) throws NullException, StringException {
-		if (((PedidoDao) dao).buscaCodPedido(p.getCodPedido()) != null) {
+		if (((PedidoDao) dao).buscarPorCodPedido(p.getCodPedido()) != null) {
 			if (Validacoes.verificaString(p.getStatus())) {
 				dao.update(p);
 			} else {
@@ -48,17 +48,13 @@ public class PedidoModel {
 
 	private boolean existe(Pedido p) {
 		boolean valida = false;
-		if (((PedidoDao) dao).buscaCodPedido(p.getCodPedido()) != null) {
+		if (((PedidoDao) dao).buscarPorCodPedido(p.getCodPedido()) != null) {
 			valida = true;
 		}
 		return valida;
 	}
 	
-	public List<Pedido> listarPedidos() {
-		return dao.listando();
-	}
-
-	public List<Pedido> filtrarPedidos() {
-		return dao.listando();
+	public List<Pedido> listarTodos() {
+		return dao.listarTodos();
 	}
 }

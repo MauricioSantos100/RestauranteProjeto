@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class Conecta {
 	static final String URL = "jdbc:postgresql://localhost:5432/ProjetoRestaurante";
     static final String USER = "postgres";
-    static final String PASS = "ifpe";
+    static final String PASS = "00000";
  
     public static Connection criarConexao() throws ClassNotFoundException, SQLException{
     	Class.forName("org.postgresql.Driver");

@@ -3,11 +3,10 @@ package controller.converter;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import javax.faces.convert.FacesConverter;
 
 import model.Entidades.Cardapio;
 
-@FacesConverter(forClass = Cardapio.class)
+
 public class CardapioConverter implements Converter{
 
 	/*

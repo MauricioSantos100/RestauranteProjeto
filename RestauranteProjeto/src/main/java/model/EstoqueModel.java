@@ -35,7 +35,6 @@ public class EstoqueModel {
 	}
 
 	public void atualizaEstoque(Estoque e) throws StringException, NullException {
-
 		if (Validacoes.verificaString(e.getNome()) && Validacoes.verificaString(e.getUniMedida())) {
 			dao.update(e);
 		} else {
@@ -45,10 +44,18 @@ public class EstoqueModel {
 
 	private boolean existe(Estoque e) {
 		boolean valida = false;
-		if (((EstoqueDao) dao).buscaNome(e.getNome()) != null) {
+		if (((EstoqueDao) dao).buscarPorNome(e.getNome()) != null) {
 			valida = true;
 		}
 		return valida;
+	}
+
+	public List<Estoque> listarTodos() {
+		return dao.listarTodos();
+	}
+
+	public Estoque buscarPorNome(String nome) {
+		return dao.buscarPorNome(nome);
 	}
 
 	public static boolean verificaUniMedida(String uniMedida) {
@@ -63,15 +70,4 @@ public class EstoqueModel {
 		return verifica;
 	}
 
-	public List<Estoque> listarNomeEstoque() {
-		return dao.listarNome();
-	}
-
-	public List<Estoque> listarEstoques() {
-		return dao.listando();
-	}
-
-	public List<Estoque> filtrarEstoques() {
-		return dao.listando();
-	}
 }

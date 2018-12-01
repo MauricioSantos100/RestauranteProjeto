@@ -8,42 +8,27 @@ import model.Entidades.Pagamento;
 import model.Exception.DateException;
 import model.Exception.JaExisteException;
 import model.Exception.NullException;
-import model.dao.PagamentoDaoImpl;
 
 public class PagamentoController {
 	private Pagamento pagamento;
 	private List<Pagamento> listaPagamento;
-	private List<Pagamento> listaPagamentoFiltrado;
-	private PagamentoDaoImpl pagamentoDaoImpl = new PagamentoDaoImpl();
 	PagamentoModel pm = new PagamentoModel();
-	
+
 	public Pagamento getPagamento() {
 		return pagamento;
 	}
+
 	public void setPagamento(Pagamento pagamento) {
 		this.pagamento = pagamento;
 	}
+
 	public List<Pagamento> getListaPagamento() {
-		listaPagamento = pagamentoDaoImpl.listando();
+		listaPagamento = pm.listarTodos();
 		return listaPagamento;
 	}
+
 	public void setListaPagamento(List<Pagamento> listaPagamento) {
 		this.listaPagamento = listaPagamento;
-	}
-	public List<Pagamento> getListaPagamentoFiltrado() {
-		listaPagamentoFiltrado = pagamentoDaoImpl.listando();
-		return listaPagamentoFiltrado;
-	}
-	public void setListaPagamentoFiltrado(List<Pagamento> listaPagamentoFiltrado) {
-		this.listaPagamentoFiltrado = listaPagamentoFiltrado;
-	}
-	
-	public void carregarPesquisa(Pagamento p) {
-		try {
-			listaPagamento = pagamentoDaoImpl.listando();
-		} catch (RuntimeException ex) {
-			FacesUtil.adicionarMsgErro("Erro ao listar pagamentos" + ex.getMessage());
-		}
 	}
 
 	public void salvar(Pagamento p) {
@@ -56,8 +41,8 @@ public class PagamentoController {
 			FacesUtil.adicionarMsgErro(ne.getMessage());
 		} catch (DateException de) {
 			FacesUtil.adicionarMsgErro(de.getMessage());
-		} 
-		
+		}
+
 	}
 
 	public void excluir(Pagamento p) {
@@ -73,5 +58,5 @@ public class PagamentoController {
 			FacesUtil.adicionarMsgErro(ne.getMessage());
 		}
 		return "";
-	}	
+	}
 }

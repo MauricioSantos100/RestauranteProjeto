@@ -31,7 +31,7 @@ public class PagamentoModel {
 	}
 
 	public void atualizaPagamento(Pagamento p) throws NullException {
-		if (((PagamentoDao) dao).buscaCodPagamento(p.getCodPagamento()) != null) {
+		if (((PagamentoDao) dao).buscarPorCodPagamento(p.getCodPagamento()) != null) {
 			dao.update(p);
 		} else {
 			throw new NullException("Nenhum item pode estar vazio");
@@ -44,17 +44,13 @@ public class PagamentoModel {
 
 	private boolean existe(Pagamento p) {
 		boolean valida = false;
-		if (((PagamentoDao) dao).buscaCodPagamento(p.getCodPagamento()) != null) {
+		if (((PagamentoDao) dao).buscarPorCodPagamento(p.getCodPagamento()) != null) {
 			valida = true;
 		}
 		return valida;
 	}
 	
-	public List<Pagamento> listarPagamentos() {
-		return dao.listando();
-	}
-
-	public List<Pagamento> filtrarPagamentos() {
-		return dao.listando();
+	public List<Pagamento> listarTodos() {
+		return dao.listarTodos();
 	}
 }

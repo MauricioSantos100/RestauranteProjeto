@@ -29,7 +29,7 @@ public class PagamentoCartaoModel {
 	}
 
 	public void atualizaPagamentoCartao(PagamentoCartao pc) throws StringException, NullException {
-		if (((PagamentoCartaoDao) dao).buscaCodPagamento(pc.getCodPagamento()) != null) {
+		if  (!this.existe(pc)) {
 			if (Validacoes.verificaString(pc.getNomeTitular())) {
 				dao.update(pc);
 			} else {
@@ -46,7 +46,7 @@ public class PagamentoCartaoModel {
 
 	private boolean existe(PagamentoCartao pc) {
 		boolean valida = false;
-		if (((PagamentoCartaoDao) dao).buscaCodPagamento(pc.getCodPagamento()) != null) {
+		if (((PagamentoCartaoDao) dao).buscarPorCodPagamento(pc.getCodPagamento()) != null) {
 			valida = true;
 		}
 		return valida;
