@@ -53,13 +53,12 @@ public class CardapioController {
 		}
 	}
 
-	public String excluir(Cardapio c) {
+	public void excluir(Cardapio c) {
 		cm.removeCategoria(c);
 		FacesUtil.adicionarMsgInfo("Cardapio excluido.");
-		return "PesquisaCardapio.xhtml?faces-redirect=true";
 	}
 
-	public String editar() {
+	public void editar() {
 		try {
 			cm.atualizarCategoria(this.cardapio);
 			FacesUtil.adicionarMsgInfo("Cardapio atualizado com Sucesso.");
@@ -70,6 +69,5 @@ public class CardapioController {
 		} catch (JaExisteException je) {
 			FacesUtil.adicionarMsgErro(je.getMessage());
 		}
-		return "PesquisaCardapio.xhtml?faces-redirect=true";
 	}
 }

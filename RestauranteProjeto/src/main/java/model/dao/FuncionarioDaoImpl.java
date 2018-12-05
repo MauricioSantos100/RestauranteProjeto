@@ -14,11 +14,8 @@ public class FuncionarioDaoImpl extends DAOImpl implements FuncionarioDao{
 		Funcionario funcionario = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {
-			mng.getTransaction().begin();
 			Query query = mng.createQuery("FROM Funcionario where cpf = :cpf");
 			funcionario = (Funcionario) query.getSingleResult();
-		}catch (Exception e) {
-			mng.getTransaction().rollback();
 		} finally {
 			mng.close();
 		}
@@ -31,11 +28,8 @@ public class FuncionarioDaoImpl extends DAOImpl implements FuncionarioDao{
 		List<Funcionario> funcionario = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {
-			mng.getTransaction().begin();
 			Query query = mng.createQuery("FROM Funcionario");
 			funcionario = query.getResultList();
-		}catch (Exception e) {
-			mng.getTransaction().rollback();
 		} finally {
 			mng.close();
 		}
@@ -47,11 +41,8 @@ public class FuncionarioDaoImpl extends DAOImpl implements FuncionarioDao{
 		Funcionario funcionario = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {
-			mng.getTransaction().begin();
 			Query query = mng.createQuery("FROM Funcionario where nome = :nome");
 			funcionario = (Funcionario) query.getSingleResult();
-		}catch (Exception e) {
-			mng.getTransaction().rollback();
 		} finally {
 			mng.close();
 		}

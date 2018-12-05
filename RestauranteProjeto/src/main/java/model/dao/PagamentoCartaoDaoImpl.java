@@ -12,11 +12,8 @@ public class PagamentoCartaoDaoImpl extends DAOImpl implements PagamentoCartaoDa
 		PagamentoCartao pagamentoCartao = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {
-			mng.getTransaction().begin();
 			Query query = mng.createQuery("FROM PagamentoCartao where cod_pagamento = :codPagamento");
 			pagamentoCartao = (PagamentoCartao) query.getSingleResult();
-		}catch (Exception e) {
-			mng.getTransaction().rollback();
 		} finally {
 			mng.close();
 		}

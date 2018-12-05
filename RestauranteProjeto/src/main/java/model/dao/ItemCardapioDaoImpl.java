@@ -14,11 +14,8 @@ public class ItemCardapioDaoImpl extends DAOImpl implements ItemCardapioDao{
 		ItemCardapio itemCardapio = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {
-			mng.getTransaction().begin();
 			Query query = mng.createQuery("FROM ItemCardapio where nome = :nome");
 			itemCardapio = (ItemCardapio) query.getSingleResult();
-		}catch (Exception e) {
-			mng.getTransaction().rollback();
 		} finally {
 			mng.close();
 		}
@@ -30,11 +27,8 @@ public class ItemCardapioDaoImpl extends DAOImpl implements ItemCardapioDao{
 		List<ItemCardapio> itemCardapio = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {
-			mng.getTransaction().begin();
 			Query query = mng.createQuery("FROM ItemCardapio");
 			itemCardapio = query.getResultList();
-		}catch (Exception e) {
-			mng.getTransaction().rollback();
 		} finally {
 			mng.close();
 		}

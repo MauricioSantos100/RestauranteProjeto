@@ -18,40 +18,123 @@
 					<p:menuitem value="Pagamento" url="#" />
 					<p:menuitem value="Confirmação" url="#" />
 				</p:steps>
-			</div>
+			</div><!--  
 			<h:form>
-			
-				<p:dataTable emptyMessage="Nenhum registro encontrado."
-				id="itemCardapio"
-				value="#{itemCardapioController.listaItemCardapio}"
-				rows="15"
-				paginator="true"
-				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink}"
-				paginatorPosition="bottom"
-				var="ic"
-				>				
-				<f:facet name="header">
-		           <h:outputText value="Produtos" />
-		        </f:facet>
-				<p:column headerText="Código" width="80">
-					<h:outputText value="#{ic.codItem}" />
-				</p:column>
-				<p:column headerText="Nome" filterBy="#{p.nome}" sortBy="#{p.nome}">
-					<h:outputText value="#{ic.nome}" />
-				</p:column>
-				<p:column headerText="Quantidade em estoque">
-					<h:outputText value="#{estoqueController.estoque.quantidade}" />
-				</p:column>
-				<p:column headerText="preço">
-					<h:outputText value="#{ic.preco}" />
-				</p:column>
-				<p:column headerText="Opcões">
-					<p:commandButton value="Adicionar ao carrinho"></p:commandButton>
-				</p:column>
-			</p:dataTable> 
-				<p:commandButton value="Proximo" styleClass="botao"
-					action="Pagamento.xhtml" />
+				<p:dataGrid var="car"
+					value="#{itemCardapioController.listaItemCardapio}" columns="3"
+					layout="grid" rows="12" paginator="true" id="cars"
+					paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="6,12,16">
+					<f:facet name="header">
+				    	Produtos
+				    </f:facet>
+					<p:panel header="#{car.nome}" style="text-align:center">
+						<h:panelGrid columns="1" style="width:100%">
+							<h:outputText value="R$#{car.preco}0" />
+							
+							<p:commandButton icon="fa fa-cart-plus" actionListener="#{itemCardapioController}"></p:commandButton>
+						</h:panelGrid>
+					</p:panel>
+				</p:dataGrid>
 			</h:form>
+			<h:form>
+				<p:dataTable emptyMessage="Nenhum registro encontrado."
+					id="itemCardapio" value="#{itemPedidoController.itemPedido}"
+					rows="15" paginator="true"
+					paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink}"
+					paginatorPosition="bottom" var="ic">
+					<f:facet name="header">
+						<h:outputText value="Carrinho" />
+					</f:facet>
+					<p:column headerText="nome" width="80">
+						<h:outputText value="#{ic.itemdardapio.nome}" />
+					</p:column>
+					<p:column headerText="Preço" filterBy="#{p.nome}"
+						sortBy="#{p.nome}">
+						<h:outputText value="#{ic.itemdardapio.preco}" />
+					</p:column>
+					<p:column headerText="Quantidade">
+						<h:outputText value="#{ic.quantidade}" />
+					</p:column>
+				</p:dataTable>
+				<p:commandButton value="Proximo" styleClass="botao"	action="Pagamento.xhtml" />
+			</h:form>
+			-->
+			
+			<h:form id="formulario">
+				<p:panel header="Produtos">
+					<p:dataTable id="tabelaProduto"
+						emptyMessage="Nenhum registro encontrado." paginator="true"
+						value="#{vendaControl.itensCardapio}" var="produto" rows="5"
+						paginatorPosition="bottom">
+		
+						<p:column headerText="Nome" filterBy="#{produto.nome}"
+							sortBy="#{produto.nome}">
+							<h:outputText value="#{produto.nome}" />
+						</p:column>		
+						<p:column headerText="Preço" sortBy="#{produto.preco}">
+							<h:outputText value="#{produto.preco}">
+								<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+							</h:outputText>
+						</p:column>
+		
+						<p:column headerText="Opções">
+							<p:commandButton icon="ui-icon-plus"
+								actionListener="#{vendaControl.adicionar}"
+								update=":formulario:tabelaCesta">
+								
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+				<p:panel header="Cesta de Compras">
+					<p:dataTable id="tabelaCesta"
+						emptyMessage="Nenhum registro encontrado." paginator="true"
+						value="#{vendaControl.itensPedido}" var="itemPedido" rows="5"
+						paginatorPosition="bottom"
+						editable="true"
+						editMode="cell">
+						
+						<p:ajax event="cellEdit" oncomplete="rc()" />
+		
+						<p:column headerText="Nome">
+							<h:outputText value="#{itemPedido.itemCardapio.nome}" />
+						</p:column>
+		
+						<p:column headerText="Preço Un.">
+							<h:outputText value="#{itemPedido.itemCardapio.preco}">
+								<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+							</h:outputText>
+						</p:column>
+		
+						<p:column headerText="Qtde.">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{itemPedido.quantidade}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{itemPedido.quantidade}" />
+								</f:facet>
+							</p:cellEditor>
+							
+						</p:column>
+		<!--  
+						<p:column headerText="Preço Parcial">
+							<h:outputText value="#{itemVenda.precoParcial}">
+								<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+							</h:outputText>
+						</p:column>
+		-->
+						<p:column headerText="Opções">	
+							<p:commandButton icon="ui-icon-minus"
+								actionListener="#{vendaControl.remover}"
+								update=":formulario:tabelaCesta :formulario:painelFinalizacao">
+								<f:attribute name="itemSelecionado" value="#{itemPedido}" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+			</h:form >
 		</ui:define>
 	</ui:composition>
 </h:body>

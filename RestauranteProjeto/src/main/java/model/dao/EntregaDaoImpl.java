@@ -14,11 +14,8 @@ public class EntregaDaoImpl extends DAOImpl implements EntregaDao{
 		Entrega entrega = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {
-			mng.getTransaction().begin();
 			Query query = mng.createQuery("FROM Entrega where cod_entrega = :codentrega");
-			entrega = (Entrega) query.getResultList();
-		}catch (Exception e) {
-			mng.getTransaction().rollback();
+			entrega = (Entrega) query.getSingleResult();
 		} finally {
 			mng.close();
 		}
@@ -30,11 +27,8 @@ public class EntregaDaoImpl extends DAOImpl implements EntregaDao{
 		List<Entrega> entrega = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {
-			mng.getTransaction().begin();
 			Query query = mng.createQuery("FROM Entrega");
 			entrega = query.getResultList();
-		}catch (Exception e) {
-			mng.getTransaction().rollback();
 		} finally {
 			mng.close();
 		}

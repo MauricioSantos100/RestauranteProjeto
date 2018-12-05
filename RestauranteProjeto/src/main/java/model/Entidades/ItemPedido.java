@@ -49,11 +49,11 @@ public class ItemPedido  implements Serializable {
 		this.quantidade = quantidade;
 	}
 
-	public ItemCardapio getItemdardapio() {
+	public ItemCardapio getItemCardapio() {
 		return itemCardapio;
 	}
 
-	public void setItemdardapio(ItemCardapio itemdardapio) {
+	public void setItemCardapio(ItemCardapio itemdardapio) {
 		this.itemCardapio = itemdardapio;
 	}
 
@@ -107,8 +107,5 @@ public class ItemPedido  implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
 	
 }

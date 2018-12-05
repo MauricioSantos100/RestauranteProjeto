@@ -14,11 +14,8 @@ public class ProdutoDaoImpl extends DAOImpl implements ProdutoDao{
 		Produto produto = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {
-			mng.getTransaction().begin();
 			Query query = mng.createQuery("FROM Produto where nome = :nome");
 			produto = (Produto) query.getSingleResult();
-		}catch (Exception e) {
-			mng.getTransaction().rollback();
 		} finally {
 			mng.close();
 		}
@@ -30,11 +27,8 @@ public class ProdutoDaoImpl extends DAOImpl implements ProdutoDao{
 		List<Produto> produto = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {
-			mng.getTransaction().begin();
 			Query query = mng.createQuery("FROM Produto");
 			produto = query.getResultList();
-		}catch (Exception e) {
-			mng.getTransaction().rollback();
 		} finally {
 			mng.close();
 		}

@@ -30,6 +30,7 @@ public class ItemCardapioController {
 
 	public ItemCardapioController() {
 		this.itemCardapio = new ItemCardapio();
+
 	}
 
 	public List<ItemCardapio> getListaItemCardapio() {
@@ -41,7 +42,7 @@ public class ItemCardapioController {
 		this.listaItemCardapio = listaItemCardapio;
 	}
 
-	public String salvar() {
+	public void salvar() {
 		try {
 			icm.registraItemCardapio(this.itemCardapio);
 			FacesUtil.adicionarMsgInfo("Item cardápio Salvo com Sucesso.");
@@ -54,7 +55,6 @@ public class ItemCardapioController {
 		} catch (ValorException ve) {
 			FacesUtil.adicionarMsgErro(ve.getMessage());
 		}
-		return "PesquisaItemCardapio.xhtml?faces-redirect=true";
 	}
 
 	public String excluir(ItemCardapio ic) {

@@ -15,11 +15,8 @@ public class PagamentoDaoImpl extends DAOImpl implements PagamentoDao {
 		List<Pagamento> pagamento = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {
-			mng.getTransaction().begin();
 			Query query = mng.createQuery("FROM Pagamento");
 			pagamento = query.getResultList();
-		}catch (Exception e) {
-			mng.getTransaction().rollback();
 		} finally {
 			mng.close();
 		}
@@ -30,11 +27,8 @@ public class PagamentoDaoImpl extends DAOImpl implements PagamentoDao {
 		Pagamento pagamento = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {
-			mng.getTransaction().begin();
 			Query query = mng.createQuery("FROM Pagamento where cod_pagamento = :codPagamento");
 			pagamento = (Pagamento) query.getSingleResult();
-		}catch (Exception e) {
-			mng.getTransaction().rollback();
 		} finally {
 			mng.close();
 		}

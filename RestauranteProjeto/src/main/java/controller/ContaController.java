@@ -19,7 +19,7 @@ import model.Exception.ValorException;
 public class ContaController {
 	private Conta conta;
 	private List<Conta> listaConta;
-	private ContaModel cm = new ContaModel();
+	private ContaModel cm = ContaModel.getInstance();
 
 	public Conta getConta() {
 		return conta;

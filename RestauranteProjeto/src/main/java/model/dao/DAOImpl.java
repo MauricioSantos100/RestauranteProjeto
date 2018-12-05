@@ -1,6 +1,5 @@
 package model.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -59,11 +58,8 @@ public class DAOImpl implements DAO<Object>{
 	public List<Object> findporid(Integer id) {
 		List<Object> obj = null;
 		try {
-			manager.getTransaction().begin();
 			Query query = (Query) manager.find(getClass(), id);
 			obj = query.getResultList();
-		} catch (Exception e) {
-			manager.getTransaction().rollback();
 		} finally {
 			manager.close();
 		}
@@ -74,11 +70,7 @@ public class DAOImpl implements DAO<Object>{
 	public List<Object> findALL() {
 		List<Object> lista = null;
 		try {
-			manager.getTransaction().begin();
 			lista = manager.createQuery("FROM " + Object.class.getName()).getResultList();
-			
-		} catch (Exception e) {
-			manager.getTransaction().rollback();
 		} finally {
 			manager.close();
 		}

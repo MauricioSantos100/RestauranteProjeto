@@ -14,11 +14,8 @@ public class ContaDaoImpl extends DAOImpl implements ContaDao{
 		Conta conta = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {
-			mng.getTransaction().begin();
 			Query query = mng.createQuery("FROM Conta where cod_conta = :codconta");
 			conta = (Conta) query.getSingleResult();
-		}catch (Exception e) {
-			mng.getTransaction().rollback();
 		} finally {
 			mng.close();
 		}
@@ -30,11 +27,8 @@ public class ContaDaoImpl extends DAOImpl implements ContaDao{
 		List<Conta> conta = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {
-			mng.getTransaction().begin();
 			Query query = mng.createQuery("FROM Conta");
 			conta = query.getResultList();
-		}catch (Exception e) {
-			mng.getTransaction().rollback();
 		} finally {
 			mng.close();
 		}

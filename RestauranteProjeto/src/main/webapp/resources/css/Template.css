@@ -1,5 +1,6 @@
 @charset "ISO-8859-1";
 
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:400i');
 * {
 	padding: 0px;
 	margin: 0px;
@@ -16,6 +17,7 @@
 a{
 	color: white;
     text-decoration: none;
+    font-family: 'Fira Sans', sans-serif;
 }
 .tudo {
 	width: 100%;
@@ -67,7 +69,7 @@ p {
 .logo2 {
 	width: 350px;
 }
- 
+ /*
 #menu>ul, #menudireito>ul  {
 	list-style-type: none;
 	overflow: hidden;
@@ -135,7 +137,7 @@ p {
 	text-decoration: none;
 	display: block;
 
-}
+}*/
 .menuRodape{ 
 	border-bottom: #fff solid 1px;
 	padding-bottom: 20px;
@@ -145,6 +147,108 @@ p {
 	display: inline-block;
     margin-right: 20px;
 }
+
+	#menudireito {
+        float: right;
+    }
+    .menu{
+        width: 100%;
+        height: 80px;
+        background-color: #444;
+    }
+    .menu ul{
+        list-style: none;
+        position: relative;
+    }
+    .menu ul li {
+        width: 100px;
+        float: left;
+    }
+    .menu a{
+        padding: 30px 0px 30px 0px;
+        display: block;
+        text-decoration: none;
+        text-align: center;
+        background-color: #444;
+        color: #fff;
+    }
+    .menu ul ul {
+        position: absolute;
+        visibility: hidden;
+        z-index: 100;
+    } 
+    .menu ul li:hover ul{
+        visibility: visible;
+    }
+    .menu a:hover{
+        background-color: #808080;
+
+    }
+    .menu ul ul li{
+        float: none;
+        border-bottom: solid 1px #ccc;
+    }
+    .menu ul ul li a{
+        background-color: rgb(15, 44, 59);
+    }
+    label[for="bt_menu"]{
+        padding: 5px;
+         
+        color: #fff;
+        font-family: "Arial";
+        text-align: center;
+        cursor: pointer;
+        font-size: 30px;
+        width: 50px;
+        height: 50px;
+    }
+    #bt_menu{
+        display: none;
+    }
+    label[for="bt_menu"]{
+            display: none;
+    }
+    @media(max-width: 800px){
+        label[for="bt_menu"]{
+            display: block;
+            position: absolute;
+            padding: 15px;
+        }
+        #bt_menu:checked ~ .menu{
+            margin-left: 0;
+        }
+        .menu{
+            margin-top: 13px;
+            margin-left: -100%;
+            transition: all .4s;
+        }
+        .menu ul{
+        	z-index: 100;
+        }
+        .menu ul li{
+            width: 100%;
+            float: none;
+        }
+        .menu ul ul{
+            position: static;
+            overflow: hidden;
+            max-height: 0;
+            transition: all .4s;
+        }
+        .menu ul li:hover ul{
+            height: auto;
+            max-height: 200px;
+        }
+        .menudireito{
+            float: none;
+        }
+        .imagemlogo{
+       		display: flex;
+			justify-content: center;
+			align-items: center;
+        }
+		
+    }
 /*
 #menudireito>li>ul>li {
 	display: none;

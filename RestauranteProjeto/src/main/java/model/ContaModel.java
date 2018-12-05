@@ -16,6 +16,17 @@ public class ContaModel {
 	private ContaDaoImpl dao = new ContaDaoImpl();
 	private static ContaModel conta;
 
+	private ContaModel() {
+		
+	}
+	
+	public static final ContaModel getInstance() {
+		if (conta == null) {
+			conta = new ContaModel();
+		}
+		return conta;
+	}
+	
 	public void registraConta(Conta c) throws JaExisteException, NullException, StringException, ValorException {
 		if (ContaModel.getInstance() != null) {
 			if (c != null) {
@@ -36,12 +47,6 @@ public class ContaModel {
 				throw new NullException("Nenhum item pode estar vazio");
 			}
 		}
-	}
-	public static final ContaModel getInstance() {
-		if (conta == null) {
-			conta = new ContaModel();
-		}
-		return conta;
 	}
 
 	public void atualizaConta(Conta c) throws ValorException, StringException, NullException {

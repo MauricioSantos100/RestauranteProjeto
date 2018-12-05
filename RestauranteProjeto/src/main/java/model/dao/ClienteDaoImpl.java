@@ -14,11 +14,8 @@ public class ClienteDaoImpl extends DAOImpl implements ClienteDao{
 		Cliente cliente = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {
-			mng.getTransaction().begin();
 			Query query = mng.createQuery("FROM Cliente where cpf = :cpf");
 			cliente = (Cliente) query.getSingleResult();
-		}catch (Exception e) {
-			mng.getTransaction().rollback();
 		} finally {
 			mng.close();
 		}
@@ -30,11 +27,8 @@ public class ClienteDaoImpl extends DAOImpl implements ClienteDao{
 		List<Cliente> cliente = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {
-			mng.getTransaction().begin();
 			Query query = mng.createQuery("FROM Cliente");
 			cliente = query.getResultList();
-		}catch (Exception e) {
-			mng.getTransaction().rollback();
 		} finally {
 			mng.close();
 		}
@@ -45,11 +39,8 @@ public class ClienteDaoImpl extends DAOImpl implements ClienteDao{
 		Cliente cliente = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {
-			mng.getTransaction().begin();
 			Query query = mng.createQuery("FROM Cliente where nome = :nome");
 			cliente = (Cliente) query.getSingleResult();
-		}catch (Exception e) {
-			mng.getTransaction().rollback();
 		} finally {
 			mng.close();
 		}

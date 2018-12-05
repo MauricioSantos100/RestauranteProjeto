@@ -16,8 +16,7 @@ public class LoginControl {
 	private String usuario;
 	private String senha;
 	private Pessoa pessoa;
-	@SuppressWarnings("unused")
-	private Usuario usuariologin = null;
+	private Usuario usuariologin;
 
 	public String getUsuario() {
 		return usuario;
@@ -39,9 +38,9 @@ public class LoginControl {
 		usuariologin = new Usuario();
 	}
 
-	public void logar(){
+	public void logar() {
 		FacesContext con = FacesContext.getCurrentInstance();
-		
+
 		if (this.usuario.equals(usuario) && this.senha.equals(senha)
 				|| this.usuario.equals("admin") && this.senha.equals("admin")) {
 			UsuarioModel cm = new UsuarioModel();
@@ -53,11 +52,12 @@ public class LoginControl {
 				e.printStackTrace();
 			}
 		} else {
-			//con.addMessage(null, new FacesMessage("falha ao entrar."));
+			// con.addMessage(null, new FacesMessage("falha ao entrar."));
 		}
 	}
+
 	private String tipo;
-	
+
 	public String getTipo() {
 		return tipo;
 	}
@@ -67,11 +67,11 @@ public class LoginControl {
 	}
 
 	public boolean temPermissao(String tipos) {
-			UsuarioModel cm = new UsuarioModel();
-			usuariologin = cm.tipo(tipos, pessoa);
-			if(this.tipo.equals(tipos)){
-				return true;
-			}
+
+		pessoa.setTipo("F");
+		if (pessoa.getTipo() == tipos) {
+			return true;
+		}
 		return false;
 	}
 
@@ -84,5 +84,5 @@ public class LoginControl {
 			e.printStackTrace();
 		}
 	}
- 
+
 }

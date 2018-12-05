@@ -14,11 +14,8 @@ public class EstoqueDaoImpl extends DAOImpl implements EstoqueDao{
 		Estoque estoque = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {
-			mng.getTransaction().begin();
 			Query query = mng.createQuery("FROM Estoque where nome = :nome");
 			estoque = (Estoque) query.getSingleResult();
-		}catch (Exception e) {
-			mng.getTransaction().rollback();
 		} finally {
 			mng.close();
 		}
@@ -30,11 +27,8 @@ public class EstoqueDaoImpl extends DAOImpl implements EstoqueDao{
 		List<Estoque> estoque = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {
-			mng.getTransaction().begin();
 			Query query = mng.createQuery("FROM Estoque");
 			estoque = query.getResultList();
-		}catch (Exception e) {
-			mng.getTransaction().rollback();
 		} finally {
 			mng.close();
 		}

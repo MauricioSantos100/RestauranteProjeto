@@ -14,11 +14,8 @@ public class ItemPedidoDaoImpl extends DAOImpl implements ItemPedidoDao {
 		ItemPedido itemPedido = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {
-			mng.getTransaction().begin();
 			Query query = mng.createQuery("FROM ItemPedido where cod_item = :codItem");
 			itemPedido = (ItemPedido) query.getSingleResult();
-		}catch (Exception e) {
-			mng.getTransaction().rollback();
 		} finally {
 			mng.close();
 		}
@@ -30,11 +27,8 @@ public class ItemPedidoDaoImpl extends DAOImpl implements ItemPedidoDao {
 		List<ItemPedido> itemPedido = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {
-			mng.getTransaction().begin();
 			Query query = mng.createQuery("FROM ItemPedido");
 			itemPedido = query.getResultList();
-		}catch (Exception e) {
-			mng.getTransaction().rollback();
 		} finally {
 			mng.close();
 		}
@@ -45,11 +39,8 @@ public class ItemPedidoDaoImpl extends DAOImpl implements ItemPedidoDao {
 		ItemPedido itemPedido = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {
-			mng.getTransaction().begin();
 			Query query = mng.createQuery("FROM ItemPedido where nome = :nome");
 			itemPedido = (ItemPedido) query.getSingleResult();
-		}catch (Exception e) {
-			mng.getTransaction().rollback();
 		} finally {
 			mng.close();
 		}

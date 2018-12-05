@@ -2,12 +2,17 @@ package controller;
 
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+
 import controller.util.FacesUtil;
 import model.ItemPedidoModel;
 import model.Entidades.ItemPedido;
 import model.Exception.JaExisteException;
 import model.Exception.NullException;
 
+@ManagedBean(name = "itemPedidoController")
+@RequestScoped
 public class ItemPedidoController {
 	private ItemPedido itemPedido;
 	private List<ItemPedido> listaItemPedido;
@@ -55,4 +60,5 @@ public class ItemPedidoController {
 		}
 		return "";
 	}
+
 }

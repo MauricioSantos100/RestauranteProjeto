@@ -12,11 +12,8 @@ public class PagamentoDinheiroDaoImpl extends DAOImpl implements PagamentoDinhei
 		PagamentoDinheiro pagamentoDinheiro = null;
 		EntityManager mng = JPAManager.getInstance().getEntityManager();
 		try {
-			mng.getTransaction().begin();
 			Query query = mng.createQuery("FROM pagamentoDinheiro where cod_pagamento = :codPagamento");
 			pagamentoDinheiro = (PagamentoDinheiro) query.getSingleResult();
-		}catch (Exception e) {
-			mng.getTransaction().rollback();
 		} finally {
 			mng.close();
 		}
