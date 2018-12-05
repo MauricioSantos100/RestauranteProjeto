@@ -17,7 +17,7 @@ public class CardapioDaoImpl extends DAOImpl implements CardapioDao {
 			Query query = mng.createQuery("FROM Cardapio where categoria = :categoria");
 			cardapio = (Cardapio) query.getSingleResult();
 		} finally {
-			mng.close();
+			mng.close(); 
 		}
 		return cardapio;
 	}
