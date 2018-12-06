@@ -6,6 +6,7 @@ import model.Entidades.Estoque;
 import model.Exception.JaExisteException;
 import model.Exception.NullException;
 import model.Exception.StringException;
+import model.Exception.ValorException;
 import model.dao.EstoqueDao;
 import model.dao.EstoqueDaoImpl;
 import model.util.Validacoes;
@@ -14,11 +15,15 @@ public class EstoqueModel {
 
 	private EstoqueDaoImpl dao = new EstoqueDaoImpl();
 
-	public void registraEstoque(Estoque e) throws StringException, JaExisteException, NullException {
+	public void registraEstoque(Estoque e) throws StringException, JaExisteException, NullException, ValorException {
 		if (e != null) {
 			if (!this.existe(e)) {
 				if (Validacoes.verificaString(e.getNome()) && Validacoes.verificaString(e.getUniMedida())) {
-					dao.insert(e);
+					if (Validacoes.verificaValor(e.getPrecoCusto())) {
+						dao.insert(e);
+					} else {
+						throw new ValorException("Valor ínvalido");
+					}
 				} else {
 					throw new StringException("Não digite números ou símbolos");
 				}
@@ -34,9 +39,13 @@ public class EstoqueModel {
 		dao.remove(e);
 	}
 
-	public void atualizaEstoque(Estoque e) throws StringException, NullException {
+	public void atualizaEstoque(Estoque e) throws StringException, NullException, ValorException {
 		if (Validacoes.verificaString(e.getNome()) && Validacoes.verificaString(e.getUniMedida())) {
-			dao.update(e);
+			if (Validacoes.verificaValor(e.getCodEstoque())) {
+				dao.update(e);
+			} else {
+				throw new ValorException("Valor ínvalido");
+			}
 		} else {
 			throw new StringException("Não digite números ou símbolos");
 		}

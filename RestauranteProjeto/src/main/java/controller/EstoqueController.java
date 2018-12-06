@@ -11,6 +11,7 @@ import model.Entidades.Estoque;
 import model.Exception.JaExisteException;
 import model.Exception.NullException;
 import model.Exception.StringException;
+import model.Exception.ValorException;
 
 @ManagedBean(name = "estoqueController")
 @RequestScoped
@@ -50,6 +51,8 @@ public class EstoqueController {
 			FacesUtil.adicionarMsgErro(ne.getMessage());
 		} catch (StringException se) {
 			FacesUtil.adicionarMsgErro(se.getMessage());
+		} catch (ValorException ve) {
+			FacesUtil.adicionarMsgErro(ve.getMessage());
 		}
 		return "PesquisaEstoque.xhtml?faces-redirect=true";
 	}
@@ -68,6 +71,8 @@ public class EstoqueController {
 			FacesUtil.adicionarMsgErro(ne.getMessage());
 		} catch (StringException se) {
 			FacesUtil.adicionarMsgErro(se.getMessage());
+		} catch (ValorException ve) {
+			FacesUtil.adicionarMsgErro(ve.getMessage());
 		}
 		return "PesquisaEstoque.xhtml?faces-redirect=true";
 	}

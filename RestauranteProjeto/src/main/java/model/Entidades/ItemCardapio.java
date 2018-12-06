@@ -3,7 +3,6 @@ package model.Entidades;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,50 +12,61 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "item_cardapio")
-public class ItemCardapio implements Serializable{
-	
+public class ItemCardapio implements Serializable {
+
 	private static final long serialVersionUID = -8066196187289652098L;
-	
-	@Id 
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cod_item")
 	private Integer codItem;
 	@Column(name = "nome", length = 30, nullable = false)
 	private String nome;
 	@Column(name = "preco", precision = 6, scale = 2, nullable = false)
 	private double preco;
-	/**/
+
 	@ManyToOne
 	@JoinColumn(name = "cod_cardapio")
 	private Cardapio cardapio = new Cardapio();
-	
+
 	@ManyToMany
 	private List<Pedido> pedido;
-	
-	@OneToMany(mappedBy = "itemCardapio", cascade = CascadeType.ALL)
+
+	@OneToMany(mappedBy = "itemCardapio")
 	private List<ItemPedido> ItemPedido;
-	
-	public ItemCardapio() {}
-	
+
+	@OneToOne
+	@JoinColumn(name = "cod_estoque")
+	private Estoque estoque;
+
+	public ItemCardapio() {
+	}
+
 	public Integer getCodItem() {
 		return codItem;
 	}
-	public void setCodItem(Integer codCardapio) {
-		this.codItem = codCardapio;
+
+	public void setCodItem(Integer codItem) {
+		this.codItem = codItem;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public double getPreco() {
 		return preco;
 	}
+
 	public void setPreco(double preco) {
 		this.preco = preco;
 	}
@@ -85,6 +95,14 @@ public class ItemCardapio implements Serializable{
 		ItemPedido = itemPedido;
 	}
 
+	public Estoque getEstoque() {
+		return estoque;
+	}
+
+	public void setEstoque(Estoque estoque) {
+		this.estoque = estoque;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -92,6 +110,7 @@ public class ItemCardapio implements Serializable{
 		result = prime * result + ((ItemPedido == null) ? 0 : ItemPedido.hashCode());
 		result = prime * result + ((cardapio == null) ? 0 : cardapio.hashCode());
 		result = prime * result + ((codItem == null) ? 0 : codItem.hashCode());
+		result = prime * result + ((estoque == null) ? 0 : estoque.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((pedido == null) ? 0 : pedido.hashCode());
 		long temp;
@@ -124,6 +143,11 @@ public class ItemCardapio implements Serializable{
 				return false;
 		} else if (!codItem.equals(other.codItem))
 			return false;
+		if (estoque == null) {
+			if (other.estoque != null)
+				return false;
+		} else if (!estoque.equals(other.estoque))
+			return false;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;
@@ -138,5 +162,5 @@ public class ItemCardapio implements Serializable{
 			return false;
 		return true;
 	}
-		
+
 }
