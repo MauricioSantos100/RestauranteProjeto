@@ -20,7 +20,7 @@ public class ClienteModel {
 	public void registraCliente(Cliente c)
 			throws JaExisteException, NullException, StringException, CpfException, TelefoneException, EmailException {
 		if (c != null) {
-			if (!this.existe(c)) {
+			
 				if (Validacoes.verificaString(c.getNome())) {
 					if (Validacoes.verificaCpf(c.getCpf())) {
 						if (Validacoes.verificaTelefone(c.getTelefone())) {
@@ -38,9 +38,7 @@ public class ClienteModel {
 				} else {
 					throw new StringException("Nome ou Usuario inválidos");
 				}
-			} else {
-				throw new JaExisteException("Este cliente já existe");
-			}
+			
 		} else {
 			throw new NullException("Nenhum item pode estar vazio");
 		}

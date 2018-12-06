@@ -2,6 +2,7 @@ package controller;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -38,6 +39,44 @@ public class VendaControl implements Serializable{
 	private ItemCardapioModel ic = new ItemCardapioModel();
 	private ItemPedidoModel ip = new ItemPedidoModel();
 	private PedidoModel pem = new PedidoModel();
+	
+	private List<ItemCardapio> itemCardapio = new ArrayList<ItemCardapio>();
+	private Double total = 0.;
+	private Integer quantidade = 0;
+
+	
+	public void adicionarProduto(ItemCardapio prod) {
+		this.itemCardapio.add(prod);
+		this.total += prod.getPreco();
+		quantidade++;
+	}
+	
+	public List<ItemCardapio> getItemCardapio() {
+		return itemCardapio;
+	}
+	
+	public void setItemCardapio(List<ItemCardapio> itemCardapio) {
+		this.itemCardapio = itemCardapio;
+	}
+	
+	public Double getTotal() {
+		return total;
+	}
+	
+	public void setTotal(Double total) {
+		this.total = total;
+	}
+
+	public Integer getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	
+
 
 	public Pedido getPedido() {
 		return pedido;
@@ -92,11 +131,11 @@ public class VendaControl implements Serializable{
 		this.pedidos = pedidos;
 	}
 	
-	public void adiciona(ActionEvent evento) {
+	
+	public void adicionar(ActionEvent evento) {
 		ItemCardapio itemcardapio = (ItemCardapio) evento.getComponent().getAttributes().get("produtoSelecionado");
 		
 		ItemPedido itempedido = new ItemPedido();
-		itempedido.setCodItemPedido(1);
 		itempedido.setQuantidade(1);
 		itempedido.setItemCardapio(itemcardapio);
 		

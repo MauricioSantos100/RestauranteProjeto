@@ -79,14 +79,16 @@
 						</p:column>
 		
 						<p:column headerText="Opções">
-							<p:commandButton icon="ui-icon-plus"
-								actionListener="#{vendaControl.adicionar}"
-								update=":formulario:tabelaCesta">
-								
+							<p:commandButton icon="ui-icon-cart" title="Comprar"
+								alt="Comprar" style="background:#00FF00"
+								actionListener="#{vendaControl.adicionarProduto(produto)}"
+								update=":frmMsg">
 							</p:commandButton>
 						</p:column>
 					</p:dataTable>
 				</p:panel>
+				
+				
 				<p:panel header="Cesta de Compras">
 					<p:dataTable id="tabelaCesta"
 						emptyMessage="Nenhum registro encontrado." paginator="true"
@@ -95,8 +97,6 @@
 						editable="true"
 						editMode="cell">
 						
-						<p:ajax event="cellEdit" oncomplete="rc()" />
-		
 						<p:column headerText="Nome">
 							<h:outputText value="#{itemPedido.itemCardapio.nome}" />
 						</p:column>
@@ -125,16 +125,25 @@
 							</h:outputText>
 						</p:column>
 		-->
+						
 						<p:column headerText="Opções">	
 							<p:commandButton icon="ui-icon-minus"
-								actionListener="#{vendaControl.remover}"
-								update=":formulario:tabelaCesta :formulario:painelFinalizacao">
+								
+								update=":formulario:tabelaCesta">
 								<f:attribute name="itemSelecionado" value="#{itemPedido}" />
 							</p:commandButton>
 						</p:column>
 					</p:dataTable>
 				</p:panel>
 			</h:form >
+			
+			<h:form id="frmMsg">
+					<label>Quantidade:</label>
+					<h:outputLabel value="#{vendaControl.quantidade}" />
+					<br />
+					<label>Preço total:</label>
+					<h:outputLabel value="#{vendaControl.total}" />
+				</h:form>
 		</ui:define>
 	</ui:composition>
 </h:body>
