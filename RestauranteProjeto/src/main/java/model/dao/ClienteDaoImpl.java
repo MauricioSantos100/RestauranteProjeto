@@ -4,23 +4,12 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import model.Entidades.Cliente;
 import model.dao.util.JPAManager;
 
 public class ClienteDaoImpl extends DAOImpl implements ClienteDao{
-
-	public Cliente buscarPorCpf(String cpf) {
-		Cliente cliente = null;
-		EntityManager mng = JPAManager.getInstance().getEntityManager();
-		try {
-			Query query = mng.createQuery("FROM Cliente where cpf = :cpf");
-			cliente = (Cliente) query.getSingleResult();
-		} finally {
-			mng.close();
-		}
-		return cliente;
-	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Cliente> ListarTodos(){
@@ -35,15 +24,11 @@ public class ClienteDaoImpl extends DAOImpl implements ClienteDao{
 		return cliente;
 	}
 
-	public Cliente buscarPorNome(String nome){
-		Cliente cliente = null;
-		EntityManager mng = JPAManager.getInstance().getEntityManager();
-		try {
-			Query query = mng.createQuery("FROM Cliente where nome = :nome");
-			cliente = (Cliente) query.getSingleResult();
-		} finally {
-			mng.close();
-		}
+	public Cliente consultarPorCpf(String cpf) {
+		TypedQuery<Cliente> query = manager.createQuery("SELECT c FROM Cliente c WHERE c.cpf = :cpf",
+				Cliente.class);
+		query.setParameter("cpf", cpf);
+		Cliente cliente = query.getSingleResult();
 		return cliente;
 	}
 }

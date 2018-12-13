@@ -17,7 +17,6 @@ public class LoginControl {
 	private String senha;
 	private Pessoa pessoa;
 	private Usuario usuariologin;
-
 	public String getUsuario() {
 		return usuario;
 	}
@@ -47,7 +46,11 @@ public class LoginControl {
 			usuariologin = cm.autenticar(usuario, senha);
 			con.getExternalContext().getSessionMap().put("user", usuario);
 			try {
-				con.getExternalContext().redirect("Inicio.xhtml");
+				if(usuariologin.getTipo() == 1) {
+					con.getExternalContext().redirect("cliente/Mesa.xhtml");
+				} else {
+					con.getExternalContext().redirect("funcionario/PesquisaCardapio.xhtml");
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -55,31 +58,22 @@ public class LoginControl {
 			// con.addMessage(null, new FacesMessage("falha ao entrar."));
 		}
 	}
+	
+	private int tipo;
 
-	private String tipo;
-
-	public String getTipo() {
+	public int getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(String tipo) {
+	public void setTipo(int tipo) {
 		this.tipo = tipo;
-	}
-
-	public boolean temPermissao(String tipos) {
-
-		pessoa.setTipo("F");
-		if (pessoa.getTipo() == tipos) {
-			return true;
-		}
-		return false;
 	}
 
 	public void deslogar() {
 		FacesContext con = FacesContext.getCurrentInstance();
 		con.getExternalContext().invalidateSession();
 		try {
-			con.getExternalContext().redirect("Inicio.xhtml");
+			con.getExternalContext().redirect("/RestauranteProjeto/Inicio.xhtml");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

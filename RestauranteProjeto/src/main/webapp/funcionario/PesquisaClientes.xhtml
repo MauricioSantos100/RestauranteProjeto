@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="TemplateF.xhtml">
+	<ui:define name="content">
+		<h:form id="tabela">
+			<p:dataTable emptyMessage="Nenhum registro encontrado."
+				id="clientes"
+				value="#{clienteController.listaCliente}"
+				rows="5"
+				paginator="true"
+				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink}"
+				paginatorPosition="bottom"
+				var="c">
+				<f:facet name="header">
+		            <p:commandButton value="Novo" icon="fa fa-plus" type="button" onclick="PF('cadastro').show();" ></p:commandButton>
+		        </f:facet>
+				<p:column headerText="Código" width="80">
+					<h:outputText value="#{c.codPessoa}" />
+				</p:column>
+				<p:column headerText="Nome" filterBy="#{c.nome}" sortBy="#{c.nome}">
+					<h:outputText value="#{c.nome}" />
+				</p:column>
+				<p:column headerText="CPF" filterBy="#{c.cpf}">
+					<h:outputText value="#{c.cpf}" />
+				</p:column>
+				<p:column headerText="Email">
+					<h:outputText value="#{c.email}" />
+				</p:column>
+				<p:column headerText="Telefone">
+					<h:outputText value="#{c.telefone}" />
+				</p:column>
+				<p:column headerText="Opcões">
+					<p:commandButton action="Editar" icon="fa fa-fw fa-edit" value="Editar" update=":dialogalterar" oncomplete="PF('editar').show();">
+						<f:setPropertyActionListener target="#{clienteController.cliente}" value="#{c}" />
+					</p:commandButton>
+					<p:commandButton icon="fa fa-fw fa-remove" action="#{clienteController.excluir(c)}" value="Excluir" update=":msgGlobal :tabela">
+						<p:confirm  message="Deseja excluir #{c.nome} ?" icon="fa fa-trash" />
+					</p:commandButton>
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+				        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-close" />
+				    </p:confirmDialog>   
+				</p:column>
+			</p:dataTable>
+		</h:form>
+			
+		<p:dialog header="Novo Cliente" widgetVar="cadastro" modal="true" showEffect="clip" >
+			<h:form>
+			    <p:panelGrid columns="2" styleClass="ui-noborder">
+					<p:outputLabel for="nome" value="Nome"/>
+	       			<p:inputText id="nome" value="#{clienteController.cliente.nome}"/>
+	       			<p:outputLabel for="email" value="E-mail"/>
+	       			<p:inputText id="email" value="#{clienteController.cliente.email}"/>
+	       			<p:outputLabel for="cpf" value="CPF"/>
+	       			<p:inputMask id="cpf" value="#{clienteController.cliente.cpf}" mask="999.999.999-99" converter="convertInput"/>
+					<p:outputLabel for="telefone" value="Telefone"/>
+	       			<p:inputMask id="telefone" value="#{clienteController.cliente.telefone}" mask="(99) 99999-9999"/>
+					<p:outputLabel for="usuario" value="Usuario"/>
+	       			<p:inputText id="usuario" value="#{clienteController.usuario.login}"/>
+	       			<p:outputLabel for="senha" value="Senha"/>
+	       			<p:password id="senha" match="senha2" label="Senha" required="true"></p:password>
+	       			<p:outputLabel for="senha2" value="Confirme a senha"/>
+	       			<p:password id="senha2" value="#{clienteController.usuario.senha}" label="Senha2" required="true" requiredMessage="Digite a senha"></p:password>
+				</p:panelGrid>
+				<div style="display:flex; justify-content:center; align-items:center;">
+					<p:commandButton value="Salvar" icon="fa fa-check" action="#{clienteController.salvar}" update=":msgGlobal :tabela" oncomplete="PF('cadastro').hide();">
+						<f:ajax render="@form" resetValues="true"/>
+					</p:commandButton>
+				</div>
+			</h:form>
+		</p:dialog>
+		
+		<p:dialog header="Editar Cliente" widgetVar="editar" modal="true" showEffect="clip" id="dialogalterar">
+			<h:form>
+			    <p:panelGrid columns="2" styleClass="ui-noborder">
+					<p:outputLabel for="nome" value="Nome"/>
+	       			<p:inputText id="nome" value="#{clienteController.cliente.nome}"/>
+	       			<p:outputLabel for="email" value="E-mail"/>
+	       			<p:inputText id="email" value="#{clienteController.cliente.email}"/>
+	       			<p:outputLabel for="cpf" value="CPF"/>
+	       			<p:inputMask id="cpf" value="#{clienteController.cliente.cpf}" mask="999.999.999-99" converter="convertInput"/>
+					<p:outputLabel for="telefone" value="Telefone"/>
+	       			<p:inputMask id="telefone" value="#{clienteController.cliente.telefone}" mask="(99) 99999-9999"/>
+					<p:outputLabel for="usuario" value="Usuario"/>
+	       			<p:inputText id="usuario" value="#{clienteController.usuario.login}"/>
+	       			<p:outputLabel for="senha" value="Senha"/>
+	       			<p:password id="senha" match="senha2" label="Senha" required="true"></p:password>
+	       			<p:outputLabel for="senha2" value="Confirme a senha"/>
+	       			<p:password id="senha2" value="#{clienteController.usuario.senha}" label="Senha2" required="true" requiredMessage="Digite a senha"></p:password>
+				</p:panelGrid>
+				<div style="display:flex; justify-content:center; align-items:center;">
+					<p:commandButton value="Salvar" icon="fa fa-check" action="#{clienteController.editar}" update=":msgGlobal :tabela" oncomplete="PF('editar').hide();"/>
+				</div>
+			</h:form>
+		</p:dialog>		
+	</ui:define>
+</ui:composition>
+</html>

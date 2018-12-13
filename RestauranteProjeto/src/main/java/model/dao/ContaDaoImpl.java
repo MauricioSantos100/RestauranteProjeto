@@ -10,18 +10,6 @@ import model.dao.util.JPAManager;
 
 public class ContaDaoImpl extends DAOImpl implements ContaDao{
 
-	public Conta buscarPorCodConta(int codConta) {
-		Conta conta = null;
-		EntityManager mng = JPAManager.getInstance().getEntityManager();
-		try {
-			Query query = mng.createQuery("FROM Conta where cod_conta = :codconta");
-			conta = (Conta) query.getSingleResult();
-		} finally {
-			mng.close();
-		}
-		return conta;
-	}
-	
 	@SuppressWarnings("unchecked")
 	public List<Conta> listarTodos(){
 		List<Conta> conta = null;

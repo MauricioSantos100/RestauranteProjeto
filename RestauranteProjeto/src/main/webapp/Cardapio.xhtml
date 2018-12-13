@@ -22,34 +22,47 @@
 				<div class="body">
 					<ul class="categoria">
 						<li> 
-						<h3><a>Nome do cardapio</a></h3>
-						
-						<ui:repeat value="#{cardapioController.listaCardapio}" var="car">
-							<h:outputText value="#{car.categoria}"/>
-						</ui:repeat>
-							<ul class="produto">
-								<ui:repeat value="#{itemCardapioController.listaItemCardapio}" var="icar">
-									  
+							<ui:repeat value="#{itemCardapioController.listaItemCardapio}" var="icar" varStatus="loop">
+							<h3><a>#{icar.cardapio.categoria}</a></h3>
+								<ul class="produto">
 									<li>
 										<div class="prod">
-										<h:outputText  value="#{icar.cardapio.categoria}"/>
 											<div class="nome">
 												<h:outputText  value="#{icar.nome}"/>
 											</div>
 											<div class="preco">
-												<h:outputText value="R$#{icar.preco}" converter="javax.faces.Number" />
+												<h:outputText value="R$#{icar.preco}0" converter="javax.faces.Number" />
 											</div>
 										</div>
 									</li>
-								</ui:repeat>
-							</ul>
+								</ul>
+							</ui:repeat>
 						</li>
 					</ul>
 					* O cardápio está sujeito a alterações sem aviso prévio. O Web Restaurante não garante o valor ou a disponibilidade dos itens.
 				</div>
 			</div>
 		</div>
-
 	</ui:define>
+	<div id="rodape">
+		<ui:insert name="rodape">
+			<h:form>
+				<footer class="footer">
+	
+					<h:graphicImage value="Imagens/logo1.png" alt="logo" class="logo2" />
+					<ul class="menuRodape">
+						<li><a href="Inicio.xhtml">INICIO</a></li>
+						<li><a href="Cardapio.xhtml">CARDAPIO</a></li>
+						<li><a href="Cardapio.xhtml">CONTATO</a></li>
+						<li><a href="Sobre.xhtml">SOBRE</a></li>
+						<li><a href="Cardapio.xhtml">LOCALIZAÇÃO</a></li>
+					</ul>
+					<p>© COPYRIGHT 2018 WEB RESTAURANTE - TODOS OS DIREITOS
+						RESERVADOS.</p>
+				</footer>
+			</h:form>
+		</ui:insert>
+	</div>
+	
 </ui:composition>
 </html>

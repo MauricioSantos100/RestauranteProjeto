@@ -5,15 +5,16 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import model.Entidades.ItemPedido;
 import model.dao.util.JPAManager;
 
-public class DAOImpl implements DAO<Object>{
+public class DAOImpl implements DAO<Object> {
 
 	EntityManager manager = JPAManager.getInstance().getEntityManager();
-	
+
 	public void insert(Object obj) {
-		try  {
-			manager.getTransaction().begin();		
+		try {
+			manager.getTransaction().begin();
 			manager.persist(obj);
 			manager.getTransaction().commit();
 		} catch (Exception e) {
@@ -23,12 +24,26 @@ public class DAOImpl implements DAO<Object>{
 		}
 	}
 
-	public void update(Object obj) {		
-		try  {
-			manager.getTransaction().begin();		
+	public void insertItens(List<ItemPedido> itensPedido) throws Exception {
+		try {
+			manager.getTransaction().begin();
+			for (Object o : itensPedido) {
+				manager.persist(o);
+			}
+			manager.getTransaction().commit();
+		} catch (Exception e) {
+			manager.getTransaction().rollback();
+		} finally {
+			manager.close();
+		}
+	}
+
+	public void update(Object obj) {
+		try {
+			manager.getTransaction().begin();
 			manager.merge(obj);
 			manager.getTransaction().commit();
-			
+
 		} catch (Exception e) {
 			manager.getTransaction().rollback();
 		} finally {
@@ -37,11 +52,11 @@ public class DAOImpl implements DAO<Object>{
 	}
 
 	public void remove(Object obj) {
-		try  {
-			manager.getTransaction().begin();		
+		try {
+			manager.getTransaction().begin();
 			manager.remove(manager.merge(obj));
 			manager.getTransaction().commit();
-			
+
 		} catch (Exception e) {
 			manager.getTransaction().rollback();
 		} finally {
@@ -65,7 +80,7 @@ public class DAOImpl implements DAO<Object>{
 		}
 		return obj;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Object> findALL() {
 		List<Object> lista = null;
@@ -76,5 +91,5 @@ public class DAOImpl implements DAO<Object>{
 		}
 		return lista;
 	}
-	
+
 }

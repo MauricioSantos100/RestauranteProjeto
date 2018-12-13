@@ -65,44 +65,48 @@
 				<p:panel header="Produtos">
 					<p:dataTable id="tabelaProduto"
 						emptyMessage="Nenhum registro encontrado." paginator="true"
-						value="#{vendaControl.itensCardapio}" var="produto" rows="5"
+						value="#{vendaControl.listaCardapio}" var="itemCardapio" rows="5"
 						paginatorPosition="bottom">
 		
-						<p:column headerText="Nome" filterBy="#{produto.nome}"
-							sortBy="#{produto.nome}">
-							<h:outputText value="#{produto.nome}" />
+						<p:column headerText="Nome" filterBy="#{itemCardapio.nome}"
+							sortBy="#{itemCardapio.nome}">
+							<h:outputText value="#{itemCardapio.nome}" />
 						</p:column>		
-						<p:column headerText="Preço" sortBy="#{produto.preco}">
-							<h:outputText value="#{produto.preco}">
+						<p:column headerText="Preço" sortBy="#{itemCardapio.preco}">
+							<h:outputText value="#{itemCardapio.preco}">
 								<f:convertNumber locale="pt_BR" minFractionDigits="2" />
 							</h:outputText>
+						</p:column>
+						<p:column headerText="Qtde.">			
+							<p:spinner value="#{vendaControl.quantidade}" />
 						</p:column>
 		
 						<p:column headerText="Opções">
 							<p:commandButton icon="ui-icon-cart" title="Comprar"
 								alt="Comprar" style="background:#00FF00"
-								actionListener="#{vendaControl.adicionarProduto(produto)}"
-								update=":frmMsg">
+								actionListener="#{vendaControl.adicionarProduto}"
+								update=":formulario :frmMsg :frmMsga">
+								<f:setPropertyActionListener value="#{itemCardapio}" target="#{vendaControl.itemCardapio}"></f:setPropertyActionListener>
 							</p:commandButton>
 						</p:column>
 					</p:dataTable>
 				</p:panel>
-				
-				
+				</h:form >
+				<h:form id="frmMsg">
 				<p:panel header="Cesta de Compras">
 					<p:dataTable id="tabelaCesta"
 						emptyMessage="Nenhum registro encontrado." paginator="true"
-						value="#{vendaControl.itensPedido}" var="itemPedido" rows="5"
+						value="#{vendaControl.itemCardapio}" var="itemPedido" rows="5"
 						paginatorPosition="bottom"
 						editable="true"
 						editMode="cell">
 						
 						<p:column headerText="Nome">
-							<h:outputText value="#{itemPedido.itemCardapio.nome}" />
+							<h:outputText value="#{itemPedido.nome}" />
 						</p:column>
 		
 						<p:column headerText="Preço Un.">
-							<h:outputText value="#{itemPedido.itemCardapio.preco}">
+							<h:outputText value="#{itemPedido.preco}">
 								<f:convertNumber locale="pt_BR" minFractionDigits="2" />
 							</h:outputText>
 						</p:column>
@@ -110,10 +114,10 @@
 						<p:column headerText="Qtde.">
 							<p:cellEditor>
 								<f:facet name="output">
-									<h:outputText value="#{itemPedido.quantidade}" />
+									<h:outputText value="#{itemPedido.estoque.quantidade}" />
 								</f:facet>
 								<f:facet name="input">
-									<p:inputText value="#{itemPedido.quantidade}" />
+									<p:inputText value="#{itemPedido.estoque.quantidade}" />
 								</f:facet>
 							</p:cellEditor>
 							
@@ -127,17 +131,15 @@
 		-->
 						
 						<p:column headerText="Opções">	
-							<p:commandButton icon="ui-icon-minus"
+							<p:commandButton icon="ui-icon-minus">
 								
-								update=":formulario:tabelaCesta">
-								<f:attribute name="itemSelecionado" value="#{itemPedido}" />
 							</p:commandButton>
 						</p:column>
 					</p:dataTable>
 				</p:panel>
 			</h:form >
 			
-			<h:form id="frmMsg">
+			<h:form id="frmMsga">
 					<label>Quantidade:</label>
 					<h:outputLabel value="#{vendaControl.quantidade}" />
 					<br />

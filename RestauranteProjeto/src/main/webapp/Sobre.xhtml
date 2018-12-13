@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<ui:composition template="Template.xhtml">
+	<ui:define name="content">
+		<link type="text/css" rel="stylesheet" href="resources/css/Sobre.css" />
+		<h:outputStylesheet library="css" name="Sobre.css"></h:outputStylesheet>
+		<div id="sobre">
+			<div class="center">
+				<div class="bg"></div>
+				<div class="bloco">
+					<div style="display: table-cell;">
+						<h1>Sobre o Web Restaurante</h1>
+						<p>Tudo começou em 2007, com a abertura do primeiro Web
+							Restaurante em Turim, na Itália. Deu tão certo, que hoje são 38
+							lojas pelo mundo, espalhando as delícias e as tradições da
+							gastronomia mundial.</p>
+							<br></br>
+						<p>O cardápio inclui porções bem generosas, sendo oito
+							variedades de steaks, opções de peixe, camarão, frango, carne
+							suína, cordeiro, massas, sanduíches, sopas e saladas. Há também
+							uma seleção de pratos especiais para crianças até 12 anos. Além
+							disso, nossos aperitivos e sobremesas "para compartilhar" são
+							realmente um grande diferencial em sabor e valor agregado.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+	<div id="rodape">
+		<ui:insert name="rodape">
+			<h:form>
+				<footer class="footer">
+
+					<h:graphicImage value="Imagens/logo1.png" alt="logo" class="logo2" />
+					<ul class="menuRodape">
+						<li><a href="Inicio.xhtml">INICIO</a></li>
+						<li><a href="Cardapio.xhtml">CARDAPIO</a></li>
+						<li><a href="Cardapio.xhtml">CONTATO</a></li>
+						<li><a href="Cardapio.xhtml">SOBRE</a></li>
+						<li><a href="Cardapio.xhtml">LOCALIZAÇÃO</a></li>
+					</ul>
+					<p>© COPYRIGHT 2018 WEB RESTAURANTE - TODOS OS DIREITOS
+						RESERVADOS.</p>
+				</footer>
+			</h:form>
+		</ui:insert>
+	</div>
+
+</ui:composition>
+</html>

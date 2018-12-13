@@ -10,7 +10,7 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<welcome-file-list>
-		<welcome-file>Template.xhtml</welcome-file>
+		<welcome-file>Inicio.xhtml</welcome-file>
 	</welcome-file-list>
 	<session-config>
 		<session-timeout>60</session-timeout>
@@ -18,12 +18,10 @@
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
-		<url-pattern>/faces/*</url-pattern>
 	</servlet-mapping>
-
 	<context-param>
 		<param-name>primefaces.FONT_AWESOME</param-name>
 		<param-value>true</param-value>
 	</context-param>
-	
+
 </web-app>

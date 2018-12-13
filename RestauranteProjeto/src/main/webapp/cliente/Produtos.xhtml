@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="TemplateC.xhtml">
+		<ui:define name="content">
+			<link type="text/css" rel="stylesheet" href="resources/css/Mesa.css" />
+			<h:outputStylesheet library="css" name="Mesa.css"></h:outputStylesheet>
+			<div class="passos">
+				<p:steps activeIndex="1" styleClass="custom" readonly="false">
+					<p:menuitem value="Seleção da mesa" url="Mesa.xhtml" />
+					<p:menuitem value="Seleção produtos" url="Produtos.xhtml" />
+					<p:menuitem value="Carrinho" url="#" />
+					<p:menuitem value="Pagamento" url="#" />
+				</p:steps>
+			</div>
+			<h:form id="frmvencad">
+				<p:dataTable emptyMessage="Nenhum Registro Cadastrado"
+					value="#{vendaController.listaCardapio}" var="cardapio" rows="4"
+					paginator="true" paginatorPosition="bottom" editable="true"
+					editMode="cell">
+					<p:column headerText="Código">
+						<h:outputText value="#{cardapio.codItem}" />
+					</p:column>
+					<p:column headerText="Nome" filterBy="#{cardapio.nome}"
+						sortBy="#{cardapio.nome}">
+						<h:outputText value="#{cardapio.nome}" />
+					</p:column>
+					<p:column headerText="Preço">
+						<h:outputText value="#{cardapio.preco}" />
+					</p:column>
+					<p:column headerText="Qtde.">
+						<p:spinner min="1" value="#{vendaController.quantidade}" />
+					</p:column>
+					<p:column headerText="Opções">
+						<p:commandButton icon="ui-icon-plus"
+							actionListener="#{vendaController.adicionar(cardapio)}"
+							update=":msgGlobal">
+						</p:commandButton>
+					</p:column>
+			        <f:facet name="paginatorBottomRight">
+			        	<p:commandButton value="Proximo" styleClass="botao" action="#{vendaController.Carrinho}"/>
+			        </f:facet>
+				</p:dataTable>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

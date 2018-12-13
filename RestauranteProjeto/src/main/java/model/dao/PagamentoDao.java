@@ -6,5 +6,4 @@ import model.Entidades.Pagamento;
 
 public interface PagamentoDao {
 	public List<Pagamento> listarTodos();
-	public Pagamento buscarPorCodPagamento(int codPagamento);
 }

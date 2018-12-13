@@ -4,24 +4,12 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import model.Entidades.Funcionario;
 import model.dao.util.JPAManager;
 
 public class FuncionarioDaoImpl extends DAOImpl implements FuncionarioDao{
-
-	public Funcionario buscarPorCpf(String cpf) {
-		Funcionario funcionario = null;
-		EntityManager mng = JPAManager.getInstance().getEntityManager();
-		try {
-			Query query = mng.createQuery("FROM Funcionario where cpf = :cpf");
-			funcionario = (Funcionario) query.getSingleResult();
-		} finally {
-			mng.close();
-		}
-		return funcionario;
-	}
-	
 	
 	@SuppressWarnings("unchecked")
 	public List<Funcionario> listarTodos(){
@@ -35,18 +23,12 @@ public class FuncionarioDaoImpl extends DAOImpl implements FuncionarioDao{
 		}
 		return funcionario;
 	}
-
-
-	public Funcionario buscarPorNome(String nome) {
-		Funcionario funcionario = null;
-		EntityManager mng = JPAManager.getInstance().getEntityManager();
-		try {
-			Query query = mng.createQuery("FROM Funcionario where nome = :nome");
-			funcionario = (Funcionario) query.getSingleResult();
-		} finally {
-			mng.close();
-		}
+	
+	public Funcionario consultarPorCpf(String cpf) {
+		TypedQuery<Funcionario> query = manager.createQuery("SELECT f FROM Funcionario f WHERE f.cpf = :cpf",
+				Funcionario.class);
+		query.setParameter("cpf", cpf);
+		Funcionario funcionario = query.getSingleResult();
 		return funcionario;
 	}
-	
 }

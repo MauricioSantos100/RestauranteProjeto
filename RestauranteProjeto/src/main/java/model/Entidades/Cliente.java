@@ -17,8 +17,7 @@ public class Cliente extends Pessoa implements Serializable{
 
 	private static final long serialVersionUID = 7126712513942445970L;
 	
-
-	@OneToMany(mappedBy = "cliente")
+	@OneToMany(mappedBy = "cliente" )
 	private List<Pedido> Pedido;
 	
 	public Cliente() {

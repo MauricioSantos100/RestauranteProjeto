@@ -34,8 +34,5 @@ public class SecurityFilter implements Filter {
 		} else {
 			resposta.sendRedirect(loginURI);
 		}
-		
-		
-	}
-
+    }
 }

@@ -23,6 +23,7 @@ public class ClienteController {
 	private Cliente cliente;
 	private Usuario usuario;
 	private List<Cliente> listaCliente;
+	private List<Usuario> listaUsuario;
 	private ClienteModel cm = new ClienteModel();
 	UsuarioController uc = new UsuarioController();
 
@@ -51,17 +52,25 @@ public class ClienteController {
 		this.listaCliente = listaCliente;
 	}
 	
+	public List<Usuario> getListausuario() {
+		listaUsuario = uc.getListaUsuario();
+		return listaUsuario;
+	}
+
+	public void setListausuario(List<Usuario> listausuario) {
+		this.listaUsuario = listausuario;
+	}
+
 	public ClienteController() {
 		this.usuario = new Usuario();
 		this.cliente = new Cliente();
 	}
 
-	public String salvar() {
+	public void salvar() {
 		try {
-			cliente.setTipo("C");
+			usuario.setTipo(1);
 			uc.salvar(this.usuario);
 			cm.registraCliente(this.cliente);
-			FacesUtil.adicionarMsgInfo("Cliente Salvo com Sucesso.");
 		} catch (JaExisteException ee) {
 			FacesUtil.adicionarMsgErro(ee.getMessage());
 		} catch (NullException ne) {
@@ -75,42 +84,18 @@ public class ClienteController {
 		} catch (TelefoneException te) {
 			FacesUtil.adicionarMsgErro(te.getMessage());
 		}
-		return "Inicio.xhtml?faces-redirect=true";
 	}
 
-	public String salvar2() {
-		try {
-			cliente.setTipo("C");
-			uc.salvar2(this.usuario);
-			cm.registraCliente(this.cliente);
-			FacesUtil.adicionarMsgInfo("Cliente Salvo com Sucesso.");
-		} catch (JaExisteException ee) {
-			FacesUtil.adicionarMsgErro(ee.getMessage());
-		} catch (NullException ne) {
-			FacesUtil.adicionarMsgErro(ne.getMessage());
-		} catch (StringException se) {
-			FacesUtil.adicionarMsgErro(se.getMessage());
-		} catch (EmailException eex) {
-			FacesUtil.adicionarMsgErro(eex.getMessage());
-		} catch (CpfException ce) {
-			FacesUtil.adicionarMsgErro(ce.getMessage());
-		} catch (TelefoneException te) {
-			FacesUtil.adicionarMsgErro(te.getMessage());
-		}
-		return "PesquisaCliente.xhtml?faces-redirect=true";
-	}
-
-	public String excluir(Cliente c) {
+	public void excluir(Cliente c) {
 		uc.excluir(this.usuario);
 		cm.removeCliente(c);
 		FacesUtil.adicionarMsgInfo("Cliente excluido.");
-		return "PesquisaCliente.xhtml?faces-redirect=true";
 	}
 
 	public String editar() throws SQLException {
 		try {
+			usuario.setTipo(1);
 			uc.editar(this.usuario);
-			cliente.setTipo("C");
 			cm.atualizaCliente(this.cliente);
 			FacesUtil.adicionarMsgInfo("Cliente alterado.");
 		} catch (StringException se) {
@@ -124,6 +109,6 @@ public class ClienteController {
 		} catch (NullException ne) {
 			FacesUtil.adicionarMsgErro(ne.getMessage());
 		}
-		return "PesquisaCliente.xhtml?faces-redirect=true";
+		return "";
 	}
 }

@@ -6,5 +6,4 @@ import model.Entidades.Conta;
 
 public interface ContaDao {
 	public List<Conta> listarTodos();
-	public Conta buscarPorCodConta(int codConta);
 }

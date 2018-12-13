@@ -6,5 +6,4 @@ import model.Entidades.Entrega;
 
 public interface EntregaDao {
 	public List<Entrega> listarTodos();
-	public Entrega buscarPorCodEntrega(int codEntrega);
 }

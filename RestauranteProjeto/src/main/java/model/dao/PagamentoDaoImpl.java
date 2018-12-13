@@ -22,16 +22,4 @@ public class PagamentoDaoImpl extends DAOImpl implements PagamentoDao {
 		}
 		return pagamento;
 	}
-
-	public Pagamento buscarPorCodPagamento(int codPagamento) {
-		Pagamento pagamento = null;
-		EntityManager mng = JPAManager.getInstance().getEntityManager();
-		try {
-			Query query = mng.createQuery("FROM Pagamento where cod_pagamento = :codPagamento");
-			pagamento = (Pagamento) query.getSingleResult();
-		} finally {
-			mng.close();
-		}
-		return pagamento;
-	}
 }

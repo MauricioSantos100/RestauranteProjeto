@@ -8,7 +8,6 @@ import javax.faces.bean.RequestScoped;
 import controller.util.FacesUtil;
 import model.ItemPedidoModel;
 import model.Entidades.ItemPedido;
-import model.Exception.JaExisteException;
 import model.Exception.NullException;
 
 @ManagedBean(name = "itemPedidoController")
@@ -35,12 +34,10 @@ public class ItemPedidoController {
 		this.listaItemPedido = listaItemPedido;
 	}
 
-	public void salvar(ItemPedido ip) {
+	public void salvar(ItemPedido ip) throws Exception {
 		try {
-			ipm.registraItemPedido(ip);
+			ipm.registraItemPedido((List<ItemPedido>) ip);
 			FacesUtil.adicionarMsgInfo("Item pedido Salvo com Sucesso.");
-		} catch (JaExisteException ee) {
-			FacesUtil.adicionarMsgErro(ee.getMessage());
 		} catch (NullException ne) {
 			FacesUtil.adicionarMsgErro(ne.getMessage());
 		}

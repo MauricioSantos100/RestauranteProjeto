@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -24,7 +25,7 @@ import javax.persistence.TemporalType;
 public class Pedido implements Serializable {
 
 	private static final long serialVersionUID = -4639976277352565939L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cod_pedido")
@@ -36,40 +37,32 @@ public class Pedido implements Serializable {
 	private Date data;
 	@Column(name = "status", length = 10, nullable = false)
 	private String status;
-	
-	@OneToOne
+
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cod_pessoa", referencedColumnName = "cod_pessoa")
 	private Cliente cliente;
 
-	@ManyToOne//onetomany
+	@ManyToOne // onetomany
 	@JoinColumn(name = "cod_conta", referencedColumnName = "cod_conta")
 	private Conta conta;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Entrega entrega;
 
-	@JoinTable(name = "pedido_itemcardapio",
-			joinColumns = {@JoinColumn(
-					name = "cod_pedido",
-					referencedColumnName = "cod_pedido")},
-			inverseJoinColumns = {@JoinColumn(
-					name = "cod_item",
-					referencedColumnName = "cod_item")})
+	@JoinTable(name = "pedido_itemcardapio", joinColumns = {
+			@JoinColumn(name = "cod_pedido", referencedColumnName = "cod_pedido") }, inverseJoinColumns = {
+					@JoinColumn(name = "cod_item", referencedColumnName = "cod_item") })
 	@ManyToMany
 	private List<ItemCardapio> itemcardapio;
-	
-	@JoinTable(name = "pedido_funcionario",
-			joinColumns = {@JoinColumn(
-					name = "cod_pedido",
-					referencedColumnName = "cod_pedido")},
-			inverseJoinColumns = {@JoinColumn(
-					name = "cod_pessoa",
-					referencedColumnName = "cod_pessoa")})
+
+	@JoinTable(name = "pedido_funcionario", joinColumns = {
+			@JoinColumn(name = "cod_pedido", referencedColumnName = "cod_pedido") }, inverseJoinColumns = {
+					@JoinColumn(name = "cod_pessoa", referencedColumnName = "cod_pessoa") })
 	@ManyToMany
 	private List<Funcionario> funcionario;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	private ItemPedido itempedido;
+
+	@OneToMany(mappedBy = "pedido")
+	private List<ItemPedido> itempedido;
 
 	public Pedido() {
 	}
@@ -106,6 +99,14 @@ public class Pedido implements Serializable {
 		this.status = status;
 	}
 
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
 	public Conta getConta() {
 		return conta;
 	}
@@ -136,6 +137,14 @@ public class Pedido implements Serializable {
 
 	public void setFuncionario(List<Funcionario> funcionario) {
 		this.funcionario = funcionario;
+	}
+
+	public List<ItemPedido> getItempedido() {
+		return itempedido;
+	}
+
+	public void setItempedido(List<ItemPedido> itempedido) {
+		this.itempedido = itempedido;
 	}
 
 	@Override
@@ -216,5 +225,5 @@ public class Pedido implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 }

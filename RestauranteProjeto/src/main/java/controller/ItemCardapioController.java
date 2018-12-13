@@ -10,7 +10,6 @@ import model.ItemCardapioModel;
 import model.Entidades.ItemCardapio;
 import model.Exception.JaExisteException;
 import model.Exception.NullException;
-import model.Exception.StringException;
 import model.Exception.ValorException;
 
 @ManagedBean(name = "itemCardapioController")
@@ -50,17 +49,14 @@ public class ItemCardapioController {
 			FacesUtil.adicionarMsgErro(ee.getMessage());
 		} catch (NullException ne) {
 			FacesUtil.adicionarMsgErro(ne.getMessage());
-		} catch (StringException se) {
-			FacesUtil.adicionarMsgErro(se.getMessage());
 		} catch (ValorException ve) {
 			FacesUtil.adicionarMsgErro(ve.getMessage());
 		}
 	}
 
-	public String excluir(ItemCardapio ic) {
+	public void excluir(ItemCardapio ic) {
 		icm.removeItemCardapio(ic);
 		FacesUtil.adicionarMsgInfo("Item cardápio excluido.");
-		return "PesquisaItemCardapio.xhtml?faces-redirect=true";
 	}
 
 	public String editar() {
@@ -69,12 +65,10 @@ public class ItemCardapioController {
 			FacesUtil.adicionarMsgInfo("Item cardápio alterado.");
 		} catch (NullException ne) {
 			FacesUtil.adicionarMsgErro(ne.getMessage());
-		} catch (StringException se) {
-			FacesUtil.adicionarMsgErro(se.getMessage());
 		} catch (ValorException ve) {
 			FacesUtil.adicionarMsgErro(ve.getMessage());
 		}
 
-		return "PesquisaItemCardapio.xhtml?faces-redirect=true";
+		return "";
 	}
 }

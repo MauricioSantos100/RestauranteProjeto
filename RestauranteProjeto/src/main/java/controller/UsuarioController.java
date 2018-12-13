@@ -8,6 +8,7 @@ import javax.faces.bean.RequestScoped;
 import controller.util.FacesUtil;
 import model.UsuarioModel;
 import model.Entidades.Usuario;
+import model.Exception.StringException;
 
 @ManagedBean(name = "usuarioController")
 @RequestScoped
@@ -36,24 +37,29 @@ public class UsuarioController {
 		this.usuario = new Usuario();
 	}
 
-	public String salvar(Usuario usuario22) {
-		um.registraUsuario(usuario22);
-		FacesUtil.adicionarMsgInfo("usuario salvo com Sucesso.");
-		return "Inicio.xhtml?faces-redirect=true";
+	public void salvar(Usuario usuario){
+		try {
+			um.registraUsuario(usuario);
+			FacesUtil.adicionarMsgInfo("usuario salvo com Sucesso.");
+		}catch (StringException se) {
+			FacesUtil.adicionarMsgErro(se.getMessage());
+		}
+	}
+
+	public void salvar2(Usuario usuario22) {
+		try {
+			um.registraUsuario(usuario22);
+			FacesUtil.adicionarMsgInfo("usuario salvo com Sucesso.");
+		}catch (StringException se) {
+			FacesUtil.adicionarMsgErro(se.getMessage());
+		}
 
 	}
 
-	public String salvar2(Usuario usuario22) {
-		um.registraUsuario(usuario22);
-		FacesUtil.adicionarMsgInfo("usuario salvo com Sucesso.");
-		return "PesquisaCliente.xhtml?faces-redirect=true";
-
-	}
-
-	public String excluir(Usuario u) {
+	public void excluir(Usuario u) {
 		um.removeCliente(u);
 		FacesUtil.adicionarMsgInfo("usuario excluido.");
-		return "PesquisaCliente.xhtml?faces-redirect=true";
+		
 	}
 
 	public String editar(Usuario usuario22){
@@ -63,7 +69,7 @@ public class UsuarioController {
 		} catch (Exception se) {
 			FacesUtil.adicionarMsgErro("Erro ao editar");
 		}
-			return "PesquisaCliente.xhtml?faces-redirect=true";
+			return "";
 	}
 
 }

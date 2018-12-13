@@ -12,7 +12,7 @@
 			<link type="text/css" rel="stylesheet" href="resources/css/Cadastro.css"/>
 			<h:outputStylesheet library="css" name="Cadastro.css"></h:outputStylesheet>
 			<div class="bloco">
-			<h:form>
+			<h:form id="form">
 				<h:panelGrid>
 					 <h:panelGrid columns="2">
 						<p:outputLabel for="nome" value="Nome"/>
@@ -33,7 +33,9 @@
 					</h:panelGrid>
 					<h:panelGrid columns="2" styleClass="botoes">
 						<p:commandButton value="Voltar" styleClass="botao" icon="fa fa-arrow-left" action="Login.xhtml"/>
-						<p:commandButton value="Salvar" styleClass="botao" icon="fa fa-check" action="#{clienteController.salvar}" update=":msgGlobal" oncomplete="PF('cadastro').hide();"/>
+						<p:commandButton value="Salvar" styleClass="botao" icon="fa fa-check" action="#{clienteController.salvar}" update=":msgGlobal :form">
+							<f:ajax render="@form" resetValues="true"/>
+						</p:commandButton>
 					</h:panelGrid>					
 				</h:panelGrid>
 				</h:form>

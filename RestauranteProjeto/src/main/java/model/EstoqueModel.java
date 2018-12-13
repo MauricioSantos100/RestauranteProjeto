@@ -7,7 +7,6 @@ import model.Exception.JaExisteException;
 import model.Exception.NullException;
 import model.Exception.StringException;
 import model.Exception.ValorException;
-import model.dao.EstoqueDao;
 import model.dao.EstoqueDaoImpl;
 import model.util.Validacoes;
 
@@ -18,8 +17,8 @@ public class EstoqueModel {
 	public void registraEstoque(Estoque e) throws StringException, JaExisteException, NullException, ValorException {
 		if (e != null) {
 			if (!this.existe(e)) {
-				if (Validacoes.verificaString(e.getNome()) && Validacoes.verificaString(e.getUniMedida())) {
-					if (Validacoes.verificaValor(e.getPrecoCusto())) {
+				if (Validacoes.verificaString(e.getUniMedida())) {
+					if (Validacoes.verificaValor(e.getPreco())) {
 						dao.insert(e);
 					} else {
 						throw new ValorException("Valor ínvalido");
@@ -39,32 +38,39 @@ public class EstoqueModel {
 		dao.remove(e);
 	}
 
-	public void atualizaEstoque(Estoque e) throws StringException, NullException, ValorException {
-		if (Validacoes.verificaString(e.getNome()) && Validacoes.verificaString(e.getUniMedida())) {
-			if (Validacoes.verificaValor(e.getCodEstoque())) {
-				dao.update(e);
+	public void atualizaEstoque(Estoque e) throws StringException, NullException, JaExisteException, ValorException {
+		if (e != null) {
+			if (!this.existe(e)) {
+				if (Validacoes.verificaString(e.getUniMedida())) {
+					if (Validacoes.verificaValor(e.getPreco())) {
+						dao.update(e);
+					} else {
+						throw new ValorException("Valor ínvalido");
+					}
+				} else {
+					throw new StringException("Não digite números ou símbolos");
+				}
 			} else {
-				throw new ValorException("Valor ínvalido");
+				throw new JaExisteException("Este Estoque já existe");
 			}
 		} else {
-			throw new StringException("Não digite números ou símbolos");
+			throw new NullException("Nenhum item pode estar vazio");
 		}
 	}
 
 	private boolean existe(Estoque e) {
-		boolean valida = false;
-		if (((EstoqueDao) dao).buscarPorNome(e.getNome()) != null) {
-			valida = true;
+		boolean existe = false;
+		try{
+			dao.consultarPorNome(e.getNome());
+			existe = true;
+		} catch (Exception ex) {
+			
 		}
-		return valida;
+		return existe;
 	}
 
 	public List<Estoque> listarTodos() {
 		return dao.listarTodos();
-	}
-
-	public Estoque buscarPorNome(String nome) {
-		return dao.buscarPorNome(nome);
 	}
 
 	public static boolean verificaUniMedida(String uniMedida) {

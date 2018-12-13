@@ -6,7 +6,6 @@ import model.Entidades.Entrega;
 import model.Exception.EnderecoException;
 import model.Exception.JaExisteException;
 import model.Exception.NullException;
-import model.dao.EntregaDao;
 import model.dao.EntregaDaoImpl;
 
 public class EntregaModel {
@@ -15,16 +14,11 @@ public class EntregaModel {
 
 	public void registraEndereco(Entrega e) throws EnderecoException, NullException, JaExisteException {
 		if (e != null) {
-			if (!this.existe(e)) {
-				if (verificaEndereco(e.getBairro()) && verificaEndereco(e.getRua())
-						&& verificaEndereco(e.getComplemento()) && verificaEndereco(e.getReferencia())
-						&& verificaEndereco(e.getStatus())) {
-					dao.insert(e);
-				} else {
-					throw new EnderecoException("Não digite simbolos");
-				}
+			if (verificaEndereco(e.getBairro()) && verificaEndereco(e.getRua()) && verificaEndereco(e.getComplemento())
+					&& verificaEndereco(e.getReferencia()) && verificaEndereco(e.getStatus())) {
+				dao.insert(e);
 			} else {
-				throw new JaExisteException("Esta entrega já existe");
+				throw new EnderecoException("Não digite simbolos");
 			}
 		} else {
 			throw new NullException("Nenhum item pode estar vazio");
@@ -32,29 +26,17 @@ public class EntregaModel {
 	}
 
 	public void atualizaEntrega(Entrega e) throws EnderecoException, NullException {
-		if (!this.existe(e)) {
-			if (verificaEndereco(e.getBairro()) && verificaEndereco(e.getRua()) && verificaEndereco(e.getComplemento())
-					&& verificaEndereco(e.getReferencia()) && verificaEndereco(e.getStatus())) {
-				dao.update(e);
-			} else {
-				throw new EnderecoException("Não digite simbolos");
-			}
-		} else {
-			throw new NullException("Nenhum item pode estar vazio");
-		}
 
+		if (verificaEndereco(e.getBairro()) && verificaEndereco(e.getRua()) && verificaEndereco(e.getComplemento())
+				&& verificaEndereco(e.getReferencia()) && verificaEndereco(e.getStatus())) {
+			dao.update(e);
+		} else {
+			throw new EnderecoException("Não digite simbolos");
+		}
 	}
 
 	public void removeEntrega(Entrega e) {
 		dao.remove(e);
-	}
-
-	private boolean existe(Entrega e) {
-		boolean existe = false;
-		if (((EntregaDao) dao).buscarPorCodEntrega(e.getCodEntrega()) != null) {
-			existe = true;
-		}
-		return existe;
 	}
 
 	public List<Entrega> listarTodos() {

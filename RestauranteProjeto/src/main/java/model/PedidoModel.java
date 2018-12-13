@@ -16,14 +16,10 @@ public class PedidoModel {
 
 	public void registraPedido(Pedido p) throws JaExisteException, StringException, NullException {
 		if (p != null) {
-			if (!this.existe(p)) {
-				if (Validacoes.verificaString(p.getStatus())) {
-					dao.insert(p);
-				} else {
-					throw new StringException("Status inválido");
-				}
+			if (Validacoes.verificaString(p.getStatus())) {
+				dao.insert(p);
 			} else {
-				throw new JaExisteException("Este Pedido já existe");
+				throw new StringException("Status inválido");
 			}
 		} else {
 			throw new NullException("Nenhum item pode estar vazio");
@@ -46,14 +42,6 @@ public class PedidoModel {
 		dao.remove(p);
 	}
 
-	private boolean existe(Pedido p) {
-		boolean valida = false;
-		if (((PedidoDao) dao).buscarPorCodPedido(p.getCodPedido()) != null) {
-			valida = true;
-		}
-		return valida;
-	}
-	
 	public List<Pedido> listarTodos() {
 		return dao.listarTodos();
 	}

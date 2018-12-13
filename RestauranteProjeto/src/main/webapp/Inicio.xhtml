@@ -16,7 +16,7 @@
 				<div class="col1">
 					<div class="bloco1">
 						<h:graphicImage value="/Imagens/banner3.jpg"
-							style="margin: auto; display: block;" />
+							style="margin: auto; display: block; border-radius: 10px;" />
 					</div>
 				</div>
 				<div class="col2">
@@ -27,7 +27,7 @@
 							Coma o melhor do Web Restaurante em qualquer lugar! <br /> Peça
 							nossos pratos no conforto da sua casa.
 						</p>
-						<a href="Mesa.xhtml">
+						<a href="cliente/Mesa.xhtml">
 							<button Class="botao">Fazer pedido</button>
 						</a>
 					</div>
@@ -40,32 +40,104 @@
 				<div class="center">
 					<div class="bg"></div>
 					<div class="interno">
-						<p class="titulo" ><span>Conheça nosso cardápio</span></p>
-						<p class="subtitulo" >
-						
-							<h3>Experimente a nossa paixão por ingredientes frescos e <br />
-								sabores inovadores. A melhor combinação de steak, frutos do mar e <br />
-								pratos exclusivos, preparados diariamente por nossos chefs. <br /></h3>
-							<p>
-								<a href="Cardapio.xhtml">
-									<button Class="botao">Conheça o Menu</button>
-								</a>
-							</p>
+						<p class="titulo">
+							<span style="color: #d6d6d6">Conheça nosso cardápio</span>
 						</p>
+						<p class="subtitulo">
+						<h3>
+							Experimente a nossa paixão por ingredientes frescos e <br />
+							sabores inovadores. A melhor combinação de steak, frutos do mar e
+							<br /> pratos exclusivos, preparados diariamente por nossos
+							chefs. <br />
+						</h3>
+						</p>
+
+						<div class="botaocardapio">
+							<div class="col-md-3 col-sm-3 col-xs-6">
+								<a href="Cardapio.xhtml"
+									class="btn btn-sm animated-button victoria-two">Conheça o
+									Menu</a>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
-
+		<a id="localizacao"></a>
 		<div class="mapa">
 			<iframe
 				src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3941.977901619459!2d-36.479463514612306!3d-8.88164618964415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc0e6d5b96e32c883!2sTagliateli+Ristorante!5e0!3m2!1spt-BR!2sbr!4v1542521149199"
-				height="400" frameborder="0"
-				style="border: 0; width: 100%;"
+				height="400" frameborder="0" style="border: 0; width: 100%;"
 				allowfullscreen=""></iframe>
 		</div>
 
+		<div id="contato">
+			<div class="selecao">
+				<div class="colunas">
+					<div class="coluna">
+						<div class="conteudo borda">
+							<div class="icone">
+								<h:graphicImage styleClass="img hvr-float" value="/Imagens/ligar.png" />
+							</div>
+							<div class="descricao">
+								<h4 class="titulo">Ligue já!</h4>
+								<div class="subtitulo">
+									<p>(87) 3762 0000 (Telefone)</p>
+									<p>(87) 3762 0000 (Telefone)</p>
+									<p>(87) 99655 1111 (WhatsApp)</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="coluna">
+						<div class="conteudo borda">
+							<div class="icone">
+								<h:graphicImage styleClass="img hvr-float" value="/Imagens/local.png" />
+							</div>
+							<div class="descricao">
+								<h4 class="titulo">Anote nosso endereço</h4>
+								<div class="subtitulo">
+									<p>Av. Euclídes Dourado, 250 -  Garanhuns, Pernambuco</p>
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="coluna">
+						<div class="conteudo borda">
+							<div class="icone">
+								<h:graphicImage styleClass="img hvr-float" value="/Imagens/mensagem.png" />
+							</div>
+							<div class="descricao">
+								<h4 class="titulo">Tire suas dúvidas</h4>
+								<div class="subtitulo">
+									<p>webrestaurante@webrestaurante.com.br</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</ui:define>
+	<div id="rodape">
+		<ui:insert name="rodape">
+			<h:form>
+				<footer class="footer">
+
+					<h:graphicImage value="Imagens/logo1.png" alt="logo" class="logo2" />
+					<ul class="menuRodape">
+						<li><a href="Inicio.xhtml">INICIO</a></li>
+						<li><a href="Cardapio.xhtml">CARDAPIO</a></li>
+						<li><a href="Cardapio.xhtml">CONTATO</a></li>
+						<li><a href="Sobre.xhtml">SOBRE</a></li>
+						<li><a href="Cardapio.xhtml">LOCALIZAÇÃO</a></li>
+					</ul>
+					<p>© COPYRIGHT 2018 WEB RESTAURANTE - TODOS OS DIREITOS
+						RESERVADOS.</p>
+				</footer>
+			</h:form>
+		</ui:insert>
+	</div>
 </ui:composition>
 </html>

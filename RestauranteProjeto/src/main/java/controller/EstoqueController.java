@@ -41,7 +41,7 @@ public class EstoqueController {
 		this.listaEstoque = listaEstoque;
 	}
 
-	public String salvar() {
+	public void salvar() {
 		try {
 			em.registraEstoque(this.estoque);
 			FacesUtil.adicionarMsgInfo("Estoque Salvo com Sucesso.");
@@ -54,27 +54,27 @@ public class EstoqueController {
 		} catch (ValorException ve) {
 			FacesUtil.adicionarMsgErro(ve.getMessage());
 		}
-		return "PesquisaEstoque.xhtml?faces-redirect=true";
 	}
 
-	public String excluir(Estoque e) {
+	public void excluir(Estoque e) {
 		em.removeEstoque(e);
 		FacesUtil.adicionarMsgInfo("Estoque excluido.");
-		return "PesquisaEstoque.xhtml?faces-redirect=true";
 	}
 
 	public String editar() {
 		try {
 			em.atualizaEstoque(this.estoque);
-			FacesUtil.adicionarMsgInfo("Entrega alterada.");
+			FacesUtil.adicionarMsgInfo("Estoque alterada.");
 		} catch (NullException ne) {
 			FacesUtil.adicionarMsgErro(ne.getMessage());
 		} catch (StringException se) {
 			FacesUtil.adicionarMsgErro(se.getMessage());
-		} catch (ValorException ve) {
+		} catch (JaExisteException jee) {
+			FacesUtil.adicionarMsgErro(jee.getMessage());
+		}catch (ValorException ve) {
 			FacesUtil.adicionarMsgErro(ve.getMessage());
 		}
-		return "PesquisaEstoque.xhtml?faces-redirect=true";
+		return "";
 	}
 
 }

@@ -1,6 +1,5 @@
 package controller;
 
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,47 +21,49 @@ import model.Entidades.Pedido;
 
 @ManagedBean(name = "vendaControl")
 @RequestScoped
-public class VendaControl implements Serializable{
-	
+public class VendaControl implements Serializable {
+
 	private static final long serialVersionUID = 5982537053071441373L;
 
 	private Pedido pedido;
-	
-	private List<ItemCardapio> itensCardapio;
-	private List<ItemPedido> itensPedido;
+
+	private List<ItemCardapio> listaCardapio;
+	private List<ItemPedido> itensPedido = new ArrayList<ItemPedido>();
 	private List<Cliente> clientes;
 	private List<Funcionario> funcionarios;
-	
+
 	private List<Pedido> pedidos;
 	private ClienteModel cm = new ClienteModel();
 	private FuncionarioModel fm = new FuncionarioModel();
-	private ItemCardapioModel ic = new ItemCardapioModel();
+	private ItemCardapioModel icm = new ItemCardapioModel();
 	private ItemPedidoModel ip = new ItemPedidoModel();
 	private PedidoModel pem = new PedidoModel();
-	
-	private List<ItemCardapio> itemCardapio = new ArrayList<ItemCardapio>();
-	private Double total = 0.;
-	private Integer quantidade = 0;
 
 	
-	public void adicionarProduto(ItemCardapio prod) {
-		this.itemCardapio.add(prod);
-		this.total += prod.getPreco();
-		quantidade++;
+	private Double total = 0.0;
+	private Integer quantidade = 0;
+	private ItemPedido itemPedido = new ItemPedido();
+	private ItemCardapio itemCardapio = new ItemCardapio();
+
+	public void adicionarProduto() {
+		itemPedido.setItemCardapio(itemCardapio);
+		itemPedido.setQuantidade(quantidade);
+		itensPedido.add(itemPedido);
+		total += itemCardapio.getPreco() * quantidade;
 	}
-	
-	public List<ItemCardapio> getItemCardapio() {
+
+	public ItemCardapio getItemCardapio() {
 		return itemCardapio;
 	}
-	
-	public void setItemCardapio(List<ItemCardapio> itemCardapio) {
+
+	public void setItemCardapio(ItemCardapio itemCardapio) {
 		this.itemCardapio = itemCardapio;
 	}
-	
+
 	public Double getTotal() {
 		return total;
 	}
-	
+
 	public void setTotal(Double total) {
 		this.total = total;
 	}
@@ -75,9 +76,6 @@ public class VendaControl implements Serializable{
 		this.quantidade = quantidade;
 	}
 
-	
-
-
 	public Pedido getPedido() {
 		return pedido;
 	}
@@ -86,13 +84,13 @@ public class VendaControl implements Serializable{
 		this.pedido = pedido;
 	}
 
-	public List<ItemCardapio> getItensCardapio() {
-		itensCardapio = ic.listarTodos();
-		return itensCardapio;
+	public List<ItemCardapio> getListaCardapio() {
+		listaCardapio = icm.listarTodos();
+		return listaCardapio;
 	}
 
-	public void setItensCardapio(List<ItemCardapio> itensCardapio) {
-		this.itensCardapio = itensCardapio;
+	public void setListaCardapio(List<ItemCardapio> listaCardapio) {
+		this.listaCardapio = listaCardapio;
 	}
 
 	public List<ItemPedido> getItensPedido() {
@@ -130,39 +128,33 @@ public class VendaControl implements Serializable{
 	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;
 	}
-	
-	
+
 	public void adicionar(ActionEvent evento) {
 		ItemCardapio itemcardapio = (ItemCardapio) evento.getComponent().getAttributes().get("produtoSelecionado");
-		
+
 		ItemPedido itempedido = new ItemPedido();
 		itempedido.setQuantidade(1);
 		itempedido.setItemCardapio(itemcardapio);
-		
 
 		itensPedido.add(itempedido);
 		System.out.println(itempedido);
-		
+
 		/*
-		int achou = -1;
-		for (int posicao = 0; posicao < itensPedido.size(); posicao++) {
-			if (itensPedido.get(posicao).getItemdardapio().equals(itemcardapio)) {
-				achou = posicao;
-			}
-		}
-
-		if (achou < 0) {
-			ItemPedido itempedido = new ItemPedido();
-			itempedido.setQuantidade(1);
-			itempedido.setItemdardapio(itemcardapio);
-
-			itensPedido.add(itempedido);
-		} else {
-			ItemPedido itempedido = itensPedido.get(achou);
-			itempedido.setQuantidade(itempedido.getQuantidade() + 1);
-		}*/
-		//calcular();
+		 * int achou = -1; for (int posicao = 0; posicao < itensPedido.size();
+		 * posicao++) { if
+		 * (itensPedido.get(posicao).getItemdardapio().equals(itemcardapio)) { achou =
+		 * posicao; } }
+		 * 
+		 * if (achou < 0) { ItemPedido itempedido = new ItemPedido();
+		 * itempedido.setQuantidade(1); itempedido.setItemdardapio(itemcardapio);
+		 * 
+		 * itensPedido.add(itempedido); } else { ItemPedido itempedido =
+		 * itensPedido.get(achou); itempedido.setQuantidade(itempedido.getQuantidade() +
+		 * 1); }
+		 */
+		// calcular();
 	}
+
 	public void remover(ActionEvent evento) {
 		ItemPedido itempedido = (ItemPedido) evento.getComponent().getAttributes().get("itemSelecionado");
 
@@ -177,6 +169,6 @@ public class VendaControl implements Serializable{
 			itensPedido.remove(achou);
 		}
 
-		//calcular();
+		// calcular();
 	}
 }

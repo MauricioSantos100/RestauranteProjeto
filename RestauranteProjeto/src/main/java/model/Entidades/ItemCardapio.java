@@ -17,56 +17,58 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "item_cardapio")
-public class ItemCardapio implements Serializable {
-
+public class ItemCardapio implements Serializable{
+	
 	private static final long serialVersionUID = -8066196187289652098L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
+	@Id 
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "cod_item")
 	private Integer codItem;
 	@Column(name = "nome", length = 30, nullable = false)
 	private String nome;
 	@Column(name = "preco", precision = 6, scale = 2, nullable = false)
 	private double preco;
-
+	/**/
 	@ManyToOne
-	@JoinColumn(name = "cod_cardapio")
+	@JoinColumn(name = "cod_cardapio", referencedColumnName = "cod_cardapio")
 	private Cardapio cardapio = new Cardapio();
-
+	
 	@ManyToMany
 	private List<Pedido> pedido;
-
+	
 	@OneToMany(mappedBy = "itemCardapio")
 	private List<ItemPedido> ItemPedido;
-
+	
 	@OneToOne
-	@JoinColumn(name = "cod_estoque")
-	private Estoque estoque;
-
-	public ItemCardapio() {
+	private Estoque estoque = new Estoque();
+	
+	
+	public ItemCardapio() {}
+	
+	public Estoque getEstoque() {
+		return estoque;
 	}
 
+	public void setEstoque(Estoque estoque) {
+		this.estoque = estoque;
+	}	
+	
 	public Integer getCodItem() {
 		return codItem;
 	}
-
-	public void setCodItem(Integer codItem) {
-		this.codItem = codItem;
+	public void setCodItem(Integer codCardapio) {
+		this.codItem = codCardapio;
 	}
-
 	public String getNome() {
 		return nome;
 	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 	public double getPreco() {
 		return preco;
 	}
-
 	public void setPreco(double preco) {
 		this.preco = preco;
 	}
@@ -93,14 +95,6 @@ public class ItemCardapio implements Serializable {
 
 	public void setItemPedido(List<ItemPedido> itemPedido) {
 		ItemPedido = itemPedido;
-	}
-
-	public Estoque getEstoque() {
-		return estoque;
-	}
-
-	public void setEstoque(Estoque estoque) {
-		this.estoque = estoque;
 	}
 
 	@Override
@@ -162,5 +156,6 @@ public class ItemCardapio implements Serializable {
 			return false;
 		return true;
 	}
+
 
 }

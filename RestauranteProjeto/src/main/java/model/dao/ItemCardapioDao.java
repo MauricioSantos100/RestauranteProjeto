@@ -6,5 +6,5 @@ import model.Entidades.ItemCardapio;
 
 public interface ItemCardapioDao {
 	public List<ItemCardapio> listarTodos();
-	public ItemCardapio buscarPorNome(String nome);
+	public ItemCardapio consultarPorNome(String nome);
 }

@@ -95,10 +95,5 @@ public class Cardapio implements Serializable {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "Cardapio [codCardapio=" + codCardapio + ", categoria=" + categoria + ", ItemCardapio=" + ItemCardapio
-				+ "]";
-	}
-
+	
 }

@@ -58,10 +58,9 @@ public class FuncionarioController {
 	public void salvar() {
 		UsuarioController uc = new UsuarioController();
 		try {
-			funcionario.setTipo("F");
+			usuario.setTipo(2);
 			uc.salvar(this.usuario);
 			fm.registraFuncionario(this.funcionario);
-			FacesUtil.adicionarMsgInfo("Funcionário Salvo com Sucesso.");
 		} catch (JaExisteException ee) {
 			FacesUtil.adicionarMsgErro(ee.getMessage());
 		} catch (NullException ne) {
@@ -87,7 +86,7 @@ public class FuncionarioController {
 
 	public String editar(Funcionario f) {
 		try {
-			funcionario.setTipo("F");
+			usuario.setTipo(2);
 			fm.atualizaFuncionario(f);
 			;
 			FacesUtil.adicionarMsgInfo("Funcionário alterado.");

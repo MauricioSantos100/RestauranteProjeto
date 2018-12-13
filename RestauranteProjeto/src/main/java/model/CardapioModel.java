@@ -6,7 +6,6 @@ import model.Entidades.Cardapio;
 import model.Exception.JaExisteException;
 import model.Exception.NullException;
 import model.Exception.StringException;
-import model.dao.CardapioDao;
 import model.dao.CardapioDaoImpl;
 import model.util.Validacoes;
 
@@ -52,17 +51,16 @@ public class CardapioModel {
 
 	private boolean existe(Cardapio c) {
 		boolean existe = false;
-		if (((CardapioDao) dao).buscarPorCategoria(c.getCategoria()) != null) {
+		try{
+			dao.consultarPorId(c.getCategoria());
 			existe = true;
+		} catch (Exception e) {
+			
 		}
 		return existe;
 	}
 
 	public List<Cardapio> listarTodos() {
 		return dao.listarTodos();
-	}
-	
-	public Cardapio buscarPorCategoria(String categoria) {
-		return dao.buscarPorCategoria(categoria);
 	}
 }

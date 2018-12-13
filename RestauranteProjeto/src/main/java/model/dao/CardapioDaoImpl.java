@@ -4,23 +4,12 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import model.Entidades.Cardapio;
 import model.dao.util.JPAManager;
 
 public class CardapioDaoImpl extends DAOImpl implements CardapioDao {
-
-	public Cardapio buscarPorCategoria(String categoria) {
-		Cardapio cardapio = null;
-		EntityManager mng = JPAManager.getInstance().getEntityManager();
-		try {
-			Query query = mng.createQuery("FROM Cardapio where categoria = :categoria");
-			cardapio = (Cardapio) query.getSingleResult();
-		} finally {
-			mng.close(); 
-		}
-		return cardapio;
-	}
 
 	@SuppressWarnings("unchecked")
 	public List<Cardapio> listarTodos() {
@@ -35,4 +24,11 @@ public class CardapioDaoImpl extends DAOImpl implements CardapioDao {
 		return cardapio;
 	}
 
+	public Cardapio consultarPorId(String categoria) {
+		TypedQuery<Cardapio> query = manager.createQuery("SELECT c FROM Cardapio c WHERE c.categoria = :categoria",
+				Cardapio.class);
+		query.setParameter("categoria", categoria);
+		Cardapio cardapio = query.getSingleResult();
+		return cardapio;
+	}
 }

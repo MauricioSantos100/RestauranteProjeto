@@ -58,7 +58,7 @@ public class CardapioController {
 		FacesUtil.adicionarMsgInfo("Cardapio excluido.");
 	}
 
-	public void editar() {
+	public String editar() {
 		try {
 			cm.atualizarCategoria(this.cardapio);
 			FacesUtil.adicionarMsgInfo("Cardapio atualizado com Sucesso.");
@@ -69,5 +69,6 @@ public class CardapioController {
 		} catch (JaExisteException je) {
 			FacesUtil.adicionarMsgErro(je.getMessage());
 		}
+		return "";
 	}
 }

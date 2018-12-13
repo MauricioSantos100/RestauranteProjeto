@@ -10,7 +10,6 @@ import model.Exception.NullException;
 import model.Exception.StringException;
 import model.Exception.TelefoneException;
 import model.Exception.ValorException;
-import model.dao.FuncionarioDao;
 import model.dao.FuncionarioDaoImpl;
 import model.util.Validacoes;
 
@@ -87,21 +86,16 @@ public class FuncionarioModel {
 
 	private boolean existe(Funcionario f) {
 		boolean existe = false;
-		if (((FuncionarioDao) dao).buscarPorCpf(f.getCpf()) != null) {
+		try{
+			dao.consultarPorCpf(f.getCpf());
 			existe = true;
+		} catch (Exception e) {
+			
 		}
 		return existe;
 	}
 	
 	public List<Funcionario> listarTodos() {
 		return dao.listarTodos();
-	}
-
-	public Funcionario buscarPorNome(String nome) {
-		return dao.buscarPorNome(nome);
-	}
-	
-	public Funcionario buscarPorCpf(String cpf) {
-		return dao.buscarPorCpf(cpf);
 	}
 }

@@ -17,7 +17,8 @@ import javax.faces.model.SelectItemGroup;
 
 @FacesConverter(value ="converter")
 public class SimpleEntityConverter implements Converter{
-	 private int index = -1;  
+	
+	  private int index = -1;  
 	  
 	    /* (non-Javadoc) 
 	     * @see javax.faces.convert.Converter#getAsObject(javax.faces.context.FacesContext, javax.faces.component.UIComponent, java.lang.String) 

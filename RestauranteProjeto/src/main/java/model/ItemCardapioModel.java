@@ -5,9 +5,7 @@ import java.util.List;
 import model.Entidades.ItemCardapio;
 import model.Exception.JaExisteException;
 import model.Exception.NullException;
-import model.Exception.StringException;
 import model.Exception.ValorException;
-import model.dao.ItemCardapioDao;
 import model.dao.ItemCardapioDaoImpl;
 import model.util.Validacoes;
 
@@ -16,17 +14,13 @@ public class ItemCardapioModel {
 	private ItemCardapioDaoImpl dao = new ItemCardapioDaoImpl();
 
 	public void registraItemCardapio(ItemCardapio ic)
-			throws StringException, JaExisteException, ValorException, NullException {
+			throws JaExisteException, ValorException, NullException {
 		if (ic != null) {
 			if (!this.existe(ic)) {
-				if (Validacoes.verificaString(ic.getNome())) {
-					if (Validacoes.verificaValor(ic.getPreco())) {
-						dao.insert(ic);
-					} else {
-						throw new ValorException("Valor inválido");
-					}
+				if (Validacoes.verificaValor(ic.getPreco())) {
+					dao.insert(ic);
 				} else {
-					throw new StringException("Nome inválido");
+					throw new ValorException("Valor inválido");
 				}
 			} else {
 				throw new JaExisteException("Este item do cardapio já existe");
@@ -36,17 +30,12 @@ public class ItemCardapioModel {
 		}
 	}
 
-	public void atualizaItemCardapio(ItemCardapio ic) throws ValorException, StringException, NullException {
-			if (Validacoes.verificaString(ic.getNome())) {
-				if (Validacoes.verificaValor(ic.getPreco())) {
-					dao.update(ic);
-				} else {
-					throw new ValorException("Valor inválido");
-				}
-			} else {
-				throw new StringException("Não digite números ou símbolos");
-			}
-		
+	public void atualizaItemCardapio(ItemCardapio ic) throws ValorException, NullException {
+		if (Validacoes.verificaValor(ic.getPreco())) {
+			dao.update(ic);
+		} else {
+			throw new ValorException("Valor inválido");
+		}
 	}
 
 	public void removeItemCardapio(ItemCardapio ic) {
@@ -54,18 +43,17 @@ public class ItemCardapioModel {
 	}
 
 	private boolean existe(ItemCardapio ic) {
-		boolean valida = false;
-		if (((ItemCardapioDao) dao).buscarPorNome(ic.getNome()) != null) {
-			valida = true;
+		boolean existe = false;
+		try{
+			dao.consultarPorNome(ic.getNome());
+			existe = true;
+		} catch (Exception e) {
+			
 		}
-		return valida;
-	}
-	
-	public List<ItemCardapio> listarTodos() {
-		return dao.listarTodos();
+		return existe;
 	}
 
-	public ItemCardapio buscarPorNome(String nome) {
-		return dao.buscarPorNome(nome);
+	public List<ItemCardapio> listarTodos() {
+		return dao.listarTodos();
 	}
 }

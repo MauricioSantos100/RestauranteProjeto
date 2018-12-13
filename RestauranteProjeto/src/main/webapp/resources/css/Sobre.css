@@ -1,0 +1,59 @@
+@charset "ISO-8859-1";
+
+
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
+body{
+	overflow: hidden;
+}
+#sobre {
+	display: table;
+	width: 100%;
+}
+#sobre .center {
+	position: relative;
+	height: 1200px;
+	overflow: hidden;
+	text-align: center;
+}
+#sobre .bg{
+	background-image: url(/RestauranteProjeto/Imagens/fundoLogin.jpg);
+}
+#content{
+	padding-top: 0px;
+}
+.center .bg {
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-color: #f4f8f9;
+	background-position: 50%;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+}
+#sobre .bloco{
+	position: relative;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	height: 300px;
+	width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 200px;
+}
+#sobre h1{
+	color: rgba(89, 89, 89, 1);
+	text-transform: none;
+	font-size: 30px;
+	text-align: center;
+	font-family: 'Josefin Sans', sans-serif;
+	text-shadow: black;
+}
+#sobre p{
+	color: rgba(89, 89, 89, 1);
+	font-family: 'Josefin Sans', sans-serif;
+	padding-top: 30px;
+	
+}

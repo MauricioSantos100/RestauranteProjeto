@@ -2,7 +2,6 @@ package model.Entidades;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,75 +12,72 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "estoque")
-public class Estoque implements Serializable {
-
+public class Estoque implements Serializable{
+	
 	private static final long serialVersionUID = 3516141863055834903L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "cod_estoque")
+	
+	@Id 
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "cod_estoque")//222
 	private Integer codEstoque;
-	@Column(name = "nome", length = 20, nullable = false)
+	@Column(name = "nome", length = 20, nullable = false)//feijao
 	private String nome;
-	@Column(name = "preco_custo", precision = 6, scale = 2, nullable = false)
-	private double precoCusto;
-	@Column(name = "quantidade", nullable = false)
+	@Column(name = "quantidade", nullable = false)//30
 	private Integer quantidade;
-	@Column(name = "uni_medida", length = 2, nullable = false)
+	@Column(name = "uni_medida", length = 10, nullable = false)//kg
 	private String uniMedida;
-
-	@OneToOne(mappedBy = "estoque", cascade = CascadeType.ALL)
-	private ItemCardapio itemCadapio;
-
-	public Estoque() {
+	//
+	@Column(name = "preco_custo", precision = 6, scale = 2, nullable = false)//10.00
+	private double preco;
+	
+	@OneToOne(mappedBy= "estoque")
+	private ItemCardapio itemcardapio;
+	
+	public double getPreco() {
+		return preco;
 	}
 
+	public void setPreco(double preco) {
+		this.preco = preco;
+	}
+
+	public ItemCardapio getItemcardapio() {
+		return itemcardapio;
+	}
+
+	public void setItemcardapio(ItemCardapio itemcardapio) {
+		this.itemcardapio = itemcardapio;
+	}
+
+	
+	//
+	
+	
+	public Estoque() {}
+	
 	public Integer getCodEstoque() {
 		return codEstoque;
 	}
-
 	public void setCodEstoque(Integer codEstoque) {
 		this.codEstoque = codEstoque;
 	}
-
 	public String getNome() {
 		return nome;
 	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	public double getPrecoCusto() {
-		return precoCusto;
-	}
-
-	public void setPrecoCusto(double precoCusto) {
-		this.precoCusto = precoCusto;
-	}
-
 	public Integer getQuantidade() {
 		return quantidade;
 	}
-
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
-
 	public String getUniMedida() {
 		return uniMedida;
 	}
-
 	public void setUniMedida(String uniMedida) {
 		this.uniMedida = uniMedida;
-	}
-
-	public ItemCardapio getItemCadapio() {
-		return itemCadapio;
-	}
-
-	public void setItemCadapio(ItemCardapio itemCadapio) {
-		this.itemCadapio = itemCadapio;
 	}
 
 	@Override
@@ -89,10 +85,9 @@ public class Estoque implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((codEstoque == null) ? 0 : codEstoque.hashCode());
-		result = prime * result + ((itemCadapio == null) ? 0 : itemCadapio.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		long temp;
-		temp = Double.doubleToLongBits(precoCusto);
+		temp = Double.doubleToLongBits(preco);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((quantidade == null) ? 0 : quantidade.hashCode());
 		result = prime * result + ((uniMedida == null) ? 0 : uniMedida.hashCode());
@@ -113,17 +108,12 @@ public class Estoque implements Serializable {
 				return false;
 		} else if (!codEstoque.equals(other.codEstoque))
 			return false;
-		if (itemCadapio == null) {
-			if (other.itemCadapio != null)
-				return false;
-		} else if (!itemCadapio.equals(other.itemCadapio))
-			return false;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
-		if (Double.doubleToLongBits(precoCusto) != Double.doubleToLongBits(other.precoCusto))
+		if (Double.doubleToLongBits(preco) != Double.doubleToLongBits(other.preco))
 			return false;
 		if (quantidade == null) {
 			if (other.quantidade != null)

@@ -1,8 +1,8 @@
 package model.Entidades;
 
 import java.io.Serializable;
-import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -12,11 +12,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipop", discriminatorType = DiscriminatorType.STRING, length = 1)
+@DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING, length = 1)
 public abstract class Pessoa implements Serializable {
 
 	private static final long serialVersionUID = 5795870903752855103L;
@@ -33,11 +33,9 @@ public abstract class Pessoa implements Serializable {
 	private String telefone;
 	@Column(name = "email", length = 100, nullable = false)
 	private String email;
-	@Column(name = "tipo", length = 1, nullable = false)
-	private String tipo;
 
-	@ManyToMany
-	private List<Usuario> usuario;
+	@OneToOne(mappedBy="pessoa", cascade = CascadeType.ALL)
+	private Usuario usuario;
 
 	protected Pessoa() {
 	}
@@ -82,14 +80,6 @@ public abstract class Pessoa implements Serializable {
 		this.email = email;
 	}
 
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -99,7 +89,6 @@ public abstract class Pessoa implements Serializable {
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
-		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
 		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
 	}
@@ -138,11 +127,6 @@ public abstract class Pessoa implements Serializable {
 				return false;
 		} else if (!telefone.equals(other.telefone))
 			return false;
-		if (tipo == null) {
-			if (other.tipo != null)
-				return false;
-		} else if (!tipo.equals(other.tipo))
-			return false;
 		if (usuario == null) {
 			if (other.usuario != null)
 				return false;
@@ -150,4 +134,6 @@ public abstract class Pessoa implements Serializable {
 			return false;
 		return true;
 	}
+
+
 }

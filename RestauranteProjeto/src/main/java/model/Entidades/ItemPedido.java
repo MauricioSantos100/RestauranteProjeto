@@ -9,27 +9,30 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "item_pedido")
-public class ItemPedido  implements Serializable {
+public class ItemPedido implements Serializable {
 
 	private static final long serialVersionUID = 2653789344701536455L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cod_itemPedido", nullable = false)
 	private Integer codItemPedido;
 	@Column(name = "quantidade", nullable = false)
 	private Integer quantidade;
-	
+	@Transient
+	@Column(name = "valor_parcial")
+	private double valorParcial;
+
 	@ManyToOne
 	@JoinColumn(name = "cod_item", referencedColumnName = "cod_item")
 	private ItemCardapio itemCardapio;
-	
-	@OneToOne(mappedBy = "itempedido")
+
+	@ManyToOne
 	@JoinColumn(name = "cod_pedido", referencedColumnName = "cod_pedido")
 	private Pedido pedido;
 
@@ -47,6 +50,14 @@ public class ItemPedido  implements Serializable {
 
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
+	}
+
+	public double getValorParcial() {
+		return valorParcial;
+	}
+
+	public void setValorParcial(double valorParcial) {
+		this.valorParcial = valorParcial;
 	}
 
 	public ItemCardapio getItemCardapio() {
@@ -73,6 +84,9 @@ public class ItemPedido  implements Serializable {
 		result = prime * result + ((itemCardapio == null) ? 0 : itemCardapio.hashCode());
 		result = prime * result + ((pedido == null) ? 0 : pedido.hashCode());
 		result = prime * result + ((quantidade == null) ? 0 : quantidade.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(valorParcial);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
 
@@ -105,7 +119,9 @@ public class ItemPedido  implements Serializable {
 				return false;
 		} else if (!quantidade.equals(other.quantidade))
 			return false;
+		if (Double.doubleToLongBits(valorParcial) != Double.doubleToLongBits(other.valorParcial))
+			return false;
 		return true;
 	}
-	
+
 }

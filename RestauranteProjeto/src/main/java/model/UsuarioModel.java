@@ -2,18 +2,22 @@ package model;
 
 import java.util.List;
 
-import model.Entidades.Pessoa;
 import model.Entidades.Usuario;
-import model.dao.UsuarioDao;
+import model.Exception.StringException;
 import model.dao.UsuarioDaoImpl;
+import model.util.Validacoes;
 
 public class UsuarioModel {
 	private UsuarioDaoImpl dao = new UsuarioDaoImpl();
 
-	public void registraUsuario(Usuario u) {
+	public void registraUsuario(Usuario u) throws StringException {
 		if (u != null) {
 			if (!this.existe(u)) {
-				dao.insert(u);
+				if (Validacoes.verificaString(u.getLogin())) {
+					dao.insert(u);
+				} else {
+					throw new StringException("Login já cadastrado");
+				}
 			}
 		}
 	}
@@ -28,26 +32,23 @@ public class UsuarioModel {
 
 	private boolean existe(Usuario u) {
 		boolean existe = false;
-		if (((UsuarioDao) dao).buscarPorIdUsuario(u.getId()) != null) {
+		try {
+			dao.consultarPorLogin(u.getLogin());
 			existe = true;
+		} catch (Exception e) {
+
 		}
 		return existe;
 	}
-
+	
 	public Usuario autenticar(String login, String senha) {
 		if (login == null || senha == null) {
 			return null;
 		}
-		return UsuarioDaoImpl.autenticar(login, senha);
-	}
-
-	public Usuario tipo(String tipo, Pessoa pessoa) {
-		if (tipo == null) {
-			return null;
-		}
-		return UsuarioDaoImpl.tipo(tipo, pessoa);
+		return dao.consultarLogin(login, senha);
 	}
 	
 	public List<Usuario> listarTodos() {
-		return dao.listarTodos();	}
+		return dao.listarTodos();
+	}
 }

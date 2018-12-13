@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="TemplateC.xhtml">
+		<ui:define name="content">
+			<link type="text/css" rel="stylesheet" href="resources/css/Mesa.css"/>
+			<h:outputStylesheet library="css" name="Mesa.css"></h:outputStylesheet>
+			<div class="passos">
+				<p:steps activeIndex="2" styleClass="custom" readonly="false">
+				    <p:menuitem value="Seleção da mesa" url="Mesa.xhtml"/>
+				    <p:menuitem value="Seleção produtos" url="Produtos.xhtml"/>
+				    <p:menuitem value="Carrinho" url="Carrinho.xhtml"/>
+				    <p:menuitem value="Pagamento" url="#"/>
+				</p:steps>
+			</div>
+			<h:form id="frmvencad">
+				<p:dataTable emptyMessage="Nenhum Registro Cadastrado"
+					value="#{vendaController.itensPedido}" var="item" rows="4"
+					paginator="true" id="tbItens">
+
+					<p:column headerText="Nome">
+						<h:outputText value="#{item.itemCardapio.nome}" />
+					</p:column>
+					<p:column headerText="Valor Item">
+						<h:outputText value="#{item.itemCardapio.preco}">
+							<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Quantidade">
+						<h:outputText value="#{item.quantidade}"  />
+					</p:column>
+					<p:column headerText="Opções">
+						<p:commandButton icon="ui-icon-close"
+							actionListener="#{vendaController.remover(item)}"
+							update=":frmvencad:tbItens :frmvencad:txtVenValorTotal :msgGlobal" />
+					</p:column>
+				</p:dataTable>
+				<div id="valorTotal">
+					<div class="header">
+						<div class="center">
+							<div class="interno">
+								<h:outputText styleClass="valor" id="txtVenValorTotal"	value="Total: R$#{vendaController.contaCadastro.valorTotal}" />
+								<a href="Pagamento.xhtml">
+									<h:commandButton value="Pagamento" styleClass="botao" action="#{vendaController.Pagamento}"/>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</h:form>
+   			
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

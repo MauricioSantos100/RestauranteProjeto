@@ -6,5 +6,5 @@ import model.Entidades.Estoque;
 
 public interface EstoqueDao {
 	public List<Estoque> listarTodos();
-	public Estoque buscarPorNome(String nome);
+	public Estoque consultarPorNome(String nome);
 }
